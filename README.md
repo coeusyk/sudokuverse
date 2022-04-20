@@ -1,6 +1,7 @@
 # Sudoku Game Project
 
-School project
+A school project creating a game of sudoku using Python, having features such as graphical UI, 
+difficulty levels, rating system and hints
 
 ## Guidelines
 
