@@ -35,4 +35,3 @@ Ask if they know how to play Sudoku:
 * If no:
   * a **pop-up** should appear showing how to play Sudoku, divided into pages.
   * after they're done with the tutorial, redirect to the **main window**.
-
