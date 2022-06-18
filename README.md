@@ -53,7 +53,7 @@ Given above is the **project structure** of our project. Files have to be added 
 
 Contains the source code of the project.
 
-Only [`app.py`](), [`__init__.py`](), and [`game-sudoku_database.sql`]() files go into this (other files go under the sub-folders).
+Only [`app.py`](https://github.com/alp-comp-project/game-sudoku/blob/develop/src/app.py), [`__init__.py`](https://github.com/alp-comp-project/game-sudoku/blob/develop/src/__init__.py), and [`game-sudoku_database.sql`](https://github.com/alp-comp-project/game-sudoku/blob/develop/src/game-sudoku_database.sql) files go into this (other files go under the sub-folders).
 
 ### 2. [/tests](https://github.com/alp-comp-project/game-sudoku/tree/develop/tests)
 
