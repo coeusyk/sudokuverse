@@ -1,0 +1,57 @@
+#menu-content {
+    background-color: #212121;
+    border: none;
+    width: 0px;
+    height: 1020px;
+    transition: width 0.3s;
+    overflow: hidden;
+}
+
+#title-space {
+    height: 8%;
+    width: auto;
+}
+
+.menu-options {
+    background-color: #212121;
+    border: none;
+    color: white;
+    padding: 12px 18px;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: Metropolis;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 300px;
+}
+
+.menu-options:hover {
+    background-color: #383838;
+}
+
+.active_menu-options {
+    background-color: #E36950;
+    border: none;
+    color: white;
+    padding: 12px 18px;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: Metropolis;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 300px;
+}
+
+#new-user-content {
+    background-color: #212121;
+    border: none;
+    width: 300px;
+    height: 100px;
+    visibility: visible;
+}
+
+#options-space {
+    height: 300px;
+}

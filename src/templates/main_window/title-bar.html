@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/title-bar_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/collapsible-menu_styles.css') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+    <div id="title-bar">
+        <button id="collapsible" title="Menu">
+            <ion-icon name="menu"></ion-icon>
+
+        </button>
+
+        <div id="menu-content">
+            <div id="title-space"></div>
+
+            <div id="main-content" role="group">
+                <button type="button" class="menu-options">PLAY</button>
+                <button type="button" class="menu-options">HOW TO PLAY</button>
+                <button type="button" class="menu-options">LEADERBOARD</button>
+                <button type="button" class="menu-options">ABOUT</button>
+            
+            </div>
+
+            <div id="new-user-content" role="group">
+                <div id="options-space"></div>
+                
+                <button type="button" class="menu-options">SIGN UP</button>
+                <button type="button" class="menu-options">LOG IN</button> 
+               
+                <div class="modals" id="sign-up"></div>
+                <div class="modals" id="log-in">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <h1 id="game-name">SUDOKU</h1>
+
+        <button id="personal-profile" title="Personal Profile">
+            <ion-icon name="person-sharp"></ion-icon>
+
+        </button>
+
+    </div>
+
+    <!--For getting the ion-icons tag to work (for the menu icon):-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+<script src="{{ url_for('static', filename='js/collapsible-menu_functionalities.js') }}"></script>
+
+</html>

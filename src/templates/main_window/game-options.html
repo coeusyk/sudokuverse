@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Special syntax for href required for Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css_files/game-options_styles.css') }}">
+
+</head>
+
+<body>
+    <center>
+    <div class="game-options">
+        <div class="space"></div>
+
+        <h2 class="options-label">Game difficulty</h2>
+
+        <div class="button-category" role="group">
+            <button type="button" class="inactive-button">SIMPLE</button><br>
+            <div class="space"></div>
+
+            <button type="button" class="inactive-button">MEDIUM</button><br>
+            <div class="space"></div>
+
+            <button type="button" class="inactive-button">COMPLEX</button>
+
+        </div>
+
+
+        <div class="space"></div>
+
+        <h2 class="options-label">How do you want <br>to play</h2>
+
+        <div class="button-category" role="group">
+            <button type="button" class="inactive-button">WITH SELF</button><br>
+            <div class="space"></div>
+
+            <button type="button" class="inactive-button">WITH FRIEND</button><br>
+            <div class="space"></div>
+
+            <button type="button" class="inactive-button">WITH RANDOM</button>
+            
+        </div>
+
+    </div>
+    </center>
+
+</body>
+
+<script src="{{ url_for('static', filename='js_files/game-options_functionalities.js') }}"></script>
+
+</html>
