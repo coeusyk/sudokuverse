@@ -1,0 +1,113 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+    box-sizing: border-box;
+}
+.container
+{
+    width: 100%;
+    height: 130vh;
+    background: black ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn
+{
+    position: center;
+    background-color: #f52222;
+    color: rgb(244, 235, 235);
+    width: 10%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 17px;
+    margin: 10px 0;
+    border: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {background-color: orangered;}
+.popup
+{
+    position: absolute;
+    bottom: 10%;
+    top: 10%;
+    transform: translate(-1%,-1%) scale(0.1);
+    padding: 0 30px 30px;
+    visibility: hidden;
+    transition: transform 0.4s;
+}
+.open-popup
+{
+    visibility: visible;
+    backdrop-filter: blur(76px);
+    transform: translate(-1%,-1%) scale(1);
+}
+.close-popup
+{
+    visibility: hidden;
+    backdrop-filter: blur(76px);
+    transform: scale(0);
+    transition: transform 0.1s;
+}
+.sign-up-form
+{
+    width: 400px;
+    border-radius: 30px;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0,3);
+    background: white;
+    color: rgb(14, 14, 14);
+    padding: 20px;
+    text-align:left;
+    margin: 8% auto 0;
+    font-size: 13px;
+}
+.sign-up-form h1
+{
+    text-align: left;
+    margin-top: 20px;
+}
+.text
+{
+    margin-bottom: 30px;
+    text-align: left;
+    color: grey;
+    font-size: 14px;
+}
+.input-box
+{
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid grey;
+}
+.btn1
+{
+    position: center;
+    background-color: rgb(245, 34, 34);
+    color: rgb(244, 235, 235);
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    margin: 10px 0;
+    border: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn1:hover {background-color:orangered;}
+hr
+{
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.or
+{
+    background: white;
+width: 30px;
+margin: -24px auto 10px;
+}
