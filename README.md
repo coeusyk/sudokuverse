@@ -25,6 +25,13 @@ Creating a game of Sudoku using Python, having basic features:-
         |__ /static
             |__ /css
                 |-- *.css
+            |__ /images
+                |__ /gui-design
+                    |-- *.jpg
+                    |-- ..
+                    |-- .
+                |__ /icons
+                    |-- *.svg
             |__ /js
                 |-- *.js
         |__ ..
