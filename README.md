@@ -80,6 +80,17 @@ Contains the files for the styling and functionality of the HTML files.
 All CSS and JavaScript files will go in to their respective subfolders of this folder.
 
 
+## Themes
+
+### Colors of Dark Theme
+
+- #E36950 -> For color of buttons
+- #2B2B2B -> Background color of main part of the window
+- #E34D1F -> On hover of #E36950 colored button
+- #212121 -> Background color of menu and some other divisions
+- #2A2A2A -> On hover of close button (x)
+
+
 ## Guidelines
 
 Use `develop` branch for active development.
