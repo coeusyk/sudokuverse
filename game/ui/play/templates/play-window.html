@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/title-bar_styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/collapsible-menu_styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/game-options_styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-modal_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/collapsible-menu_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/game-options_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/login-modal_styles.css') }}">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,15 +16,15 @@
     <!-- The title bar -->
     <div id="title-bar">
         <button id="collapsible" title="Menu">
-            <img src="{{ url_for('static', filename='images/icons/list.svg') }}" alt="Menu Button" width="35" height="35">
+            <img src="{{ url_for('play_blueprint.static', filename='images/icons/list.svg') }}" alt="Menu Button" width="35" height="35">
 
         </button>
 
         <h1 id="game-name">SudokuVerse</h1>
-        <img id="game-icon" src="{{ url_for('static', filename='images/icons/app_icon.png') }}" alt="Game Icon" width="35" height="35">
+        <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/icons/app_icon.png') }}" alt="Game Icon" width="35" height="35">
 
         <button id="personal-profile" title="Personal Profile">
-            <img src="{{ url_for('static', filename='images/icons/person-lines-fill.svg') }}" alt="Personal Profile" width="35" height="35">
+            <img src="{{ url_for('play_blueprint.static', filename='images/icons/person-lines-fill.svg') }}" alt="Personal Profile" width="35" height="35">
 
         </button>
 
@@ -124,11 +124,11 @@
 </body>
 
 <!-- Functionalities -->
-<script src="{{ url_for('static', filename='js/collapsible-menu_functionalities.js') }}"></script>
-<script src="{{ url_for('static', filename='js/game-options_functionalities.js') }}"></script>
-<script src="{{ url_for('static', filename='js/modal_functionalities.js') }}"></script>
+<script src="{{ url_for('play_blueprint.static', filename='js/collapsible-menu_functionalities.js') }}"></script>
+<script src="{{ url_for('play_blueprint.static', filename='js/game-options_functionalities.js') }}"></script>
+<script src="{{ url_for('play_blueprint.static', filename='js/modal_functionalities.js') }}"></script>
 
 <!-- Media Queries -->
-<script src="{{ url_for('static', filename='js/collapsible-menu_media-queries.js') }}"></script>
+<script src="{{ url_for('play_blueprint.static', filename='js/collapsible-menu_media-queries.js') }}"></script>
 
 </html>

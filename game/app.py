@@ -1,10 +1,10 @@
 from flask import Flask, render_template
 
-from play_window.play import play_window_blueprint
+from ui.play import play_blueprint
 
 
 app = Flask(__name__)
-app.register_blueprint(play_window_blueprint, url_prefix='/play_window')
+app.register_blueprint(play_blueprint)
 
 
 @app.route("/")
