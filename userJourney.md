@@ -110,9 +110,3 @@ The options are as follows:
   * Visible to **friends** only
   * Visible to **no one**
 * Change background app theme
-
-
-## Shop
-
-This option allows the user to buy things to stylise their board and display picture 
-with the credits they will earn by playing matches.
