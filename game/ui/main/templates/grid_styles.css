@@ -1,0 +1,40 @@
+body {
+    background-color: #2b2b2b;
+}
+
+
+#grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    height: 500px;
+    width: 500px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+
+.grid-item {
+    display: flex;
+    font-size: 29px;
+    font-family: Metropolis;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+
+.type-1, .type-3 {
+    border-right: 2px solid black;
+}
+
+.type-2, .type-3 {
+    border-top: 2px solid black;
+}
+
+
+.row-1, .row-2, .row-3, .row-4, .row-5, .row-6, .row-7, .row-8, .row-9,
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9,
+.grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9 {
+    background-color: white;  /* #FFD580 - For whole row on click, #FFAC1C - On click */
+}
