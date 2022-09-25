@@ -16,6 +16,8 @@ body {
 .grid-item {
     display: flex;
     font-size: 29px;
+    height: 53.37px;
+    width: 53.37px;
     font-family: Metropolis;
     align-items: center;
     justify-content: center;

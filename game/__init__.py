@@ -20,6 +20,9 @@ def create_app():
     from game.ui.play import play
     app.register_blueprint(play.play_blueprint)
 
+    from game.ui.gameplay import gameplay
+    app.register_blueprint(gameplay.gameplay_blueprint)
+
     @app.route("/")
     def base():
         return render_template("base.html")

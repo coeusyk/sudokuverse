@@ -51,6 +51,7 @@ const gridMap = new Map([
 ]);
 
 const Attributes = [rows, cols, grids]
+const GridElements = document.getElementById("grid-container").getElementsByTagName("div");
 const Maps = [rowMap, colMap, gridMap];
 
 
@@ -74,15 +75,10 @@ function getCurAttributes(div) {
 function activateRowColGrid(div) {
     curRowColGrid = getCurAttributes(div);
 
-    for (let attr of Attributes) {
-        for (let element of attr) {
-            if (!(element in curRowColGrid)) {
-                Array.from(element).forEach(_div => {
-                    _div.style.backgroundColor = "white"
-                });
-            };
-        };
-    };
+    // Turning all cells to white bg initially:
+    Array.from(GridElements).forEach(_div => {
+        _div.style.backgroundColor = "white"
+    });
 
     for (let elem of curRowColGrid) {
         Array.from(elem).forEach(_div => {
@@ -97,7 +93,6 @@ function activateRowColGrid(div) {
 };
 
 
-const GridElements = document.getElementById("grid-container").getElementsByTagName("div");
 for (let div_ of GridElements) {
     div_.addEventListener('click', function() {activateRowColGrid(div_)})
 };
