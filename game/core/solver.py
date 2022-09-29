@@ -1,8 +1,8 @@
 import pulp as lp
 import random
 
-from constants import GRID_SIZE, MIN_NUMBER, GAME_NAME, ROWS, COLS, GRIDS
-from solve_initialiser import generate_partial
+from game.core.constants import GRID_SIZE, MIN_NUMBER, GAME_NAME, ROWS, COLS, GRIDS
+from game.core.solve_initialiser import generate_partial
 
 
 class Sudoku:
