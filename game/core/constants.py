@@ -8,7 +8,7 @@ ROWS = range(MIN_NUMBER, MAX_NUMBER)
 COLS = range(MIN_NUMBER, MAX_NUMBER)
 GRIDS = range(MIN_NUMBER, MAX_NUMBER)
 
-POSITIONS = [f"{chr(65 + (j // 10))}{j % 10}" for j in range(1, 90) if j % 10 != 0]
+POSITIONS = [(j // 10, j % 10) for j in range(1, 90) if (j % 10 != 0) and (j % 10 != 9)]
 
 PATH = "game/core/"
 

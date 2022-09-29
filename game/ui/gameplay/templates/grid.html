@@ -14,9 +14,19 @@
     <div id="grid-container">
         {% for attr in cell_attributes %}
             {% if attr[3] == 0 %}
-                <div class="grid-item row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}"></div>
+                {% if partial[attr[0] - 1][attr[1] - 1] == 0 %}
+                    <div class="grid-item row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}"></div>
+                {% else %}
+                    <div class="grid-item row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}">{{ partial[attr[0] - 1][attr[1] - 1] }}</div>
+                {% endif %}
+
             {% else %}
-                <div class="grid-item type-{{ attr[3] }} row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}"></div>
+                {% if partial[attr[0] - 1][attr[1] - 1] == 0 %}
+                    <div class="grid-item type-{{ attr[3] }} row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}"></div>
+                {% else %}
+                    <div class="grid-item type-{{ attr[3] }} row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}">{{ partial[attr[0] - 1][attr[1] - 1] }}</div>
+                {% endif %}
+
             {% endif %}
         
         {% endfor %}

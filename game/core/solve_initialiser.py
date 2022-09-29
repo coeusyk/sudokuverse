@@ -1,6 +1,6 @@
 import random
 
-from constants import MAX_NUMBER, PATH
+from game.core.constants import MAX_NUMBER, PATH
 
 
 def generate_partial(max_filled: int = 9):
