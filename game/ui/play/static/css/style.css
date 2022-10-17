@@ -1,9 +1,12 @@
-*{
+* 
+{
     margin: 0;
     padding: 0;
     font-family: cursive;
     box-sizing: border-box;
 }
+
+
 .container
 {
     width: 100%;
@@ -14,21 +17,7 @@
     justify-content: center;
 }
 
-.btn
-{
-    position: center;
-    background-color: #ea5206;
-    color: rgb(244, 235, 235);
-    width: 10%;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 17px;
-    margin: 10px 0;
-    border: 2px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.btn:hover {background-color: orangered;}
+
 .popup
 {
     position: absolute;
@@ -39,12 +28,14 @@
     visibility: hidden;
     transition: transform 0.4s;
 }
+
 .open-popup
 {
     visibility: visible;
     backdrop-filter: blur(76px);
     transform: translate(-1%,-1%) scale(1);
 }
+
 .close-popup
 {
     visibility: hidden;
@@ -52,6 +43,12 @@
     transform: scale(0);
     transition: transform 0.1s;
 }
+
+@font-face {
+    font-family: Metropolis;
+    src: url(Metropolis-Regular.otf);
+}
+
 .sign-up-form
 {
     width: 400px;
@@ -63,51 +60,91 @@
     text-align:left;
     margin: 8% auto 0;
     font-size: 13px;
+    font-family: Metropolis;
 }
+
 .sign-up-form h1
 {
     text-align: left;
     margin-top: 20px;
+    font-size: x-large;
+    font-family: Metropolis;
+}
+
+.texth
+{
+    font-family: Metropolis;
+    margin-top: 20px;
+    color: black;
+    font-size: 25px;
+}
+
+.texth1
+{
+    font-family: Metropolis;
+    margin-top: 20px;
+    color: #ea5206;
+    font-size: 25px;
+}
+
+.text1
+{
+    font-family: Metropolis;
+    margin-top: 8px;
+    color: black;
+    font-size: 12px;
 }
 .text
 {
-    margin-bottom: 30px;
+    margin-top: 5px;
+    margin-bottom: 40px;
     text-align: left;
     color: grey;
-    font-size: 14px;
+    font-size: 11px;
+    font-family: Metropolis;
 }
+
 .input-box
 {
     border-radius: 20px;
     padding: 10px;
     margin: 10px 0;
+    margin-bottom: 20px;
     width: 100%;
     border: 1px solid grey;
+    font-family: Metropolis;
 }
+
 .btn1
 {
     position: center;
-    background-color: rgb(245, 34, 34);
+    background-color: #ea5206;
     color: rgb(244, 235, 235);
     width: 50%;
     padding: 10px;
     border-radius: 5px;
     font-size: 15px;
-    margin: 10px 0;
+    font-family: Metopolis;
+    margin-top: 20px 0;
+    margin-bottom: 1px;
     border: 2px;
     cursor: pointer;
     transition: 0.3s;
 }
-.btn1:hover {background-color:orangered;}
+
+.btn1:hover {background-color:#df6122;}
 hr
 {
     margin-top: 20px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 1px;
 }
+
 .or
 {
     background: white;
-width: 30px;
-margin: -24px auto 10px;
+    width: 30px;
+    margin: -24px auto 10px;
+    margin-top: 1px;
+    font-family: Metropolis;
 }
