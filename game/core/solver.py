@@ -82,7 +82,7 @@ class Sudoku:
                         sense=lp.LpConstraintEQ, rhs=input_sudoku[row][col],
                         name=f"constraint_prefilled_{row}_{col}"
                     )
-                                                     
+
                     self.problem.addConstraint(pre_constraint)
 
     # Attempt to solve, with supplied inputs and return solution; None otherwise
@@ -128,13 +128,16 @@ def console_print_solution(matrix, rows, cols):
     print("\n")
 
 
-file_path = generate_partial(max_filled = random.randint(0, 9))
+def get_solution():
+    file_path = generate_partial(max_filled = random.randint(0, 9))
 
-with open(file_path, "r") as f:
-    partial = [[int(t) for t in line.split()] for line in f]
+    with open(file_path, "r") as f:
+        partial = [[int(t) for t in line.split()] for line in f]
 
 
-board = Sudoku()
-board.init_puzzle(input_sudoku=partial)
+    board = Sudoku()
+    board.init_puzzle(input_sudoku=partial)
 
-solution = board.solve_puzzle()
+    solution = board.solve_puzzle()
+
+    return solution

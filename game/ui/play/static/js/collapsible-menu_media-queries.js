@@ -8,11 +8,13 @@ const mediaQuery2 = window.matchMedia('(max-width: 1700px)');
 
 function mQ1Work(e) {
     if (e.matches) {
-        menuContent.style.width = "0px";
+        menuContent.style.width = "0px"
+        newUserContent.style.width = "0px";
     } 
     
     else {
-        menuContent.style.width = "200px";
+        menuContent.style.width = "200px"
+        newUserContent.style.width = "200px";
     };
 
 };
@@ -33,11 +35,13 @@ function mQ2Work(e) {
         optionsSpace.style.display = "none";
     };
 
+    newUserContent.style.transition = "width 0.3s"
+
 };
 
 
-mediaQuery1.addListener(mQ1Work);
-mediaQuery2.addListener(mQ2Work);
+mediaQuery1.addEventListener("change", function() {mQ1Work(mediaQuery1)})
+mediaQuery2.addEventListener("change", function() {mQ2Work(mediaQuery2)});
 
 // Initial checks:
 mQ1Work(mediaQuery1);

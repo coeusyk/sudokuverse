@@ -1,8 +1,15 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+
 #menu-content {
     background-color: #212121;
     border: none;
     width: 200px;
-    height: 100%;
+    height: calc(100% - 50px);
     transition: width 0.3s;
     overflow: hidden;
     position: fixed;
@@ -57,7 +64,8 @@
     width: 200px;
     height: 100px;
     visibility: visible;
-    position: fixed;
+    transition: width 0.3s;
+    position: absolute;
     bottom: 11%;
     overflow: hidden;
 }

@@ -3,13 +3,88 @@ body {
 }
 
 
+#top-bar {
+    display: grid;
+    grid-template-columns: 318px 107px auto;
+    position: absolute;
+    width: 500px;
+    height: 50px;
+    gap: 50px 20px;
+    border: none;
+    left: calc(50% - 450px);
+    top: 14%;
+    align-content: center;
+}
+
+
+#difficulty {
+    font-family: Metropolis;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    width: 318px;
+    user-select: none;
+}
+
+
+#timer-box {
+    align-self: center;
+    background-color: #E36950;
+    color: white;
+    height: 50px;
+    width: 107px;
+    border-radius: 5px;
+    user-select: none;
+}
+
+
+#timer {
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    font-weight: 400;
+    font-size: 30px;
+    font-family: Metropolis;
+    right: 6.5%;
+    top: 20%;
+}
+
+
+#pause-play {
+    display: flex;
+    align-self: center;
+    height: 41px;
+    width: 41px;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    background-color: #212121;
+    cursor: pointer;
+    user-select: none;
+}
+
+#pause-play:hover { background-color: #383838; }
+
+
+#pause-icon {
+    justify-self: center;
+    align-self: center;
+}
+
+
+.coloured-text { color: #E36950; }
+
+
 #grid-container {
     display: grid;
+    position: absolute;
     grid-template-columns: auto auto auto auto auto auto auto auto auto;
     height: 500px;
     width: 500px;
     background-color: white;
     border: 2px solid black;
+    left: calc(50% - 450px);
+    top: 21%;
 }
 
 
@@ -23,20 +98,50 @@ body {
     justify-content: center;
     border: 1px solid rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    user-select: none;
 }
 
 
-.type-1, .type-3 {
-    border-right: 2px solid black;
-}
+.type-1, .type-3 { border-right: 2px solid black; }
 
-.type-2, .type-3 {
-    border-top: 2px solid black;
-}
+.type-2, .type-3 { border-top: 2px solid black; }
 
 
 .row-1, .row-2, .row-3, .row-4, .row-5, .row-6, .row-7, .row-8, .row-9,
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9,
 .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9 {
-    background-color: white;  /* #FFD580 - For whole row on click, #FFAC1C - On click */
+    background-color: white;  /* #FFECB9 - For whole row on click, #FFDD86 - On click */
+}
+
+
+.unfilled { color: white; }
+
+.filled { color: rgb(233, 130, 39); }
+
+
+.active { background-color: #FFDD86; }
+
+
+.notes {
+    color: white !important; /* When some notes present - #777777 -> rgb(119, 119, 119) */ 
+    font-size: 10px;
+    justify-content: none;
+}
+
+
+#bottom-bar {
+    position: absolute;
+    width: 500px;
+    left: calc(50% - 450px);
+    bottom: calc(25% - 130px);
+}
+
+#mistakes {
+    text-align: center;
+    font-family: Metropolis;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    width: 500px;
+    user-select: none;
 }

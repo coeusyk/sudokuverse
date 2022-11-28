@@ -24,6 +24,7 @@ body {
     position: absolute;
     top: 0%;
     left: 0%;
+    user-select: none;
 }
 
 #personal-profile {
@@ -34,7 +35,8 @@ body {
     cursor: pointer;
     position: absolute;
     top: 0%;
-    right: 0%
+    right: 0%;
+    user-select: none;
 }
 
 #collapsible:hover, #personal-profile:hover {
@@ -72,6 +74,7 @@ body {
     position: relative;
     top: -30%;
     cursor: pointer;
+    user-select: none;
 }
 
 #game-name:hover{
@@ -84,6 +87,7 @@ body {
     position: relative;
     top: 13.5%;
     cursor: pointer;
+    user-select: none;
 }
 
 #game-icon:hover {

@@ -18,18 +18,3 @@ db = SQLAlchemy()
 
 #     uid = db.Column(db.String(36), db.ForeignKey("user.uid"))
 #     dob = db.Column(db.DateTime, nullable=False)
-
-
-# class GameStats(db.Model):
-#     __tablename__ = "game_stats"
-
-#     uid = db.Column(db.String(36), db.ForeignKey("user.uid"))
-#     wins = db.Column(db.Integer, nullable=False)
-#     losses = db.Column(db.Integer, nullable=False)
-#     game_type = db.Column(db.Integer, nullable=False)
-
-
-# class TimeStats(db.Model):
-#     __tablename__ = "time_stats"
-
-#     uid = db.Column(db.String(36), db.ForeignKey("user.uid"))

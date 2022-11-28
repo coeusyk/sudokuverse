@@ -2,6 +2,7 @@ const menuButton = document.getElementById("collapsible");
 const menuContentButtons = document.getElementById("main-content").getElementsByTagName("button");
 
 const playButton = menuContentButtons[0];
+
 playButton.className = "active_menu-options";
 
 

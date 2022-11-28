@@ -50,15 +50,19 @@ const gridMap = new Map([
     ["grid-7", grid7], ["grid-8", grid8], ["grid-9", grid9]
 ]);
 
-const Attributes = [rows, cols, grids]
 const GridElements = document.getElementById("grid-container").getElementsByTagName("div");
 const Maps = [rowMap, colMap, gridMap];
+
+var menuContent = document.getElementById("menu-content")
+var newUserContent = document.getElementById("new-user-content");
+
+menuContent.style.width = "0px"
+newUserContent.style.width = "0px";
 
 
 function getCurAttributes(div) {
     var currentAttributes = [];
 
-    console.log("In CurAttribute");
     for (let map of Maps) {
         for (let [key, value] of map.entries()) {
             if (div.className.includes(key)) {
@@ -69,30 +73,92 @@ function getCurAttributes(div) {
     };
 
     return currentAttributes;
+
+};
+
+
+function getCurCell() {
+    var rowIndex = -1;
+    var colIndex = -1;
+
+    for (let row of rows) {
+        rowIndex += 1;
+
+        for (let cell of row) {
+            colIndex += 1;
+
+            if (cell.className.includes("active")) {
+                return [cell, rowIndex, colIndex];
+            };
+        };
+
+        if (colIndex == 8) {
+            colIndex = -1;
+        };
+    };
+
+    return null;
+
 };
 
 
 function activateRowColGrid(div) {
-    curRowColGrid = getCurAttributes(div);
+    var curRowColGrid = getCurAttributes(div);
 
     // Turning all cells to white bg initially:
     Array.from(GridElements).forEach(_div => {
-        _div.style.backgroundColor = "white"
+        _div.style.backgroundColor = "white";
+        _div.classList.remove("active");
+        if (_div.className.includes("unfilled")) {
+            _div.style.color = "white";
+        };
     });
 
     for (let elem of curRowColGrid) {
         Array.from(elem).forEach(_div => {
-            _div.style.backgroundColor = "#FFD580"
+            _div.style.backgroundColor = "rgb(255, 236, 185)";
+            if (_div.className.includes("unfilled")) {
+                _div.style.color = "rgb(255, 236, 185)";
+            };
         });
-
-        console.log("Check2");
     };
 
-    div.style.backgroundColor = "#FFAC1C";
+};
+
+
+/**
+ * Colourises all cells of the same number as of the selected cell
+ * @param [div] The selected cell on the board
+ */
+function activateNumCells(div) {
+    // Updating the current cell:
+    div.style.backgroundColor = "#FFDD86";
+    if (div.className.includes("unfilled")) {
+        div.style.color = "#FFDD86";
+    };
+
+    if (div.className.includes("unfilled") | div.className.includes("filled")) {
+        div.classList.add("active");
+    };
+
+    // Updating all the other cells (having the same number) row-wise:
+    if (!(div.className.includes("unfilled")) | (div.style.color == "rgb(255, 0, 0)")) {
+        let num = div.innerHTML;
+        for (i = 0; i < rows.length; i++) {
+            Array.from(rows[i]).forEach(_div => {
+                if ((_div.innerHTML == num) && (!(_div.className.includes("unfilled")))) {
+                    _div.style.backgroundColor = "#FFDD86"
+                };
+            });
+        };
+    };
 
 };
 
 
 for (let div_ of GridElements) {
-    div_.addEventListener('click', function() {activateRowColGrid(div_)})
+    div_.addEventListener('click', function() {
+        activateRowColGrid(div_);
+        activateNumCells(div_);
+    });
 };

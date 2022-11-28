@@ -8,13 +8,14 @@ ROWS = range(MIN_NUMBER, MAX_NUMBER)
 COLS = range(MIN_NUMBER, MAX_NUMBER)
 GRIDS = range(MIN_NUMBER, MAX_NUMBER)
 
-POSITIONS = [(j // 10, j % 10) for j in range(1, 90) if (j % 10 != 0) and (j % 10 != 9)]
+POSITIONS = [(j // 10, j % 10) for j in range(90) if (j % 10 != 9)]
+
 
 PATH = "game/core/"
 
-SIMPLE = range(30, 35)
-MEDIUM = range(25, 30)
-COMPLEX = range(20, 25)
+SIMPLE = range(31, 36)
+MEDIUM = range(26, 31)
+COMPLEX = range(21, 26)
 
 CELL_ATTRIBUTES = [[] for _ in range(81)]
 
@@ -68,5 +69,30 @@ def create_cell_attributes():
 
             temp += 1
 
+
+def get_grids():
+    box_combinations, temp_b_combinations = [], []
+    box_times, index, column_times = 0, 2, 2
+    for _ in range(3):
+        for _ in range(9):
+            temp_b_combinations += [POSITIONS[index - 2], POSITIONS[index - 1], POSITIONS[index]]
+
+            box_times += 1
+            if box_times == 3:
+                box_combinations += [temp_b_combinations]
+                temp_b_combinations, box_times = [], 0
+
+            index += 9
+        else:
+            index = (3 * column_times) - 1
+
+        column_times += 1
+
+    del temp_b_combinations, index, box_times, column_times
+
+    return box_combinations
+
+
+POS_GRIDS = get_grids()
 
 create_cell_attributes()
