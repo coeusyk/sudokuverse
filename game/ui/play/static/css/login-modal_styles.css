@@ -21,7 +21,7 @@
     color: #2A2A2A;
 }
 
-#heading {
+#login-heading {
     color: #E36950;
     font-family: Metropolis;
     font-size: 40px;
@@ -34,7 +34,7 @@
     height: 55px;
 }
 
-.inputs {
+.login-inputs {
     border: solid 2px;
     border-color: #BEBEBE;
     border-radius: 10px;
@@ -46,11 +46,11 @@
     font-size: 17px;
 }
 
-#input-field-space {
+.input-field-space {
     height: 50px;
 }
 
-#button-space {
+#login-button-space {
     height: 60px;
 }
 

@@ -3,7 +3,7 @@ import random
 from game.core.constants import MAX_NUMBER, PATH
 
 
-def generate_partial(max_filled: int = 9):
+def gen_for_solve(max_filled: int = 9):
     if not (-1 < max_filled < 10):
         msg = "invalid max_filled: expected number in 0 to 9"
         raise ValueError(msg)
@@ -30,5 +30,5 @@ def generate_partial(max_filled: int = 9):
                 row = ["0" for _ in range(MAX_NUMBER)]
             
             f.write(f"{' '.join(row)}\n")
-    
+
     return current_path

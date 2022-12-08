@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/collapsible-menu_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/game-options_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/login-modal_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/signup-modal_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/grid_styles.css') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+    <!-- The title bar -->
+    <div id="title-bar">
+        <button id="collapsible" title="Menu">
+            <img src="{{ url_for('play_blueprint.static', filename='images/list.svg') }}" alt="Menu Button" width="35" height="35">
+
+        </button>
+
+        <h1 id="game-name">SudokuVerse</h1>
+        <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="35" height="35">
+
+        <button id="personal-profile" title="Personal Profile">
+            <img src="{{ url_for('play_blueprint.static', filename='images/person-lines-fill.svg') }}" alt="Personal Profile" width="35" height="35">
+
+        </button>
+
+    </div>
+
+    <!-- The content of the menu button -->
+    <div id="menu-content">
+        <div id="title-space"></div>
+
+        <div id="main-content" role="group">
+            <button type="button" class="menu-options">PLAY</button>
+            <button type="button" class="menu-options">HOW TO PLAY</button>
+            <button type="button" class="menu-options">ABOUT</button>
+        
+        </div>
+
+        <div id="new-user-content" role="group">
+            <div id="options-space"></div>
+            
+            <button type="button" class="menu-options">SIGN UP</button>
+            <button type="button" class="menu-options">LOG IN</button> 
+
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+    <div class="modals" id="sign-up">
+        <div id="signup-modal-content">
+            <h1 id="signup-heading">Welcome to <span class="coloured-text">SudokuVerse!</span></h1>
+            <h6 id="register-text">Register your account</h6>
+
+            <form method="POST" id="signup-form">
+                <h5 class="input-heading">Username</h5>
+                <input name="username" id="username-input" class="signup-inputs" type="text" placeholder="*Required">
+                <h6 id="uname-NE" class="not-entered"></h6>
+                
+                <div class="input-field-space"></div>
+
+                <h5 id="dob-head" class="input-heading">Date of Birth</h5>
+                <input name="dob" id="dob-input" class="signup-inputs" type="date" placeholder="*Optional">
+
+                <div class="input-field-space"></div>
+
+                <h5 class="input-heading">Email</h5>
+                <input name="email" id="email-input" class="signup-inputs" type="email" placeholder="*Required">
+                <h6 id="email-NE" class="not-entered"></h6>
+
+                <div class="input-field-space"></div>
+                
+                <h5 id="phash-head" class="input-heading">Password</h5>
+                <input name="phash" id="phash-input" class="signup-inputs" type="password" placeholder="*Required">
+                <h6 id="phash-NE" class="not-entered"></h6>
+
+                <div id="signup-button-space"></div>
+
+                <input id="signup-button" name="add-user" type="submit" value="Create account">
+
+            </form>
+
+            <button id="phash-view-toggle">
+                <img id="show-phash-icon" src="{{ url_for('play_blueprint.static', filename='images/eye.svg') }}" alt="Show" width="20" height="20">
+                <img id="hide-phash-icon" src="{{ url_for('play_blueprint.static', filename='images/eye-slash.svg') }}" alt="Hide" width="20" height="20">
+            </button>
+
+            <h4 id="login-option-text">Already have an account? <a href="" id="login-link">Log in</a></h4>
+
+        </div>
+
+    </div>
+
+    <div class="modals" id="log-in">
+        <div id="login-modal-content">
+            <span class="close-button">&times;</span>
+    
+            <h1 id="login-heading">LOG IN</h1>
+    
+            <div id="heading-space"></div>
+    
+            <form>
+                <input class="login-inputs" type="text" placeholder="E-mail address">
+    
+                <div class="input-field-space"></div>
+    
+                <input class="login-inputs" type="password" placeholder="Password">
+            </form>
+    
+            <div id="login-button-space"></div>
+            
+            <center>
+                <button id="login-button">Login</button>
+            </center>
+    
+            <!-- <a href=""></a> -->
+    
+        </div>
+
+    </div>
+
+    <!-- The sudoku board -->
+    <div id="grid-container">
+        {% for attr in cell_attributes %}
+            <div class="grid-item type-{{ attr[3] }}"></div>
+
+        {% endfor %}
+
+    </div>
+
+    <form method="POST" id="play-now-form">
+        <input id="diff-info" name="difficulty" type="text">  <!-- Just for knowing the difficulty -->
+        <input id="play-now-button" name="redirect" type="submit" value="PLAY NOW" disabled>
+
+    </form>
+
+    <!-- The game options -->
+    <div id="game-options">
+        <center>
+            <div id="go-heading-space"></div>
+
+            <h2 id="options-label">Choose difficulty</h2>
+            <hr id="separator">
+
+            <div id="button-category" role="group">
+                <button type="button" class="inactive-button">SIMPLE</button><br>
+                <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">33-36</span></h4>
+                <div class="space"></div>
+
+                <button type="button" class="inactive-button">MEDIUM</button><br>
+                <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">27-30</span></h4>
+                <div class="space"></div>
+
+                <button type="button" class="inactive-button">COMPLEX</button>
+                <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">21-24</span></h4>
+
+            </div>
+
+        </center>
+
+    </div>
+
+</body>
+
+<!-- Getting python variables to JS -->
+<script>
+    const unameValidity = {{ uname_val | tojson }};
+    const emailValidity = {{ email_val | tojson }};
+    const phashValidity = {{ phash_val | tojson }};
+
+</script>
+
+<!-- Functionalities -->
+<script src="{{ url_for('play_blueprint.static', filename='js/collapsible-menu_functionalities.js') }}"></script>
+<script src="{{ url_for('play_blueprint.static', filename='js/game-options_functionalities.js') }}"></script>
+<script src="{{ url_for('play_blueprint.static', filename='js/modal_functionalities.js') }}"></script>
+<script src="{{ url_for('play_blueprint.static', filename='js/signup-modal_functionalities.js') }}"></script>
+
+<!-- Media Queries -->
+<script src="{{ url_for('play_blueprint.static', filename='js/collapsible-menu_media-queries.js') }}"></script>
+
+</html>

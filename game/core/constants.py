@@ -1,21 +1,20 @@
-MIN_NUMBER = 0
 MAX_NUMBER = 9
 
 GAME_NAME = "SudokuVerse"
 
 GRID_SIZE = 3
-ROWS = range(MIN_NUMBER, MAX_NUMBER)
-COLS = range(MIN_NUMBER, MAX_NUMBER)
-GRIDS = range(MIN_NUMBER, MAX_NUMBER)
+ROWS = range(MAX_NUMBER)
+COLS = range(MAX_NUMBER)
+GRIDS = range(MAX_NUMBER)
 
 POSITIONS = [(j // 10, j % 10) for j in range(90) if (j % 10 != 9)]
 
 
 PATH = "game/core/"
 
-SIMPLE = range(31, 36)
-MEDIUM = range(26, 31)
-COMPLEX = range(21, 26)
+SIMPLE = range(33, 37)
+MEDIUM = range(27, 31)
+COMPLEX = range(21, 25)
 
 CELL_ATTRIBUTES = [[] for _ in range(81)]
 

@@ -1,8 +1,28 @@
-.options-label {
+#options-label {
     font-family: Metropolis;
     font-weight: 600;
     color: white;
     font-size: 25px;
+    letter-spacing: 0.3px;
+}
+
+
+#separator {
+    display: flex;
+    position: relative;
+    width: 260px;
+    margin-top: -3px;
+    justify-self: center;
+    color: white;
+    border: 0;
+    border-top: 1.2px solid white;
+    border-color: white;
+}
+
+
+#go-heading-space {
+    height: 28px;
+    width: auto;
 }
 
 
@@ -14,26 +34,33 @@
 
 #game-options {
     background-color: #212121;
-    width: 300px;
-    height: 455px;
-    border-radius: 15px;
+    width: 310px;
+    height: 438px;
+    border-radius: 25px;
     position: fixed;
-    top: 30%;
-    right: 15%;
+    top: 20%;
+    right: 25%;
     transform: translate(25%, 2%);
+}
+
+
+#button-category {
+    position: relative;
+    margin-top: 13%;
 }
 
 
 .inactive-button {
     background-color: #2B2B2B;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-family: Metropolis;
-    font-size: 15px;
-    font-weight: 450;
-    color: white;
-    width: 195px;
-    padding: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    width: 220px;
+    height: 39px;
+    align-content: center;
     text-align: center;
     letter-spacing: 1px;
     cursor: pointer;
@@ -47,18 +74,54 @@
 .active-button {
     background-color: #E36950;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-family: Metropolis;
-    font-size: 15px;
-    font-weight: 450;
+    font-size: 18px;
+    font-weight: 500;
     color: white;
-    width: 195px;
-    padding: 8px;
+    width: 220px;
+    height: 39px;
     text-align: center;
+    align-content: center;
     letter-spacing: 1px;
     cursor: pointer;
 }
 
 .active-button:hover {
     background-color: #E36950;
+}
+
+
+.num-of-clues {
+    position: relative;
+    color: white;
+    font-family: Metropolis;
+    font-weight: 400;
+    font-size: 13px;
+    margin-top: 12px;
+    letter-spacing: 0.4px;
+}
+
+
+#diff-info { display: none; }
+
+
+#play-now-button {
+    border-radius: 40px;
+    border: none;
+    position: fixed;
+    font-family: Metropolis;
+    width: 155px;
+    height: 60px;
+    font-size: 20px;
+    color: white;
+    background-color: #777777;  /* #777777 when difficulty not chosen, #E36950 when chosen */
+    font-weight: 600;
+    z-index: 50;
+    left: 37.8%;
+    top: 44.5%;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.5px;
+    transition: background-color 0.1s linear;
 }
