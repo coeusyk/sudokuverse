@@ -85,6 +85,7 @@ function addNumber(button) {
             };
         };
 
+        activateRowColGrid(selectedCell);  // From grid_functionalities.js
         activateNumCells(selectedCell);  // From grid_functionalities.js
     };
 

@@ -16,6 +16,7 @@ def play_window_guest():
     uname_validity, email_validity, phash_validity = None, None, None
 
     if request.method == "POST":
+        # Checking if the request from JS is for adding a user:
         if "add-user" in request.form:
             username = request.form.get("username")
             dob = request.form.get("dob")
@@ -40,6 +41,7 @@ def play_window_guest():
 
                 return redirect(f"/play/{username}")  # Redirecting to the user window
         
+        # Checking if the request from JS is for redirecting the user to the gameplay window:
         elif "redirect" in request.form:
             difficulty = request.form.get("difficulty")
 

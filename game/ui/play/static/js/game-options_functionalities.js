@@ -64,6 +64,14 @@ function startGame() {
 };
 
 
+// Defaulting the difficulty level to Simple:
+dLButtons[0].className = "active-button";
+clickTimes[0]++;
+
+playNowButton.disabled = false;
+playNowButton.style.backgroundColor = "#E36950";
+
+
 // Assigning event listeners to the dLButtons ('event delegation'):
 difficultyLevelCategory.addEventListener('click', clickEvent => {
     if ((clickEvent.target.className == "inactive-button") | (clickEvent.target.className == "active-button")) {

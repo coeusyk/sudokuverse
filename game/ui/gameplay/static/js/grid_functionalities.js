@@ -148,7 +148,7 @@ function activateNumCells(div) {
             Array.from(rows[i]).forEach(_div => {
                 if ((_div.innerHTML == num) && (!(_div.className.includes("unfilled")))) {
                     _div.style.backgroundColor = "#FFDD86"
-                };
+                }
             });
         };
     };
