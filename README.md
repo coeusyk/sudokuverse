@@ -12,10 +12,6 @@ Creating a game of Sudoku using Python, having basic features:-
 ```
 /game-sudoku
     |__ /src
-        |-- __init__.py
-        |-- config.py
-        |-- models.py
-        
         |__ /game
             |__ /core
                 |-- *.py
@@ -36,6 +32,10 @@ Creating a game of Sudoku using Python, having basic features:-
                     |__ /static
                     |__ /templates
                     |-- <module>.py
+            
+            |-- __init__.py
+            |-- config.py
+            |-- models.py
         
         |__ /tests
             |__ /code-tests
