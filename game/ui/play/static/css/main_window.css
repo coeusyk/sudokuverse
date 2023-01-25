@@ -16,6 +16,17 @@
     justify-content: center;   
 }
 
+.popup
+{
+    position: absolute;
+    bottom: 10%;
+    top: 10%;
+    transform: translate(-1%,-1%) scale(0.1);
+    padding: 0 30px 30px;
+    visibility: hidden;
+    transition: transform 0.4s;
+}
+
 .open-popup
 {
     visibility: visible;
