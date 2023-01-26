@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/collapsible-menu_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('learn_blueprint.static', filename='css/learn-window_styles.css') }}">
+
+    <title>How To Play - SudokuVerse</title>
+
+</head>
+
+<body>
+    <!-- The title bar -->
+    <div id="title-bar">
+        <h1 id="game-name">SudokuVerse</h1>
+        <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="35" height="35">
+
+    </div>
+
+    <!-- The content of the menu button -->
+    <div id="menu-content">
+        <div id="title-space"></div>
+
+        <div id="main-content" role="group">
+            {% if user_identified %}
+                <a href="/home">
+                    <button type="button" class="menu-options">HOME</button>
+                </a>
+            {% else %}
+                <a href="/play">
+                    <button type="button" class="menu-options">PLAY</button>
+                </a>
+            {% endif %}
+            
+            <a href="/how-to-play">
+                <button type="button" class="menu-options active_m-o">HOW TO PLAY</button>
+            </a>
+            
+            <a href="/about">
+                <button type="button" class="menu-options">ABOUT</button>
+            </a>
+        
+        </div>
+
+        {% if user_identified %}
+            <!-- <a href="/profile/{{ username }}">
+                <button type="button" class="menu-options">PROFILE</button>
+            </a> -->
+
+            <button id="log-out-btn" class="menu-options">LOG OUT</button>
+        
+        {% else %}
+            <div id="new-user-content" role="group">
+                <div id="options-space"></div>
+                
+                <a href="{{ url_for('signup_blueprint.signup_window') }}">
+                    <button type="button" class="menu-options">SIGN UP</button>
+                </a>
+
+                <a href="{{ url_for('login_blueprint.login_window') }}">
+                    <button type="button" class="menu-options">LOG IN</button> 
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <div id="page-content">
+        <div id="how-to-play_div">
+            <h1 id="main-heading">How to Play on SudokuVerse</h1>
+
+            <hr id="heading-sep" class="separator">
+
+            <ol>
+                <li class="steps">
+                    Select a cell on the board.<br>The row, column and grid of the selected cell are highlighted to provide easier readability of the board.<br>
+                    If the selected cell is a clue (color of number is black), then all cells having that number are highlighted as well.
+                </li>
+
+                <li class="steps">
+                    To add a number, click that number from the number grid.<br>If the number added is incorrect, the number is shown in red,
+                    along with the reason why it was incorrect (if the number is present in the same row, column or grid).
+                </li>
+
+                <li class="steps">
+                    Once the board is completely filled, the game ends.<br>If the number of mistakes made exceed 3, the game ends.
+                </li>
+            </ol>
+
+            <hr class="separator">
+
+            <h2 id="div-footer">Ready to <span class="coloured-text">start</span> a game?</h2>
+
+            {% if user_identified %}
+                <a href="/home">    
+                    <button id="play-now">Play Now</button>
+                </a>
+            {% else %}
+                <a href="/play">    
+                    <button id="play-now">Play Now</button>
+                </a>
+            {% endif %}
+
+        </div>
+
+        <div id="end-space"></div>
+
+    </div>
+
+</body>
+
+</html>

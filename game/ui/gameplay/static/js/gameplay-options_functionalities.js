@@ -1,17 +1,17 @@
 var eraseButton = document.getElementById("erase-button");
 var hintButton = document.getElementById("hint-button");
 var undoButton = document.getElementById("undo-button");
-var notesButton = document.getElementById("notes-button");
+
+var hintsUsedDisplay = document.getElementById("hints-used");
 
 var usedHints = 0;
-const totalHints = 3;
+var maxHints = parseInt(hintsUsedDisplay.innerText[hintsUsedDisplay.innerText.length - 1]);
+var hintsUsedIdentifier = document.getElementById("h-u-span");
 
 
 function eraseFunctionality(cellAttr=null, undo=false) {
     if (cellAttr == null) {
         var currentCellAttr = getCurCell();
-        console.log(true);
-        console.log(currentCellAttr);
     } else {
         var currentCellAttr = cellAttr;
     };
@@ -36,7 +36,7 @@ function eraseFunctionality(cellAttr=null, undo=false) {
 
 
 function hintFunctionality(cellAttr=null, undo=false) {
-    if (usedHints < totalHints) {
+    if (usedHints < maxHints) {
         if (cellAttr == null) {
             var selectedCellAttr = getCurCell();
         } else {
@@ -56,14 +56,15 @@ function hintFunctionality(cellAttr=null, undo=false) {
                 selectedCell.classList.remove("unfilled");
                 selectedCell.classList.add("filled");
                 
-                selectedCell.innerHTML = solution_[rowIndex][colIndex]
+                selectedCell.innerText = solution_[rowIndex][colIndex]
                 selectedCell.style.color = "rgb(233, 130, 39)";
 
-                checkNumCompletion(selectedCell.innerHTML);
+                checkNumCompletion(selectedCell.innerText);
                 activateNumCells(selectedCell);  // From grid_functionalities.js
 
                 if (!(undo)) {
                     usedHints += 1;
+                    hintsUsedIdentifier.innerText = usedHints;
                 };
             };
         };
@@ -94,28 +95,6 @@ function undoFunctionality() {
 };
 
 
-function notesFunctionality() {
-    // Changing the notes identifier (OFF to ON and vice-versa):
-    var nISpan = document.getElementById("n-i-span");
-    if (nISpan.innerHTML == "OFF") {
-        nISpan.innerHTML = "ON";
-    } else {
-        nISpan.innerHTML = "OFF";
-    };
-
-    // Changing the font size of all unfilled cells:
-    for (i = 0; i < rows.length; i++) {
-        Array.from(rows[i]).forEach(_div => {
-            if (_div.className.includes("unfilled")) {
-                _div.classList.toggle("notes");
-            };
-        });
-    };
-
-};
-
-
 eraseButton.addEventListener('click', function() { eraseFunctionality(cellAttr=null, undo=false); });
 hintButton.addEventListener('click', function() { hintFunctionality(cellAttr=null, undo=false); });
 undoButton.addEventListener('click', undoFunctionality);
-notesButton.addEventListener('click', notesFunctionality);

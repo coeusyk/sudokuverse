@@ -1,0 +1,138 @@
+#signup-request {
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 10px;
+    width: 895px;
+    height: min-content;
+    position: relative;
+    top: 20%;
+    left: 50%;
+    margin-left: -482px;
+    background-color: var(--div-color);
+    border: none;
+    border-radius: 5px;
+    justify-items: center;
+    justify-content: center;
+    line-height: 1.2;
+    padding-bottom: 60px;
+}
+
+
+#sr-main-heading {
+    width: max-content;
+    height: auto;
+    font-size: 45px;
+    font-weight: 700;
+    font-family: var(--font);
+    justify-self: center;
+    padding: 10px 15px;
+    color: white;
+    text-align: center;
+}
+
+
+.sr-sep {
+    border: 0;
+    border-top: 5px solid #777777;
+    justify-self: center;
+    width: 94%;
+}
+
+#sr-header-sep { margin-top: -10px; }
+
+
+#extra-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+    width: max-content;
+    height: max-content;
+    justify-self: center;
+    justify-items: center;
+    border: none;
+    padding: 30px 25px;
+}
+
+
+.feature {
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 5px;
+    width: 350px;
+    height: max-content;
+}
+
+
+.feature-heading {
+    font-weight: 600;
+    font-size: 25px;
+    font-family: var(--font);
+    color: white;
+    text-align: center;
+}
+
+
+.fh-separator {
+    border: 0;
+    border-top: 3px solid #777777;
+    justify-self: center;
+    width: 100%;
+}
+
+
+.feature-sub-heading {
+    font-size: 20px;
+    font-weight: 500;
+    font-family: var(--font);
+    color: white;
+    text-align: center;
+}
+
+
+.coloured-bold {
+    color: var(--theme-color);
+    font-weight: 550;
+}
+
+
+#sr-footer {
+    font-size: 33px;
+    font-family: var(--font);
+    font-weight: 700;
+    color: white;
+    width: 500px;
+    padding: 15px;
+    text-align: center;
+}
+
+
+#join-us-btn {
+    color: white;
+    font-family: var(--font);
+    background-color: var(--theme-color);
+    width: 180px;
+    height: 70px;
+    text-align: center;
+    align-content: center;
+    font-size: 27px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: filter 0.1s;
+    box-shadow: 0px 3px 0px 1px rgba(227, 105, 80, 0.6)
+}
+
+#join-us-btn:hover { filter: brightness(115%) saturate(115%); }
+
+#join-us-btn:active { filter: brightness(110%) saturate(110%); }
+
+
+#end-space {
+    height: 100px;
+    position: relative;
+    top: 23%;
+}
+
+
+.coloured-text { filter: brightness(110%) saturate(110%); }

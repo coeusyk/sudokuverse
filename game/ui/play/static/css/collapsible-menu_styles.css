@@ -1,67 +1,66 @@
+:root {
+    --bg-color: #2B2B2B;
+    --theme-color: #E36950;
+    --div-color: #212121;
+    --font: 'Metropolis';
+    --collapsible-div-width: 230px;
+    --fixed-div-width: 230px;
+}
+
+
 html, body {
     margin: 0;
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 
 #menu-content {
-    background-color: #212121;
+    background-color: var(--div-color);
     border: none;
-    width: 200px;
-    height: calc(100% - 50px);
+    width: var(--collapsible-div-width);
+    height: calc(100% - 40px);
     transition: width 0.3s;
     overflow: hidden;
     position: fixed;
-    top: 50px;
+    top: 45px;
     left: 0%;
+    z-index: 80;
 }
 
 
 #title-space {
-    height: 8%;
+    height: 6%;
     width: auto;
 }
 
 
 .menu-options {
-    background-color: #212121;
+    background-color: var(--div-color);
     border: none;
     color: white;
-    padding: 12px 18px;
+    padding: 14px 18px;
     text-align: left;
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 500;
-    font-family: Metropolis;
+    font-family: var(--font);
     letter-spacing: 1px;
     cursor: pointer;
-    width: 200px;
+    width: var(--fixed-div-width);
+    user-select: none;
 }
 
-.menu-options:hover {
-    background-color: #383838;
-}
+.menu-options:hover { background-color: #383838; }
 
 
-.active_menu-options {
-    background-color: #E36950;
-    border: none;
-    color: white;
-    padding: 12px 18px;
-    text-align: left;
-    font-size: 20px;
-    font-weight: 500;
-    font-family: Metropolis;
-    letter-spacing: 1px;
-    cursor: pointer;
-    width: 200px;
-}
+.active_m-o { background-color: var(--theme-color); }
+.active_m-o:hover { background-color: var(--theme-color); }
 
 
 #new-user-content {
-    background-color: #212121;
+    background-color: var(--div-color);
     border: none;
-    width: 200px;
+    width: var(--fixed-div-width);
     height: 100px;
     visibility: visible;
     transition: width 0.3s;
@@ -74,4 +73,15 @@ html, body {
 #options-space {
     display: none;
     height: 300px;
+}
+
+
+#log-out-btn {
+    position: relative;
+    margin-top: 50px;
+}
+
+
+@media only screen and (max-width: 1500px) {
+    :root { --collapsible-div-width: 0px; }
 }

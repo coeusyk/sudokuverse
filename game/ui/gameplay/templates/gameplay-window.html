@@ -4,137 +4,112 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('gameplay_blueprint.static', filename='css/grid_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/collapsible-menu_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('gameplay_blueprint.static', filename='css/gameplay-options_styles.css') }}">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Gameplay</title>
+    <title>Gameplay - SudokuVerse</title>
 
 </head>
 
-<body>
+<body style="background-color: var(--bg-color);">
     <!-- The title bar -->
     <div id="title-bar">
-        <button id="collapsible" title="Menu">
-            <img src="{{ url_for('play_blueprint.static', filename='images/list.svg') }}" alt="Menu Button" width="35" height="35">
-
-        </button>
-
         <h1 id="game-name">SudokuVerse</h1>
         <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="35" height="35">
 
-        <button id="personal-profile" title="Personal Profile">
-            <img src="{{ url_for('play_blueprint.static', filename='images/person-lines-fill.svg') }}" alt="Personal Profile" width="35" height="35">
-
-        </button>
-
     </div>
 
-    <!-- The content of the menu button -->
-    <div id="menu-content">
-        <div id="title-space"></div>
+    <div id="page-container">
+        <div id="board-container">
+            <!-- The bar on top of the board -->
+            <div id="top-bar">
+                <h2 id="difficulty">Difficulty: <span class="coloured-text" id="difficulty-chosen">{{ difficulty }}</span></h2>
 
-        <div id="main-content" role="group">
-            <button type="button" class="menu-options">PLAY</button>
-            <button type="button" class="menu-options">HOW TO PLAY</button>
-            <button type="button" class="menu-options">LEADERBOARD</button>
-            <button type="button" class="menu-options">ABOUT</button>
-        
-        </div>
+                <div id="timer-box">
+                    <span id="timer">0:00</span>
 
-        <div id="new-user-content" role="group">
-            <div id="options-space"></div>
+                </div>
+
+                <button id="pause-play">
+                    <img src="{{ url_for('gameplay_blueprint.static', filename='images/pause.svg') }}" alt="" width="30" height="30" id="pause-icon">
+
+                </button>
+
+            </div>
+
+            <!-- The sudoku board -->
+            <div id="grid-container-1">
+                {% for attr in cell_attributes %}
+                    {% if attr[3] == 0 %}
+                        {% if partial[attr[0] - 1][attr[1] - 1] == 0 %}
+                            <div class="grid-item row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }} unfilled">{{ solution[attr[0] - 1][attr[1] - 1] }}</div>
+                        {% else %}
+                            <div class="grid-item row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}">{{ partial[attr[0] - 1][attr[1] - 1] }}</div>
+                        {% endif %}
+
+                    {% else %}
+                        {% if partial[attr[0] - 1][attr[1] - 1] == 0 %}
+                            <div class="grid-item type-{{ attr[3] }} row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }} unfilled">{{ solution[attr[0] - 1][attr[1] - 1] }}</div>
+                        {% else %}
+                            <div class="grid-item type-{{ attr[3] }} row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}">{{ partial[attr[0] - 1][attr[1] - 1] }}</div>
+                        {% endif %}
+
+                    {% endif %}
+                
+                {% endfor %}
             
-            <button type="button" class="menu-options">SIGN UP</button>
-            <button type="button" class="menu-options">LOG IN</button> 
+            </div>
 
-        </div>
-
-    </div>
-
-    <!-- The bar on top of the board -->
-    <div id="top-bar">
-        <h2 id="difficulty">Difficulty: <span class="coloured-text">{{ difficulty }}</span></h2>
-
-        <div id="timer-box">
-            <span id="timer">0:00</span>
-
-        </div>
-
-        <button type="button" id="pause-play">
-            <img src="{{ url_for('gameplay_blueprint.static', filename='images/pause.svg') }}" alt="" width="30" height="30" id="pause-icon">
-
-        </button>
-
-    </div>
-
-    <!-- The sudoku board -->
-    <div id="grid-container">
-        {% for attr in cell_attributes %}
-            {% if attr[3] == 0 %}
-                {% if partial[attr[0] - 1][attr[1] - 1] == 0 %}
-                    <div class="grid-item row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }} unfilled">{{ solution[attr[0] - 1][attr[1] - 1] }}</div>
-                {% else %}
-                    <div class="grid-item row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}">{{ partial[attr[0] - 1][attr[1] - 1] }}</div>
-                {% endif %}
-
-            {% else %}
-                {% if partial[attr[0] - 1][attr[1] - 1] == 0 %}
-                    <div class="grid-item type-{{ attr[3] }} row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }} unfilled">{{ solution[attr[0] - 1][attr[1] - 1] }}</div>
-                {% else %}
-                    <div class="grid-item type-{{ attr[3] }} row-{{ attr[0] }} col-{{ attr[1] }} grid-{{ attr[2] }}">{{ partial[attr[0] - 1][attr[1] - 1] }}</div>
-                {% endif %}
-
-            {% endif %}
+            <div id="grid-container-2">
+                <img id="grid-image" src="{{ url_for('gameplay_blueprint.static', filename='images/sudoku_board.svg') }}">
         
-        {% endfor %}
-
-    </div>
-
-    <!-- The bar below the board -->
-    <div id="bottom-bar">
-        <h2 id="mistakes">Mistakes: <span class="coloured-text">0</span>/3</h2>
-
-    </div>
-
-    <!-- The playing options -->
-    <div id="play-options">
-        <div id="option-icons">
-            <button class="icon-buttons" id="undo-button">
-                <img src="{{ url_for('play_blueprint.static', filename='images/arrow-counterclockwise.svg') }}" id="undo-icon" alt="Undo" width="32" height="32" class="icons">
-            </button>
-
-            <button class="icon-buttons" id="erase-button">
-                <img src="{{ url_for('play_blueprint.static', filename='images/eraser-fill.svg') }}" alt="Erase" width="32" height="32" class="icons">
-            </button>
-
-            <button class="icon-buttons" id="notes-button">
-                <img src="{{ url_for('play_blueprint.static', filename='images/pencil-fill.svg') }}" alt="Notes" width="32" height="32" class="icons">
-            </button>
-
-            <button class="icon-buttons" id="hint-button">
-                <img src="{{ url_for('play_blueprint.static', filename='images/lightbulb.svg') }}" alt="Hint" width="32" height="32" class="icons">
-            </button>
+                <button id="quit-game">Quit?</button>
         
-        </div>
+            </div>
 
-        <div id="option-ids">
-            <span class="option-names">Undo</span>
-            <span class="option-names">Erase</span>
-            <span class="option-names">Notes</span>
-            <span class="option-names" id="id-hint">Hint</span>
-        
-        </div>
+            <!-- The bar below the board -->
+            <div id="bottom-bar">
+                <h2 id="mistakes">Mistakes: <span class="coloured-text">0</span>/3</h2>
 
-        <h2 id="notes-identifier">Notes: <span id="n-i-span" class="coloured-text">OFF</span></h2>
+            </div>
 
-        <div id="number-grid">
-            {% for num in nums %}
-                <button class="numbers enabled">{{ num }}</button>
-            
-            {% endfor %}
+            <!-- The playing options -->
+            <div id="play-options">
+                <div id="option-icons">
+                    <button class="icon-buttons" id="undo-button">
+                        <img src="{{ url_for('gameplay_blueprint.static', filename='images/arrow-counterclockwise.svg') }}" id="undo-icon" alt="Undo" width="32" height="32" class="icons">
+                    </button>
+
+                    <button class="icon-buttons" id="erase-button">
+                        <img src="{{ url_for('gameplay_blueprint.static', filename='images/eraser-fill.svg') }}" alt="Erase" width="32" height="32" class="icons">
+                    </button>
+
+                    <button class="icon-buttons" id="hint-button">
+                        <img src="{{ url_for('gameplay_blueprint.static', filename='images/lightbulb.svg') }}" alt="Hint" width="32" height="32" class="icons">
+                    </button>
+                
+                </div>
+
+                <div id="option-ids">
+                    <span class="option-names">Undo</span>
+                    <span class="option-names">Erase</span>
+                    <span class="option-names" id="id-hint">Hint</span>
+                
+                </div>
+
+                <h2 id="hints-used">Hints Used: <span id="h-u-span" class="coloured-text">0</span>/{{ max_hints }}</h2>
+
+                <div id="number-grid">
+                    {% for num in nums %}
+                        <button class="numbers enabled">{{ num }}</button>
+                    
+                    {% endfor %}
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -148,11 +123,8 @@
 </script>
 
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/grid_functionalities.js') }}"></script>
-<script src="{{ url_for('play_blueprint.static', filename='js/collapsible-menu_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/gameplay-options_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/numbers_functionalities.js') }}"></script>
-<script src="{{ url_for('gameplay_blueprint.static', filename='js/timer_functionality.js') }}"></script>
-
-<script src="{{ url_for('gameplay_blueprint.static', filename='js/collapsible-menu_media-queries.js') }}"></script>
+<script src="{{ url_for('gameplay_blueprint.static', filename='js/timer_functionalities.js') }}"></script>
 
 </html>

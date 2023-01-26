@@ -1,9 +1,12 @@
 #options-label {
+    position: relative;
     font-family: Metropolis;
     font-weight: 600;
     color: white;
     font-size: 25px;
     letter-spacing: 0.3px;
+    left: 16%;
+    user-select: none;
 }
 
 
@@ -33,21 +36,25 @@
 
 
 #game-options {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
     background-color: #212121;
     width: 310px;
-    height: 438px;
+    height: 450px;
     border-radius: 25px;
-    position: fixed;
-    top: 20%;
-    right: 25%;
-    transform: translate(25%, 2%);
+    position: relative;
+    user-select: none;
 }
 
 
 #button-category {
     position: relative;
     margin-top: 13%;
+    left: 14.8%;
 }
+
+
+.coloured-text { color: #E36950; }
 
 
 .inactive-button {
@@ -99,29 +106,9 @@
     font-weight: 400;
     font-size: 13px;
     margin-top: 12px;
+    left: 10.5%;
     letter-spacing: 0.4px;
 }
 
 
-#diff-info { display: none; }
-
-
-#play-now-button {
-    border-radius: 40px;
-    border: none;
-    position: fixed;
-    font-family: Metropolis;
-    width: 155px;
-    height: 60px;
-    font-size: 20px;
-    color: white;
-    background-color: #777777;  /* #777777 when difficulty not chosen, #E36950 when chosen */
-    font-weight: 600;
-    z-index: 50;
-    left: 37.8%;
-    top: 44.5%;
-    cursor: pointer;
-    text-align: center;
-    letter-spacing: 0.5px;
-    transition: background-color 0.1s linear;
-}
+#diff-info { display: none; }  /* Just for knowing the difficulty */

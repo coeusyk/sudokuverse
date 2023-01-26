@@ -1,52 +1,85 @@
-body {
-    background-color: #2b2b2b;
+:root {
+    --theme-color: #E36950;
+    --bg-color: #2B2B2B;
+    --div-color: #212121;
+    --font: 'Metropolis';
+}
+
+
+body { overflow-x: hidden; }
+
+
+#page-container {
+    height: calc(100% - 60px);
+    width: 100%;
+    position: absolute;
+    margin-top: 45px;
+}
+
+
+#board-container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-top: -325px;
+    margin-left: -450px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 80px 500px auto;
+    align-items: center;
+    justify-items: center;
+    width: 900px;
+    height: fit-content;
+    column-gap: 40px;
 }
 
 
 #top-bar {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
     display: grid;
-    grid-template-columns: 318px 107px auto;
+    grid-template-columns: 257px 168px auto;
     position: absolute;
     width: 500px;
-    height: 50px;
+    padding: 10px 0px;
+    height: 60px;
     gap: 50px 20px;
-    border: none;
-    left: calc(50% - 450px);
-    top: 14%;
     align-content: center;
 }
 
 
 #difficulty {
-    font-family: Metropolis;
-    font-size: 22px;
+    font-family: var(--font);
+    font-size: 24px;
     font-weight: 600;
     color: white;
-    width: 318px;
-    user-select: none;
+    width: max-content;
 }
 
 
 #timer-box {
+    display: grid;
+    grid-template-columns: auto;
     align-self: center;
-    background-color: #E36950;
+    background-color: var(--theme-color);
     color: white;
     height: 50px;
-    width: 107px;
+    width: auto;
     border-radius: 5px;
     user-select: none;
 }
 
 
 #timer {
-    position: absolute;
-    width: 100px;
-    height: 25px;
-    font-weight: 400;
-    font-size: 30px;
-    font-family: Metropolis;
-    right: 6.5%;
-    top: 20%;
+    position: relative;
+    font-weight: 500;
+    font-size: 26px;
+    font-family: 'IBM Plex Mono';
+    align-self: center;
+    width: 125px;
+    height: auto;
+    text-align: right;
+    left: 14%;   
 }
 
 
@@ -58,9 +91,8 @@ body {
     border-radius: 50px;
     border: none;
     color: white;
-    background-color: #212121;
+    background-color: var(--div-color);
     cursor: pointer;
-    user-select: none;
 }
 
 #pause-play:hover { background-color: #383838; }
@@ -72,28 +104,25 @@ body {
 }
 
 
-.coloured-text { color: #E36950; }
+.coloured-text { color: var(--theme-color); }
 
 
-#grid-container {
+#grid-container-1 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
     display: grid;
-    position: absolute;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    grid-template-columns: repeat(9, 1fr);
     height: 500px;
     width: 500px;
     background-color: white;
     border: 2px solid black;
-    left: calc(50% - 450px);
-    top: 21%;
 }
 
 
 .grid-item {
     display: flex;
     font-size: 29px;
-    height: 53.37px;
-    width: 53.37px;
-    font-family: Metropolis;
+    font-family: var(--font);
     align-items: center;
     justify-content: center;
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -122,26 +151,64 @@ body {
 .active { background-color: #FFDD86; }
 
 
-.notes {
-    color: white !important; /* When some notes present - #777777 -> rgb(119, 119, 119) */ 
-    font-size: 10px;
-    justify-content: none;
-}
-
-
 #bottom-bar {
-    position: absolute;
-    width: 500px;
-    left: calc(50% - 450px);
-    bottom: calc(25% - 130px);
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    display: grid;
+    width: 500px;;
+    padding: 5px;
 }
 
 #mistakes {
     text-align: center;
-    font-family: Metropolis;
-    font-size: 22px;
+    justify-self: center;
+    font-family: var(--font);
+    font-size: 24px;
     font-weight: 600;
     color: white;
-    width: 500px;
+    width: fit-content;
+}
+
+
+#grid-container-2 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    display: none;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    justify-content: center;
+}
+
+
+#grid-image {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;    
+    user-select: none;
+    pointer-events: none;
+    width: 504px;
+    height: 504px;
+}
+
+
+#quit-game {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    align-self: center;
+    justify-self: center;
+    width: 190px;
+    height: 60px;
+    background-color: var(--theme-color);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4px 0px 1px rgba(227, 105, 80, 0.6);
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 24px;
+    color: white;
+    font-weight: 700;
+    position: relative;
+    top: 30px;
     user-select: none;
 }
+
+#quit-game:hover { filter: brightness(110%) saturate(110%); }

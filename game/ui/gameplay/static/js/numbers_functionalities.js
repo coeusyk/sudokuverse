@@ -55,6 +55,7 @@ function checkNumCompletion(num) {
 
 function addNumber(button) {
     var selectedCellAttr_ = getCurCell();
+    let mistake = false;
 
     if (selectedCellAttr_ != null) {
         addWork(selectedCellAttr_, "+");
@@ -66,22 +67,25 @@ function addNumber(button) {
         selectedCell.classList.remove("unfilled");
         selectedCell.classList.add("filled");
 
-        if (solution_[rowIndex][colIndex] == button.innerHTML) {
+        if (solution_[rowIndex][colIndex] == button.innerText) {
             selectedCell.innerHTML = solution_[rowIndex][colIndex]
             selectedCell.style.color = "rgb(233, 130, 39)";
 
-            checkNumCompletion(selectedCell.innerHTML);
+            checkNumCompletion(selectedCell.innerText);
         }
 
         else {
-            selectedCell.innerHTML = button.innerHTML;
+            mistake = true;
+
+            selectedCell.innerText = button.innerText;
             selectedCell.style.color = "rgb(255, 0, 0)";
 
             let mistakes = document.getElementById("mistakes").getElementsByClassName("coloured-text")[0];
-            mistakes.innerHTML = `${parseInt(mistakes.innerHTML) + 1}`
+            mistakes.innerText = `${parseInt(mistakes.innerText) + 1}`;
 
-            if (mistakes.innerHTML == '3') {
+            if (mistakes.innerText == '3') {
                 alert("Game over");
+                stopTimer();  // From timer_functionalities.js
             };
         };
 

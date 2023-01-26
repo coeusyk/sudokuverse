@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/collapsible-menu_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('about_blueprint.static', filename='css/about-window_styles.css') }}">
+
+    <title>About - SudokuVerse</title>
+
+</head>
+
+<body>
+    <!-- The title bar -->
+    <div id="title-bar">
+        <h1 id="game-name">SudokuVerse</h1>
+        <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="35" height="35">
+
+    </div>
+
+    <!-- The content of the menu button -->
+    <div id="menu-content">
+        <div id="title-space"></div>
+
+        <div id="main-content" role="group">
+            {% if user_identified %}
+                <a href="/home">
+                    <button type="button" class="menu-options">HOME</button>
+                </a>
+            {% else %}
+                <a href="/play">
+                    <button type="button" class="menu-options">PLAY</button>
+                </a>
+            {% endif %}
+            
+            <a href="/how-to-play">
+                <button type="button" class="menu-options">HOW TO PLAY</button>
+            </a>
+            
+            <a href="/about">
+                <button type="button" class="menu-options active_m-o">ABOUT</button>
+            </a>
+        
+        </div>
+
+        {% if user_identified %}
+            <a href="/profile/{{ username }}">
+                <button type="button" class="menu-options">PROFILE</button>
+            </a>
+
+            <button id="log-out-btn" class="menu-options">LOG OUT</button>
+        
+        {% else %}
+            <div id="new-user-content" role="group">
+                <div id="options-space"></div>
+                
+                <a href="{{ url_for('signup_blueprint.signup_window') }}">
+                    <button type="button" class="menu-options">SIGN UP</button>
+                </a>
+
+                <a href="{{ url_for('login_blueprint.login_window') }}">
+                    <button type="button" class="menu-options">LOG IN</button> 
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <div id="page-content">
+        <div id="about-div">
+            <h1 id="main-heading">About Sudoku</h1>
+
+            <hr id="heading-sep">
+
+            <div class="information">    
+                <h2 class="info-heading"><span class="coloured-text">What</span> is Sudoku?</h2>
+                <p class="info-content">
+                    Sudoku is a logic-based combinatorial number-placement puzzle. Sudoku has a 9 x 9 grid with numbers or symbols appearing in some of the squares. 
+                    These numbers act as clues to fill the remaining squares. 
+                    A general Sudoku has a 9 x 9 grid which is divided into 9 boxes where each box is a small 3 x 3 grid.
+                </p>
+            
+            </div>
+
+            <hr class="info-sep">
+
+            <div class="information">
+                <h2 class="info-heading">Its <span class="coloured-text">Origin</span></h2>
+                <p class="info-content">
+                    Howard Garns, an American, invented Sudoku in 1979 and originally published it in the name <span class="bold">"Numbers in Place"</span> in Dell Magazines.
+                    Maki Kaji, a Japanese, published a grid in 1984 in the quarterly magazine, Nikoli. He named the grid Sudoku which means 
+                    <span class="bold">single numbers</span> in English.
+                </p>
+
+            </div>
+
+            <hr class="info-sep">
+
+            <div class="information">
+                <h2 class="info-heading"><span class="coloured-text">How</span> is it Played?</h2>
+                <p class="info-content">
+                    The player is provided with a certain number of clues should fill the remaining squares based on the following rules:<br>
+                    <ol>
+                        <li class="info-content">Each row should have numbers 1-9, with <span class="bold">no repeats</span><br></li>
+                        <li class="info-content">Each column should have numbers 1-9, with <span class="bold">no repeats</span><br></li>
+                        <li class="info-content">Each 3x3 quadrant should have numbers 1-9, with <span class="bold">no repeats</span></li>
+                    </ol>
+                </p>
+
+            </div>
+
+        </div>
+
+        <div id="end-space"></div>
+
+    </div>
+
+</body>
+
+</html>

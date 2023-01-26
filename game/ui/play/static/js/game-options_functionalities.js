@@ -6,7 +6,7 @@ var diffInfo = document.getElementById("diff-info");
 var playNowButton = document.getElementById("play-now-button");
 
 
-function buttonClick(button_) {
+function diffButtonClick(button_) {
     let index = Array.from(dLButtons).indexOf(button_);
 
     for (let i = 0; i < dLButtons.length; i++) {
@@ -50,7 +50,7 @@ function startGame() {
         const formData = new FormData(playNowForm);
         const data = new URLSearchParams(formData);
 
-        fetch("/play/guest", {
+        fetch(window.location.href, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -58,7 +58,13 @@ function startGame() {
             },
 
             body: data
-        });
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data["redirect"] == true) {
+                    window.location.href = "/gameplay";
+                };
+            })
     };
 
 };
@@ -75,7 +81,7 @@ playNowButton.style.backgroundColor = "#E36950";
 // Assigning event listeners to the dLButtons ('event delegation'):
 difficultyLevelCategory.addEventListener('click', clickEvent => {
     if ((clickEvent.target.className == "inactive-button") | (clickEvent.target.className == "active-button")) {
-        buttonClick(clickEvent.target);
+        diffButtonClick(clickEvent.target);
     };
 });
 

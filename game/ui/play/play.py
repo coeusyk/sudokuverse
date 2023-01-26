@@ -1,68 +1,33 @@
-import json
-import hashlib
-
-from flask import Blueprint, render_template, request, redirect, url_for, session
-
-from game.core.constants import CELL_ATTRIBUTES
-from game.core.signup_work import check_username_validity, check_email_validity, check_phash_validity
-from game.models import db, User
+from flask import Blueprint, render_template, request, redirect, url_for
+from game.core.constants import USER_IDENTIFIER, DIFFICULTY_DICT, DIFF_CHOSEN, DIFF_RESP, SIMPLE, MEDIUM, COMPLEX
 
 
 play_blueprint = Blueprint("play_blueprint", __name__, template_folder="templates", static_folder="static", static_url_path="/ui/play")
 
 
-@play_blueprint.route("/play/guest", methods=['GET', 'POST'])
-def play_window_guest():
-    uname_validity, email_validity, phash_validity = None, None, None
+@play_blueprint.route("/play", methods=['GET', 'POST'])
+def play_window():
+    if DIFF_RESP in request.cookies:
+        DIFF_RESP.set_cookie(DIFF_CHOSEN, "", max_age=0)
+
+    if USER_IDENTIFIER in request.cookies:
+        if request.cookies[USER_IDENTIFIER] != "logged-out":
+            return redirect(url_for('home_blueprint.home_window'), code=302)
+
 
     if request.method == "POST":
-        # Checking if the request from JS is for adding a user:
-        if "add-user" in request.form:
-            username = request.form.get("username")
-            dob = request.form.get("dob")
-            email = request.form.get("email")
-            phash = request.form.get("phash")
+        difficulty = request.form.get("difficulty")
+        diff_id = DIFFICULTY_DICT[difficulty]
 
-            uname_validity = check_username_validity(username)
-            email_validity = check_email_validity(email)
-            phash_validity = check_phash_validity(phash)
+        DIFF_RESP.set_cookie(DIFF_CHOSEN, str(diff_id))
 
-            if (uname_validity == True) and (email_validity == True) and (phash_validity == True):
-                phash = hashlib.md5(phash)
+        return DIFF_RESP
 
-                user_record = User(
-                    username=username, 
-                    email=email, 
-                    phash=phash, 
-                    dob=dob
-                )
-
-                db.session.add(user_record)
-
-                return redirect(f"/play/{username}")  # Redirecting to the user window
-        
-        # Checking if the request from JS is for redirecting the user to the gameplay window:
-        elif "redirect" in request.form:
-            difficulty = request.form.get("difficulty")
-
-            session['game-info'] = json.dumps({"difficulty": difficulty})
-
-            return redirect(url_for('gameplay_blueprint.gameplay_window'))  # Redirecting to the game window
 
     return render_template(
-        "play-window_guest.html", 
-        cell_attributes=CELL_ATTRIBUTES, 
-        uname_val=uname_validity, 
-        email_val=email_validity, 
-        phash_val=phash_validity
-    )
+        "play-window.html",
 
-
-@play_blueprint.route("/play/<username>")
-def play_window_user(username: str):
-    user = User.query.filter_by(username=username).first_or_404()  # Getting the logged-in user
-
-    return render_template(
-        "play-window_user.html", 
-        user=user
+        simple_min = SIMPLE[0], simple_max = SIMPLE[-1],
+        medium_min = MEDIUM[0], medium_max = MEDIUM[-1],
+        complex_min = COMPLEX[0], complex_max = COMPLEX[-1]
     )

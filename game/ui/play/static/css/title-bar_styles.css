@@ -1,13 +1,20 @@
-body {
-    background-color: #2B2B2B;
+body { background-color: var(--bg-color); }
+
+
+#page-content {
+    height: calc(100% - 45px);
+    width: calc(100% - var(--collapsible-div-width));
+    position: absolute;
+    margin-top: 45px;
+    margin-left: var(--collapsible-div-width);
 }
 
 
 #title-bar {
-    background-color: #E36950;
+    background-color: var(--theme-color);
     width: 100%;
-    height: 50px;
-    position: absolute;
+    height: 45px;
+    position: fixed;
     top: 0%;
     left: 0%;
     text-align: center;
@@ -15,64 +22,15 @@ body {
 }
 
 
-#collapsible {
-    background-color: #E36950;
-    border: none;
-    height: 50px;
-    width: 80px;
-    cursor: pointer;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    user-select: none;
-}
-
-#personal-profile {
-    background-color: #E36950;
-    border: none;
-    height: 50px;
-    width: 80px;
-    cursor: pointer;
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    user-select: none;
-}
-
-#collapsible:hover, #personal-profile:hover {
-    background-color: #E34D1F;
-}
-
-
-.modals {
-    position: fixed;
-    left: 0; top: 0; right: 0; bottom: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s;
-    z-index: 100;
-}
-
-
-.active-modal {
-    opacity: 1;
-    visibility: visible;
-    transition: visibility 0s linear 0s, opacity 0.25s 0s;
-}
-
-
 #game-name {
     display: inline-block;
     color: white;
-    font-family: Metropolis;
-    font-size: 35px;
+    font-family: var(--font);
+    font-size: 33px;
     font-weight: 650;
     letter-spacing: 1px;
     position: relative;
-    top: -30%;
+    top: -33%;
     cursor: pointer;
     user-select: none;
 }
@@ -98,11 +56,6 @@ body {
 /* Media queries */
 
 @media only screen and (max-width: 600px) {
-    #game-name {
-        display: none;
-    }
-
-    #game-icon {
-        display: inline-block;
-    }
+    #game-name { display: none; }
+    #game-icon { display: inline-block; }
 }

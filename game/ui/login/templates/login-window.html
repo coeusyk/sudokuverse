@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('login_blueprint.static', filename='css/login-window_styles.css') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - SudokuVerse</title>
+
+</head>
+
+<body>
+    <div id="login-div">
+        <h1 id="login-msg">LOG IN</h1>
+
+        <hr class="login-separator">
+
+        <div id="separator-space"></div>
+
+        <form method="POST" id="login-form">
+            <input type="email" 
+                class="login-inputs" 
+                name="email" 
+                placeholder="E-mail address"
+            >
+
+            <div id="input-space"></div>
+
+            <input type="password" 
+                class="login-inputs" 
+                name="phash" 
+                placeholder="Password"
+            >
+
+        </form>
+
+        <div id="error-box-space"></div>
+
+        <div class="welcome-or-error-box">
+            <span id="welcome-or-error">Welcome Back!</span>
+        
+        </div>
+
+        <div id="login-btn-space"></div>
+
+        <button id="login-button">Login</button>
+
+        <hr class="login-separator">
+
+        <div id="redirects-space"></div>
+
+        <!-- Button redirects, to main and play window -->
+        <a href="{{ url_for('main_window') }}">    
+            <button class="redirects">Return to Main</button>
+        </a>
+
+        <a href="{{ url_for('play_blueprint.play_window') }}">
+            <button class="redirects">Return to Play</button>
+        </a>
+
+    </div>
+
+</body>
+
+<script src="{{ url_for('login_blueprint.static', filename='js/login-window_functionalities.js') }}"></script>
+
+</html>

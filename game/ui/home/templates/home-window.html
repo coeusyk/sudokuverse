@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/collapsible-menu_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/game-options_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/grid_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('home_blueprint.static', filename='css/extra-options_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('home_blueprint.static', filename='css/stats_styles.css') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home - SudokuVerse</title>
+
+</head>
+
+<body>
+    <!-- The title bar -->
+    <div id="title-bar">
+        <h1 id="game-name">SudokuVerse</h1>
+        <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="35" height="35">
+
+    </div>
+
+    <!-- The content of the menu button -->
+    <div id="menu-content">
+        <div id="title-space"></div>
+
+        <div id="main-content" role="group">
+            <a href="/home">
+                <button type="button" class="menu-options active_m-o">HOME</button>
+            </a>
+            
+            <a href="/how-to-play">
+                <button type="button" class="menu-options">HOW TO PLAY</button>
+            </a>
+            
+            <a href="/about">
+                <button type="button" class="menu-options">ABOUT</button>
+            </a>
+
+            <!-- <a href="/profile/{{ username }}">
+                <button type="button" class="menu-options">PROFILE</button>
+            </a> -->
+
+        </div>
+
+        <button id="log-out-btn" class="menu-options">LOG OUT</button>
+
+    </div>
+
+    <div id="page-content">
+        <div id="play-now-container">
+            <h1 id="username-display">Welcome <span class="coloured-text">{{ username }}</span></h1>
+
+            <!-- The sudoku board -->
+            <svg id="board-container">
+                <rect id="board" width="450" height="450" x="10" y="10"/>
+
+                {% set variable_value, const_start, const_end = 50, 10, 460 %}
+                {% for i in range(1, 9) %}
+                    {% if i % 3 != 0 %}
+                        <line class="line" x1="{{ 10 + variable_value * i }}" x2="{{ 10 + variable_value * i }}" y1="{{ const_start }}" y2="{{ const_end }}"/>
+                        <line class="line" x1="{{ const_start }}" x2="{{ const_end }}" y1="{{ 10 + variable_value * i }}" y2="{{ 10 + variable_value * i }}"/>
+                    
+                    {% else %}
+                        <line class="line sep" x1="{{ 10 + variable_value * i }}" x2="{{ 10 + variable_value * i }}" y1="{{ const_start }}" y2="{{ const_end }}"/>
+                        <line class="line sep" x1="{{ const_start }}" x2="{{ const_end }}" y1="{{ 10 + variable_value * i }}" y2="{{ 10 + variable_value * i }}"/>
+                    
+                    {% endif %}
+                
+                {% endfor %}
+
+            </svg>
+
+            <form method="POST" id="play-now-form">
+                <input id="diff-info" name="difficulty" type="text">  <!-- Just for knowing the difficulty -->
+                <input id="play-now-button" name="redirect" type="submit" value="PLAY NOW" disabled>
+
+            </form>
+
+            <!-- The game options -->
+            <div id="game-options">
+                <div id="go-heading-space"></div>
+
+                <h2 id="options-label">Choose difficulty</h2>
+                <hr id="separator">
+
+                <div id="button-category" role="group">
+                    <button type="button" class="inactive-button">SIMPLE</button><br>
+                    <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">{{ simple_min }}-{{ simple_max }}</span></h4>
+                    <div class="space"></div>
+
+                    <button type="button" class="inactive-button">MEDIUM</button><br>
+                    <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">{{ medium_min }}-{{ medium_max }}</span></h4>
+                    <div class="space"></div>
+
+                    <button type="button" class="inactive-button">COMPLEX</button>
+                    <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">{{ complex_min }}-{{ complex_max }}</span></h4>
+
+                </div>
+
+            </div>
+        
+        </div>
+
+        <div id="board-space"></div>
+
+        <div id="cg-stats_container">
+            <!-- The completed games -->
+            <div id="completed-games">
+                <div id="c-g-header">
+                    <span id="c-g-name" class="header-name">Completed Games</span>
+                    <button id="toggle-c-g-dropdown">
+                        <img src="{{ url_for('home_blueprint.static', filename='images/chevron-right.svg') }}" alt="Hide Career" width="16" height="16">
+
+                    </button>
+
+                </div>
+
+                <div id="c-g-column-headers">
+                    <span class="c-g-column">Difficulty</span>
+                    <span class="c-g-column">Hints Used</span>
+                    <span class="c-g-column">Time Taken</span>
+                    <span class="c-g-column">Date-Time</span>
+
+                </div>
+
+                <div id="entries"></div>
+
+            </div>
+
+            <!-- The stats -->
+            <div id="stats">
+                <span id="stats-name" class="header-name">Stats</span>
+                <hr id="header-sep" class="stats-separator">
+
+                <div class="stats-grid main">
+                    <span class="stat stats-id">Date Joined</span>
+                    <span class="stat stats-const">{{ join_date }}</span>
+
+                    <span class="stat stats-id">Total Games</span>
+                    <span class="stat stats-variable">{{ total_games }}</span>
+
+                    <span class="stat stats-id">Games Finished</span>
+                    <span class="stat stats-variable">{{ games_completed }}</span>
+
+                </div>
+
+                <hr class="stats-separator">
+
+                <div class="stats-grid sub">
+                    <span class="sub-header-name">Simple</span>
+                    <hr class="sub-stats-sep">
+
+                    <span class="stat stats-id">Fastest</span>
+                    <span class="stat stats-variable">{{ s_fastest_time }}<span class="stats-const">{{ s_ft_date }}</span></span>
+
+                    <span class="stat stats-id">Games</span>
+                    <span class="stat stats-variable">{{ simple_cg }} <span class="stats-const">/</span> {{ simple_tg }}</span>
+
+                </div>
+
+                <hr class="stats-separator">
+
+                <div class="stats-grid sub">
+                    <span class="sub-header-name">Medium</span>
+                    <hr class="sub-stats-sep">
+
+                    <span class="stat stats-id">Fastest</span>
+                    <span class="stat stats-variable">{{ m_fastest_time }}<span class="stats-const">{{ m_ft_date }}</span></span>
+
+                    <span class="stat stats-id">Games</span>
+                    <span class="stat stats-variable">{{ medium_cg }} <span class="stats-const">/</span> {{ medium_tg }}</span>
+
+                </div>
+
+                <hr class="stats-separator">
+
+                <div id="complex-stats" class="stats-grid sub">
+                    <span class="sub-header-name">Complex</span>
+                    <hr class="sub-stats-sep">
+
+                    <span class="stat stats-id">Fastest</span>
+                    <span class="stat stats-variable">{{ c_fastest_time }}<span class="stats-const">{{ c_ft_date }}</span></span>
+
+                    <span class="stat stats-id">Games</span>
+                    <span class="stat stats-variable">{{ complex_cg }} <span class="stats-const">/</span> {{ complex_tg }}</span>
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="{{ url_for('play_blueprint.static', filename='js/game-options_functionalities.js') }}"></script>
+<script src="{{ url_for('home_blueprint.static', filename='js/extra-options_functionalities.js') }}"></script>
+
+</html>
