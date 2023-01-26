@@ -1,19 +1,23 @@
+:root {
+    --options-width: 210px;
+}
+
+
 #play-options {
-    position: absolute;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
     height: 505px;
     width: 366px;
     border: none;
     border-radius: 15px;
-    background-color: #212121;
-    top: 21%;
-    right: calc(50% - 450px);
+    background-color: var(--div-color);
 }
 
 
 #option-icons {
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    width: 300px;
+    grid-template-columns: repeat(3, 1fr);
+    width: var(--options-width);
     column-gap: 3px;
     position: relative;
     top: 6.5%;
@@ -27,7 +31,7 @@
     height: 55px;
     border: none;
     border-radius: 8px;
-    background-color: #2b2b2b;
+    background-color: var(--bg-color);
     cursor: pointer;
     user-select: none;
 }
@@ -42,29 +46,28 @@
 
 #option-ids {
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    width: 280px;
-    column-gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    width: var(--options-width);
+    column-gap: 2px;
     position: relative;
     top: 8%;
-    margin: 0 14%;
+    margin: 0 auto;
+    justify-items: center;
 }
 
 
 .option-names {
-    font-family: Metropolis;
+    font-family: var(--font);
     font-weight: 550;
     color: white;
     font-size: 15px;
     user-select: none;
 }
 
-#id-hint { margin-left: 6px; }
 
-
-#notes-identifier {
+#hints-used {
     position: relative;
-    font-family: Metropolis;
+    font-family: var(--font);
     font-size: 22px;
     font-weight: 600;
     color: white;
@@ -77,8 +80,8 @@
 
 #number-grid {
     display: grid;
-    grid-template-columns: auto auto auto;
-    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 9.5%;
     position: relative;
     top: 18%;
     width: 300px;
@@ -89,11 +92,11 @@
 .numbers {
     width: 95px;
     height: 95px;
-    font-family: Metropolis;
+    font-family: var(--font);
     font-size: 35px;
     font-weight: 400;
     margin: auto auto;
-    background-color: #2b2b2b;
+    background-color: var(--bg-color);
     border: none;
     border-radius: 8px;
     user-select: none;
@@ -110,4 +113,4 @@
 
 .disabled { color: #777777; }
 
-.disabled:hover { background-color: #2b2b2b; }
+.disabled:hover { background-color: var(--bg-color); }

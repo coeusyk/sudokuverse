@@ -2,8 +2,15 @@ import random
 
 from game.core.constants import SIMPLE, MEDIUM, COMPLEX, POSITIONS, POS_GRIDS
 
+my_dict = {"Simple": 1, "Medium": 2, "Complex": 3}
 
-def create_partial(input_sudoku: list[list[int]], difficulty: int):
+
+def create_puzzle(input_sudoku: list[list[int]], difficulty: int):
+    """
+    This function creates a puzzle out of the generated solved sudoku 
+    based on the difficulty chosen
+    """
+
     if difficulty == 1:
         num_of_clues = random.choice(SIMPLE)
         clues_per_grid = 3

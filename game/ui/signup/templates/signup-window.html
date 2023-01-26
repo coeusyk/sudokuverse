@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('signup_blueprint.static', filename='css/signup-window_styles.css') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Signup - SudokuVerse</title>
+
+</head>
+
+<body>
+    <!-- The signup part -->
+    <div id="signup-div">
+        <h1 id="welcome-msg">Welcome to <span class="coloured-text">SudokuVerse!</span></h1>
+        <h5 id="register-msg">Register your account</h5>
+
+        <hr id="signup-separator-1">
+
+        <div class="separator-space"></div>
+
+        <form method="POST" id="signup-form">
+            <span class="input-headers" id="uname-head">Username</span><br>
+            <input type="text" class="signup-inputs" name="username" placeholder="*Required">
+            <span class="input-errors"></span>
+
+            <div class="input-space" id="dob-space"></div>
+
+            <span class="input-headers" id="dob-head">Date of Birth</span>
+            <input type="date" class="signup-inputs" name="dob">
+            <span class="input-errors"></span>
+
+            <div class="input-space" id="email-space"></div>
+
+            <span class="input-headers" id="email-head">Email</span><br>
+            <input type="email" class="signup-inputs" name="email" placeholder="*Required">
+            <span class="input-errors"></span>
+
+            <div class="input-space" id="phash-space"></div>
+
+            <span class="input-headers" id="phash-head">Password</span><br>
+            <input type="password" class="signup-inputs" name="phash" id="phash-input" placeholder="*Required">
+            <span class="input-errors"></span>
+
+        </form>
+
+        <!-- Show/Hide Phash Button -->
+        <button id="phash-view-toggle">
+            <img src="{{ url_for('signup_blueprint.static', filename='images/eye.svg') }}" id="show-phash-icon" alt="Show Password" width="18" height="18">
+            <img src="{{ url_for('signup_blueprint.static', filename='images/eye-slash.svg') }}" id="hide-phash-icon" alt="Hide Password" width="18" height="18">
+
+        </button>
+
+        <div id="button-space"></div>
+
+        <!-- The signup button -->
+        <button class="signup-button disabled" disabled>Create account</button>
+        <span id="login-option-text">Already have an account? <a href="{{ url_for('login_blueprint.login_window') }}" id="login-link">Log in</a></span>
+
+        <hr id="signup-separator-2">
+
+        <!-- Button redirects, to main and play window -->
+        <a href="{{ url_for('main_window') }}">    
+            <button class="redirects">Return to Main</button>
+        </a>
+
+        <a href="{{ url_for('play_blueprint.play_window') }}">
+            <button class="redirects">Return to Play</button>
+        </a>
+
+    </div>
+
+</body>
+
+<script src="{{ url_for('signup_blueprint.static', filename='js/signup-window_functionalities.js') }}"></script>
+
+</html>

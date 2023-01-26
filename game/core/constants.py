@@ -1,27 +1,41 @@
-MIN_NUMBER = 0
+"""
+All project constants are defined here to make any changes done here 
+to be reflected everywhere
+"""
+
+
+import datetime
+import json
+
+from flask import Response
+
+
 MAX_NUMBER = 9
 
 GAME_NAME = "SudokuVerse"
 
 GRID_SIZE = 3
-ROWS = range(MIN_NUMBER, MAX_NUMBER)
-COLS = range(MIN_NUMBER, MAX_NUMBER)
-GRIDS = range(MIN_NUMBER, MAX_NUMBER)
+ROWS = range(MAX_NUMBER)
+COLS = range(MAX_NUMBER)
+GRIDS = range(MAX_NUMBER)
+NUMBERS = range(1, MAX_NUMBER + 1)
 
 POSITIONS = [(j // 10, j % 10) for j in range(90) if (j % 10 != 9)]
 
 
 PATH = "game/core/"
 
-SIMPLE = range(31, 36)
-MEDIUM = range(26, 31)
-COMPLEX = range(21, 26)
+NUM_OF_DIFFICULTIES = 3
+SIMPLE = range(35, 39)
+MEDIUM = range(29, 33)
+COMPLEX = range(23, 27)
+
+DIFFICULTY_DICT = {"SIMPLE": 1, "MEDIUM": 2, "COMPLEX": 3}
 
 CELL_ATTRIBUTES = [[] for _ in range(81)]
 
 
 def create_cell_attributes():
-
     # Adding row number for all cells:
     temp = 1
     for i in range(1, 82):
@@ -75,7 +89,9 @@ def get_grids():
     box_times, index, column_times = 0, 2, 2
     for _ in range(3):
         for _ in range(9):
-            temp_b_combinations += [POSITIONS[index - 2], POSITIONS[index - 1], POSITIONS[index]]
+            temp_b_combinations += [
+                POSITIONS[index - 2], POSITIONS[index - 1], POSITIONS[index]
+            ]
 
             box_times += 1
             if box_times == 3:
@@ -96,3 +112,16 @@ def get_grids():
 POS_GRIDS = get_grids()
 
 create_cell_attributes()
+
+
+# Responses:
+SUCCESS_RESP = Response(json.dumps({"success": True}), status=302)  # Signup/Login/Logout successful response
+DIFF_RESP = Response(json.dumps({"redirect": True}), status=302)  # Start game
+
+
+# Cookie names:
+USER_IDENTIFIER = "__uuid"
+DIFF_CHOSEN = "__diff"
+
+
+COOKIE_EXPIRATION_TIME = datetime.timedelta(days=30)

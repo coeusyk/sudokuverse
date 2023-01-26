@@ -50,14 +50,10 @@ const gridMap = new Map([
     ["grid-7", grid7], ["grid-8", grid8], ["grid-9", grid9]
 ]);
 
-const GridElements = document.getElementById("grid-container").getElementsByTagName("div");
+var gridContainer = document.getElementById("grid-container-1");
+
+const GridElements = gridContainer.getElementsByTagName("div");
 const Maps = [rowMap, colMap, gridMap];
-
-var menuContent = document.getElementById("menu-content")
-var newUserContent = document.getElementById("new-user-content");
-
-menuContent.style.width = "0px"
-newUserContent.style.width = "0px";
 
 
 function getCurAttributes(div) {
@@ -147,7 +143,7 @@ function activateNumCells(div) {
         for (i = 0; i < rows.length; i++) {
             Array.from(rows[i]).forEach(_div => {
                 if ((_div.innerHTML == num) && (!(_div.className.includes("unfilled")))) {
-                    _div.style.backgroundColor = "#FFDD86"
+                    _div.style.backgroundColor = "#FFDD86";
                 };
             });
         };

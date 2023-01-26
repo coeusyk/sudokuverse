@@ -1,0 +1,72 @@
+:root {
+    --grid-dimensions: 470px;
+}
+
+
+#play-now-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 1fr;
+    position: relative;
+    left: 50%;
+    top: 9%;
+    width: max-content;
+    transform: translateX(-50%);
+    justify-items: center;
+    align-items: center;
+    column-gap: 40px;
+    row-gap: 50px;
+}
+
+
+#board-container {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+    width: var(--grid-dimensions);
+    height: var(--grid-dimensions);
+}
+
+#board {
+    fill: white;
+    stroke: black;
+    stroke-width: 2.5px;
+    align-self: center;
+}
+
+.line {
+    stroke: black;
+    stroke-width: 1px;
+}
+
+.sep { stroke-width: 2px; }
+
+
+#play-now-form {
+    grid-row: 2 / 3;
+    grid-column: 2 / 1;
+}
+
+
+#play-now-button {
+    border-radius: 40px;
+    border: none;
+    position: relative;
+    font-family: Metropolis;
+    width: 155px;
+    height: 60px;
+    font-size: 20px;
+    color: white;
+    background-color: #777777;  /* #777777 when difficulty not chosen, #E36950 when chosen */
+    font-weight: 600;
+    z-index: 50;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.5px;
+    transition: background-color 0.1s linear;
+    user-select: none;
+    align-self: center;
+}
+
+#play-now-button:hover { filter: brightness(115%) saturate(115%); }
+
+#play-now-button:disabled { filter: none; }

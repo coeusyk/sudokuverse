@@ -1,8 +1,8 @@
 import pulp as lp
 import random
 
-from game.core.constants import GRID_SIZE, MIN_NUMBER, GAME_NAME, ROWS, COLS, GRIDS
-from game.core.solve_initialiser import generate_partial
+from game.core.constants import GRID_SIZE, GAME_NAME, ROWS, COLS, GRIDS
+from game.core.solve_initialiser import gen_for_solve
 
 
 class Sudoku:
@@ -61,7 +61,7 @@ class Sudoku:
             for value in self.values:
                 number_ = [self.grid_vars[grid_row * GRID_SIZE + row][grid_col * GRID_SIZE + col][value] * value for col
                            in
-                           range(MIN_NUMBER, GRID_SIZE) for row in range(MIN_NUMBER, GRID_SIZE)]
+                           range(GRID_SIZE) for row in range(GRID_SIZE)]
 
                 constraint_4 = lp.LpConstraint(
                     e=lp.lpSum(number_),
@@ -75,15 +75,18 @@ class Sudoku:
     def init_puzzle(self, input_sudoku):
         for row in ROWS:
             for col in COLS:
-                if input_sudoku[row][col] != 0:
-                    values_ = [self.grid_vars[row][col][value] * value for value in self.values]
-                    pre_constraint = lp.LpConstraint(
-                        e=lp.lpSum(values_),
-                        sense=lp.LpConstraintEQ, rhs=input_sudoku[row][col],
-                        name=f"constraint_prefilled_{row}_{col}"
-                    )
+                try:
+                    if input_sudoku[row][col] != 0:
+                        values_ = [self.grid_vars[row][col][value] * value for value in self.values]
+                        pre_constraint = lp.LpConstraint(
+                            e=lp.lpSum(values_),
+                            sense=lp.LpConstraintEQ, rhs=input_sudoku[row][col],
+                            name=f"constraint_prefilled_{row}_{col}"
+                        )
 
-                    self.problem.addConstraint(pre_constraint)
+                        self.problem.addConstraint(pre_constraint)
+                except IndexError:
+                    print(row, col)
 
     # Attempt to solve, with supplied inputs and return solution; None otherwise
     def solve_puzzle(self):
@@ -129,14 +132,14 @@ def console_print_solution(matrix, rows, cols):
 
 
 def get_solution():
-    file_path = generate_partial(max_filled = random.randint(0, 9))
+    file_path = gen_for_solve(max_filled = random.randint(0, 9))
 
     with open(file_path, "r") as f:
-        partial = [[int(t) for t in line.split()] for line in f]
-
+        lines = f.readlines()
+        partial = [[int(t) for t in line.split()] for line in lines]
 
     board = Sudoku()
-    board.init_puzzle(input_sudoku=partial)
+    board.init_puzzle(partial)
 
     solution = board.solve_puzzle()
 

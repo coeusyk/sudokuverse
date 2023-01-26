@@ -6,28 +6,21 @@
     <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/collapsible-menu_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/game-options_styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/login-modal_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/grid_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/extra-features_styles.css') }}">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Play - SudokuVerse</title>
+
 </head>
 
-<body>
+<body style="background-color: var(--bg-color);">
     <!-- The title bar -->
     <div id="title-bar">
-        <button id="collapsible" title="Menu">
-            <img src="{{ url_for('play_blueprint.static', filename='images/list.svg') }}" alt="Menu Button" width="35" height="35">
-
-        </button>
-
         <h1 id="game-name">SudokuVerse</h1>
         <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="35" height="35">
-
-        <button id="personal-profile" title="Personal Profile">
-            <img src="{{ url_for('play_blueprint.static', filename='images/person-lines-fill.svg') }}" alt="Personal Profile" width="35" height="35">
-
-        </button>
 
     </div>
 
@@ -36,100 +29,135 @@
         <div id="title-space"></div>
 
         <div id="main-content" role="group">
-            <button type="button" class="menu-options">PLAY</button>
-            <button type="button" class="menu-options">HOW TO PLAY</button>
-            <button type="button" class="menu-options">LEADERBOARD</button>
-            <button type="button" class="menu-options">ABOUT</button>
+            <a href="/play">
+                <button type="button" class="menu-options active_m-o">PLAY</button>
+            </a>
+            
+            <a href="/how-to-play">
+                <button type="button" class="menu-options">HOW TO PLAY</button>
+            </a>
+            
+            <a href="/about">
+                <button type="button" class="menu-options">ABOUT</button>
+            </a>
         
         </div>
 
         <div id="new-user-content" role="group">
             <div id="options-space"></div>
             
-            <button type="button" class="menu-options">SIGN UP</button>
-            <button type="button" class="menu-options">LOG IN</button> 
+            <a href="/signup">
+                <button type="button" class="menu-options">SIGN UP</button>
+            </a>
+
+            <a href="/login">
+                <button type="button" class="menu-options">LOG IN</button> 
+            </a>
 
         </div>
 
     </div>
 
-    <!-- Modals -->
-    <div class="modals" id="sign-up"></div>
+    <div id="page-content">
+        <div id="play-now-container">
+            <!-- The sudoku board -->
+            <svg id="board-container">
+                <rect id="board" width="450" height="450" x="10" y="10"/>
 
-    <div class="modals" id="log-in">
-        <div id="login-modal-content">
-            <span class="close-button">&times;</span>
-    
-            <h1 id="heading">LOG IN</h1>
-    
-            <div id="heading-space"></div>
-    
-            <form action="">
-                <input class="inputs" type="text" placeholder="E-mail address">
-    
-                <div id="input-field-space"></div>
-    
-                <input class="inputs" type="password" placeholder="Password">
+                {% set variable_value, const_start, const_end = 50, 10, 460 %}
+                {% for i in range(1, 9) %}
+                    {% if i % 3 != 0 %}
+                        <line class="line" x1="{{ 10 + variable_value * i }}" x2="{{ 10 + variable_value * i }}" y1="{{ const_start }}" y2="{{ const_end }}"/>
+                        <line class="line" x1="{{ const_start }}" x2="{{ const_end }}" y1="{{ 10 + variable_value * i }}" y2="{{ 10 + variable_value * i }}"/>
+                    
+                    {% else %}
+                        <line class="line sep" x1="{{ 10 + variable_value * i }}" x2="{{ 10 + variable_value * i }}" y1="{{ const_start }}" y2="{{ const_end }}"/>
+                        <line class="line sep" x1="{{ const_start }}" x2="{{ const_end }}" y1="{{ 10 + variable_value * i }}" y2="{{ 10 + variable_value * i }}"/>
+                    
+                    {% endif %}
+                
+                {% endfor %}
+
+            </svg>
+
+            <form method="POST" id="play-now-form">
+                <input id="diff-info" name="difficulty" type="text">  <!-- Just for knowing the difficulty -->
+                <input id="play-now-button" name="redirect" type="submit" value="PLAY NOW" disabled>
+
             </form>
-    
-            <div id="button-space"></div>
-            
-            <center>
-                <button id="login-button">Login</button>
-            </center>
-    
-            <!-- <a href=""></a> -->
-    
+
+            <!-- The game options -->
+            <div id="game-options">
+                <div id="go-heading-space"></div>
+
+                <h2 id="options-label">Choose difficulty</h2>
+                <hr id="separator">
+
+                <div id="button-category" role="group">
+                    <button type="button" class="inactive-button">SIMPLE</button><br>
+                    <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">{{ simple_min }}-{{ simple_max }}</span></h4>
+                    <div class="space"></div>
+
+                    <button type="button" class="inactive-button">MEDIUM</button><br>
+                    <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">{{ medium_min }}-{{ medium_max }}</span></h4>
+                    <div class="space"></div>
+
+                    <button type="button" class="inactive-button">COMPLEX</button>
+                    <h4 class="num-of-clues">Number of Clues: <span class="coloured-text">{{ complex_min }}-{{ complex_max }}</span></h4>
+
+                </div>
+
+            </div>
+        
         </div>
 
-    </div>
+        <div id="signup-request">
+            <h1 id="sr-main-heading">We have something <span class="coloured-text">extra</span> <br>waiting for you!</h1>
 
-    <!-- The game options -->
-    <div id="game-options">
-        <center>
-            <div class="space"></div>
+            <hr id="sr-header-sep" class="sr-sep">
 
-            <h2 class="options-label">Game difficulty</h2>
+            <div id="extra-features">
+                <div class="feature">
+                    <h2 class="feature-heading">Get <span class="coloured-text">Statistics</span> based on your Journey with Us</h2>
 
-            <div class="button-category" role="group">
-                <button type="button" class="inactive-button">SIMPLE</button><br>
-                <div class="space"></div>
+                    <hr class="fh-separator">
 
-                <button type="button" class="inactive-button">MEDIUM</button><br>
-                <div class="space"></div>
+                    <p class="feature-sub-heading">You will get to see the <span class="coloured-bold">number of games</span> you played overall
+                        and get to know your <span class="coloured-bold">fastest times</span> in each difficulty
+                    </p>
+                
+                </div>
 
-                <button type="button" class="inactive-button">COMPLEX</button>
+                <div class="feature">
+                    <h2 class="feature-heading">Check your Past <span class="coloured-text">Completed Games</span> to Improve</h2>
 
-            </div>
+                    <hr class="fh-separator">
 
+                    <p class="feature-sub-heading">Your recent games will be shown with the <span class="coloured-bold">difficulty</span> chosen, 
+                        the <span class="coloured-bold">number of hints</span> used, the <span class="coloured-bold">time taken</span> to complete the puzzle, and 
+                        the <span class="coloured-bold">date and time</span> of the puzzle solved
+                    </p>
 
-            <div class="space"></div>
-
-            <h2 class="options-label">How do you want <br>to play</h2>
-
-            <div class="button-category" role="group">
-                <button type="button" class="inactive-button">WITH SELF</button><br>
-                <div class="space"></div>
-
-                <button type="button" class="inactive-button">WITH FRIEND</button><br>
-                <div class="space"></div>
-
-                <button type="button" class="inactive-button">WITH RANDOM</button>
+                </div>
 
             </div>
 
-        </center>
+            <hr class="sr-sep">
 
+            <h1 id="sr-footer">So, what are <span class="coloured-text">you</span> waiting for?</h1>
+
+            <a href="/signup">
+                <button id="join-us-btn">Join Us</button>
+            </a>
+
+        </div>
+
+        <div id="end-space"></div>
+    
     </div>
 
 </body>
 
-<!-- Functionalities -->
-<script src="{{ url_for('play_blueprint.static', filename='js/collapsible-menu_functionalities.js') }}"></script>
 <script src="{{ url_for('play_blueprint.static', filename='js/game-options_functionalities.js') }}"></script>
-<script src="{{ url_for('play_blueprint.static', filename='js/modal_functionalities.js') }}"></script>
-
-<!-- Media Queries -->
-<script src="{{ url_for('play_blueprint.static', filename='js/collapsible-menu_media-queries.js') }}"></script>
 
 </html>

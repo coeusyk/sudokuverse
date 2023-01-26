@@ -1,0 +1,240 @@
+:root {
+    --bg-color: #2b2b2b;
+    --div-color: #212121;
+    --theme-color: rgb(227, 105, 80);
+    --font: 'Metropolis';
+}
+
+
+body {
+    background-color: var(--bg-color);
+    height: 1045px;
+}
+
+
+#signup-div {
+    position: absolute;
+    width: 500px;
+    height: 950px;
+    background-color: var(--div-color);
+    border-radius: 25px;
+    left: calc(50% - 250px);
+    top: 7%;
+}
+
+
+#welcome-msg {
+    position: relative;
+    height: 22px;
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 28px;
+    align-items: center;
+    text-align: center;
+    justify-self: center;
+    color: white;
+    top: 1.5%;
+}
+
+.coloured-text { color: var(--theme-color); }
+
+
+#register-msg {
+    position: relative;
+    height: 15px;
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 15px;
+    align-items: center;
+    justify-self: center;
+    text-align: center;
+    color: #777777;
+}
+
+
+#signup-separator-1 {
+    position: relative;
+    width: 450px;
+    border: 0;
+    border-top: 3px solid #7A7A7A;
+}
+
+
+#signup-separator-2 {
+    position: relative;
+    width: 450px;
+    border: 0;
+    border-top: 3px solid #7A7A7A;
+    margin-top: 9%;
+}
+
+
+.separator-space {
+    position: relative;
+    height: 15px;
+}
+
+
+.input-headers {
+    position: relative;
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFFFFF;
+    left: 9%;
+}
+
+
+.signup-inputs {
+    position: relative;
+    width: 378px;
+    height: 30px;
+    justify-self: center;
+    padding: 7px 20px;
+    font-family: var(--font);
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1.5px solid var(--div-color);
+    left: 8.2%;
+    margin-top: 4px;
+    background-color: var(--bg-color);
+    color: white;
+    color-scheme: dark;
+}
+
+.signup-inputs:focus {
+    outline: none;
+    border: 1.5px solid var(--theme-color);
+}
+
+
+::placeholder { color: #777777; }
+
+
+.input-errors {
+    display: block;
+    position: relative;
+    width: 492px;
+    color: red;
+    font-size: 14px;
+    font-family: var(--font);
+    margin-top: 4px;
+    left: 9.5%;
+}
+
+
+.input-space { 
+    position: relative;
+    height: 50px; 
+}
+
+
+#phash-view-toggle {
+    position: absolute;
+    bottom: 42.3%;
+    right: 11.7%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    background-color: var(--bg-color);
+    user-select: none;
+}
+
+#phash-view-toggle:focus-visible { outline: none; }
+
+#show-phash-icon {
+    display: block;
+    position: absolute;
+    bottom: 15%;
+    right: 15%;
+    outline-color: white;
+}
+
+#hide-phash-icon {
+    display: none;
+    position: absolute;
+    bottom: 15%;
+    right: 15%;
+}
+
+
+.signup-button {
+    position: relative;
+    width: 300px;
+    height: 50px;
+    background-color: var(--theme-color);
+    border-radius: 5px;
+    border: none;
+    align-content: center;
+    text-align: center;
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: 24px;
+    color: white;
+    left: 20%;
+    display: block;
+    cursor: pointer;
+    margin-top: 30px;
+    box-shadow: 0px 4px 0px 1px rgba(227, 105, 80, 0.6);
+}
+
+.signup-button:hover { filter: brightness(110%) saturate(110%); }
+
+.disabled {
+    opacity: 50%;
+    cursor: default;
+} 
+
+.disabled:hover { filter: none; }
+
+
+#login-option-text {
+    position: relative;
+    font-family: var(--font);
+    height: 25px;
+    font-weight: 500;
+    font-size: 19px;
+    justify-self: center;
+    text-align: center;
+    color: white;
+    top: 1.8%;
+    left: 20%;
+}
+
+
+#login-link { color: var(--theme-color); }
+#login-link:hover { filter: brightness(120%) saturate(120%); }
+
+
+.redirects {
+    position: relative;
+    width: 322px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    color: white;
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: 25px;
+    align-items: center;
+    text-align: center;
+    left: 18%;
+    cursor: pointer;
+    margin-top: 5%;
+    box-shadow: 0px 4px 0px 1px rgba(43, 43, 43, 0.6);
+}
+
+.redirects:hover { background-color: #383838; }
+
+
+#dob-space { height: 48px; }  /* 20px when 2 lines, 34px when one line, 48px when no lines */
+#email-space { height: 48px; }  /* 34px when one line, 48px when no line */
+#phash-space { height: 48px; }  /* 34px when one line, 48px when no line */
+
+
+#button-space {
+    position: relative;
+    height: 34px;  /* 20px when one line, 34px when no line */
+}

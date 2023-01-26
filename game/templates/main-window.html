@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SudokuVerse - Play Sudoku Online</title>
+
+    <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main-window_styles.css') }}">
+
+</head>
+
+<body>
+    <!-- The title bar -->
+    <div id="title-bar">
+        <a href="/"><h1 id="game-name">SudokuVerse</h1></a>
+        <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="35" height="35">
+
+    </div>
+
+    <!-- The page content -->
+    <div id="page-content">
+        <div class="containers">
+            <img id="sudoku-board" src="{{ url_for('static', filename='images/sudoku_board.svg') }}" alt="Sudoku Board" width="450" height="450">
+
+            <h1 id="play-msg">Play Sudoku<br>on<br>SudokuVerse!</h1>
+
+            <a href="/play">
+                <div id="play-now-div">
+                    <img id="game-icon-1" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="45" height="45">
+                    <span id="pn-div-name">Play Now</span>
+
+                </div>
+            </a>
+        
+        </div>
+
+        <div id="how-to-play" class="containers div-container">
+            <h2 class="container-headers ch-type-1">Learn To Play Sudoku</h2>
+            <p class="container-content cc-type-1">The link below will guide you through the<br>steps of playing Sudoku and get you<br>ready for the challenge!</p>
+
+            <a href="/how-to-play">
+                <button class="container-button cb-type-1">How To Play</button>
+            </a>
+
+            <img id="htp-illustration" src="{{ url_for('static', filename='images/how_to_play_illustration.svg') }}" alt="How to Play" width="329.03" height="300">
+
+        </div>
+
+        <div id="about" class="containers div-container">
+            <h2 class="container-headers ch-type-2">More About Sudoku</h2>
+            <p class="container-content cc-type-2">Learn interesting facts, its history, its objective and a lot more!</p>
+
+            <a href="/about">
+                <button class="container-button ch-type-2">About Sudoku</button>
+            </a>
+
+            <img id="as-illustration" src="{{ url_for('static', filename='images/about_sudoku_illustration.svg') }}" alt="About Sudoku" width="375.47" height="280">
+
+        </div>
+
+        <div id="end-space"></div>
+
+    </div>
+
+</body>
+
+</html>
