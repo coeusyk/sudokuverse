@@ -10,45 +10,37 @@ Creating a game of Sudoku using Python, having basic features:-
 ## Project Structure
 
 ```
-/game-sudoku
-    |__ /src
+/sudoku-verse
+    |__ /game
+        |__ /core
+            |-- *.py
+            |-- *.txt
+        |__ /templates
+            |-- main-window.html
+        |__ /static
+            |__ /css
+                |-- *.css
+            |__ /images
+                |-- *.svg
+            |__ /js
+                |-- *.js
+        |__ /ui
+            |__ /<module>
+                |__ /static
+                |__ /templates
+                |-- <module>.py
+
         |-- __init__.py
         |-- config.py
         |-- models.py
-        
-        |__ /game
-            |__ /core
-                |-- *.py
-                |-- *.txt
-            |__ /templates
-                |-- main-window.html
-            |__ /static
-                |__ /css
-                    |-- *.css
-                |__ /images
-                    |-- *.svg
-                |__ /js
-                    |-- *.js
-            |__ /services
-                |-- *.py
-            |__ /ui
-                |__ /<module>
-                    |__ /static
-                    |__ /templates
-                    |-- <module>.py
-        
-        |__ /tests
-            |__ /code-tests
-                |__ /gui
-                    |-- *.html
-                    |-- *.css
-                    |-- *.js
-                |__ /python
-                    |-- *.py
-                |__ /database
-                    |-- *.sql
-            |__ /unit-tests
-                |-- *.py
+
+    |__ /tests
+        |__ /code-tests
+            |__ /gui
+                |-- *.html
+                |-- *.css
+        |__ /unit-tests
+            |-- *.py
 ```
 
 Given above is the **project structure** of our project. Files have to be added as required (shown above).
