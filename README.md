@@ -24,8 +24,6 @@ Creating a game of Sudoku using Python, having basic features:-
                 |-- *.svg
             |__ /js
                 |-- *.js
-        |__ /services
-            |-- *.py
         |__ /ui
             |__ /<module>
                 |__ /static
@@ -41,11 +39,6 @@ Creating a game of Sudoku using Python, having basic features:-
             |__ /gui
                 |-- *.html
                 |-- *.css
-                |-- *.js
-            |__ /python
-                |-- *.py
-            |__ /database
-                |-- *.sql
         |__ /unit-tests
             |-- *.py
 ```
