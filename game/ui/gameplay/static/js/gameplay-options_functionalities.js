@@ -56,8 +56,15 @@ function hintFunctionality(cellAttr=null, undo=false) {
                 selectedCell.classList.remove("unfilled");
                 selectedCell.classList.add("filled");
                 
-                selectedCell.innerText = solution_[rowIndex][colIndex]
-                selectedCell.style.color = "rgb(233, 130, 39)";
+                if (!undo) {
+                    selectedCell.innerText = solution_[rowIndex][colIndex]  
+                };
+
+                if (selectedCell.innerText == solution_[rowIndex][colIndex]) {
+                    selectedCell.style.color = "rgb(233, 130, 39)";
+                } else {
+                    selectedCell.style.color = "rgb(255, 0, 0)";
+                };
 
                 checkNumCompletion(selectedCell.innerText);
                 activateNumCells(selectedCell);  // From grid_functionalities.js

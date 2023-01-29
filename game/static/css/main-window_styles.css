@@ -7,7 +7,6 @@
 
 body {overflow-x: hidden;}
 
-
 #page-content {
     display: grid;
     grid-template-columns: auto;
@@ -18,7 +17,6 @@ body {overflow-x: hidden;}
     row-gap: 100px;
     justify-content: center;
 }
-
 
 .containers {
     display: grid;
@@ -45,25 +43,21 @@ body {overflow-x: hidden;}
     align-content: center;
 }
 
-
 #how-to-play {
     grid-template-columns: 525px 400px;
     grid-template-rows: 75px 100px 140px;
 }
-
 
 #about {
     grid-template-columns: 475px 475px;
     grid-template-rows: 120px 20px 200px;
 }
 
-
 #sudoku-board {
     grid-row: 1 / 3;
     grid-column: 1 / 2;
     user-select: none;
 }
-
 
 #play-msg {
     font-family: var(--font);
@@ -75,7 +69,6 @@ body {overflow-x: hidden;}
     height: max-content;
     margin-bottom: -15px;
 }
-
 
 #play-now-div {
     margin-top: -15px;
@@ -95,7 +88,6 @@ body {overflow-x: hidden;}
 
 #play-now-div:hover { filter: brightness(110%) saturate(110%); }
 
-
 #pn-div-name {
     font-family: var(--font);
     color: white;
@@ -103,7 +95,6 @@ body {overflow-x: hidden;}
     font-size: 35px;
     text-align: center;
 }
-
 
 .container-headers {
     font-family: var(--font);
@@ -124,7 +115,6 @@ body {overflow-x: hidden;}
     margin-top: 30px;
 }
 
-
 .container-content {
     font-family: var(--font);
     font-weight: 500;
@@ -143,7 +133,6 @@ body {overflow-x: hidden;}
     grid-row: 2 / 3;
     grid-column: 2 / 3;
 }
-
 
 .container-button {
     width: 275px;
@@ -173,13 +162,11 @@ body {overflow-x: hidden;}
     grid-column: 2 / 3;
 }
 
-
 #htp-illustration {
     grid-row: 1 / 4;
     grid-column: 2 / 3;
     user-select: none;
 }
-
 
 #as-illustration {
     grid-row: 1 / 4;
@@ -187,15 +174,12 @@ body {overflow-x: hidden;}
     user-select: none;
 }
 
-
 a:link { text-decoration: none; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }
 a:active { text-decoration: none; }
 
-
 #game-icon-1 { user-select: none; }
-
 
 #end-space {
     margin-top: -10px;
