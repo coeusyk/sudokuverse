@@ -2,7 +2,6 @@
     --options-width: 210px;
 }
 
-
 #play-options {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
@@ -12,7 +11,6 @@
     border-radius: 15px;
     background-color: var(--div-color);
 }
-
 
 #option-icons {
     display: grid;
@@ -24,7 +22,6 @@
     place-items: center;
     margin: 0 auto;
 }
-
 
 .icon-buttons {
     width: 55px;
@@ -38,11 +35,9 @@
 
 .icon-buttons:hover { background-color: #383838; }
 
-
 .icons { margin: auto auto; }
 
 #undo-icon { margin-top: 3px; }
-
 
 #option-ids {
     display: grid;
@@ -55,7 +50,6 @@
     justify-items: center;
 }
 
-
 .option-names {
     font-family: var(--font);
     font-weight: 550;
@@ -63,7 +57,6 @@
     font-size: 15px;
     user-select: none;
 }
-
 
 #hints-used {
     position: relative;
@@ -77,7 +70,6 @@
     user-select: none;
 }
 
-
 #number-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -87,7 +79,6 @@
     width: 300px;
     row-gap: 5px;
 }
-
 
 .numbers {
     width: 95px;
@@ -102,14 +93,12 @@
     user-select: none;
 }
 
-
 .enabled {
     color: white;
     cursor: pointer;
 }
 
 .enabled:hover { background-color: #383838; }
-
 
 .disabled { color: #777777; }
 

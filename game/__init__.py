@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 
+import os
 import toml
 
 from game.core.constants import USER_IDENTIFIER
@@ -10,8 +11,14 @@ def create_app():
     Creates a Flask app and configures all basic requirements to run the web server
     """
 
+    profile = os.getenv('APP_PROFILE')
+    if profile is None:
+        profile = "dev"
+    
+    print(profile)
+
     from game.config import Config
-    config = Config()
+    config = Config(flask_env=profile)
 
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_file("config.toml", load=toml.load)

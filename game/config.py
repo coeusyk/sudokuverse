@@ -45,7 +45,7 @@ class Config:
         const_errors_handle = ErrorMessages("Constants")  # Error message handler for constants
 
         env_error = config_errors_handle.get_error_message("flask_env", "INVALID_VALUE")
-        if (self.flask_env != "dev") and (self.flask_env != "prod"):
+        if self.flask_env not in ["dev", "prod", "docker"]:
             raise ValueError(env_error)
         
         num_of_diff_error = const_errors_handle.get_error_message("num_of_difficulties", "INVALID_VALUE")

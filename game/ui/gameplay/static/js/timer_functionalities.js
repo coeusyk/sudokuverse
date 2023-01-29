@@ -101,11 +101,9 @@ function pausePlay() {
 pausePlayButton.addEventListener('click', pausePlay);
 quitGameBtn.addEventListener('click', function() { stopTimer() });
 
-
 // Timer Functionality:
 var current_time = 0;
 var paused = false;
-
 
 var time = setInterval(function() {
     if (!paused) {

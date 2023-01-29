@@ -6,9 +6,7 @@
     --font: 'Metropolis';
 }
 
-
 body { background-color: var(--bg-color); }
-
 
 #login-div {
     position: absolute;
@@ -17,9 +15,8 @@ body { background-color: var(--bg-color); }
     background-color: var(--content-color);
     border-radius: 25px;
     left: calc(50% - 210px);
-    top: 7.5%;
+    top: calc(50% - 347.5px);
 }
-
 
 #login-msg {
     position: relative;
@@ -35,7 +32,6 @@ body { background-color: var(--bg-color); }
     letter-spacing: 1px;
 }
 
-
 .login-separator {
     position: relative;
     width: 330px;
@@ -44,12 +40,10 @@ body { background-color: var(--bg-color); }
     top: 4.6%;
 }
 
-
 #separator-space {
     position: relative;
     height: 60px;
 }
-
 
 .login-inputs {
     position: relative;
@@ -72,18 +66,15 @@ body { background-color: var(--bg-color); }
     border: 1.5px solid var(--theme-color);
 }
 
-
 #input-space {
     position: relative;
     height: 20px;
 }
 
-
 #error-box-space {
     position: relative;
     height: 20px;
 }
-
 
 .welcome-or-error-box {
     display: flex;
@@ -114,12 +105,10 @@ body { background-color: var(--bg-color); }
     user-select: none;
 }
 
-
 #login-btn-space {
     position: relative;
     height: 40px;
 }
-
 
 #login-button {
     position: relative;
@@ -151,7 +140,6 @@ body { background-color: var(--bg-color); }
     top: 1.2%;
     left: 30.2%;
 }
-
 
 #redirects-space {
     position: relative;
