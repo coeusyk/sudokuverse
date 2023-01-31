@@ -14,8 +14,6 @@ def create_app():
     profile = os.getenv('APP_PROFILE')
     if profile is None:
         profile = "dev"
-    
-    print(profile)
 
     from game.config import Config
     config = Config(flask_env=profile)

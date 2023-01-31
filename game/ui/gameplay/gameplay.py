@@ -2,7 +2,7 @@ import json
 import datetime
 import uuid
 
-from flask import Blueprint, render_template, abort, request, Response
+from flask import Blueprint, render_template, request, Response, redirect, url_for
 
 from game.models import db, User, GameStats
 from game.core.constants import CELL_ATTRIBUTES
@@ -33,7 +33,10 @@ def gameplay_window():
             max_hints = 3
 
     else:
-        abort(400)
+        if DIFF_CHOSEN in request.cookies:
+            return redirect(url_for('home_blueprint.home_window'))
+        else:
+            return redirect(url_for('play_blueprint.play_window'))
 
 
     if request.method == "POST":
@@ -42,7 +45,7 @@ def gameplay_window():
 
         end_time = datetime.datetime.now()
 
-        if game_stats["time-taken"] != None:
+        if game_stats["time-taken"] is not None:
             start_time = end_time - convert_timer_value(game_stats["time-taken"])
         else:
             start_time = None

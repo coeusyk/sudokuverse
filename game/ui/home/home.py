@@ -13,9 +13,6 @@ home_blueprint = Blueprint("home_blueprint", __name__, template_folder="template
 
 @home_blueprint.route("/home", methods=["GET", "POST"])
 def home_window():
-    if DIFF_RESP in request.cookies:
-        DIFF_RESP.set_cookie(DIFF_CHOSEN, "", max_age=0)
-
     if USER_IDENTIFIER in request.cookies:
         if request.cookies[USER_IDENTIFIER] != "logged-out":
             uid: str = request.cookies.get(USER_IDENTIFIER)

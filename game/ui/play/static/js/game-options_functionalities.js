@@ -61,7 +61,7 @@ function startGame() {
         })
             .then(response => response.json())
             .then(data => {
-                if (data["redirect"] == true) {
+                if (data["redirect"]) {
                     window.location.href = "/gameplay";
                 };
             })
@@ -86,3 +86,6 @@ difficultyLevelCategory.addEventListener('click', clickEvent => {
 });
 
 playNowButton.addEventListener('click', startGame);
+
+// Deleting the diff cookie:
+document.cookie = "__diff=; expires=Sat, 01 Jan 0001 00:00:00 UTC; path=/"

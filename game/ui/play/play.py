@@ -7,9 +7,6 @@ play_blueprint = Blueprint("play_blueprint", __name__, template_folder="template
 
 @play_blueprint.route("/play", methods=['GET', 'POST'])
 def play_window():
-    if DIFF_RESP in request.cookies:
-        DIFF_RESP.set_cookie(DIFF_CHOSEN, "", max_age=0)
-
     if USER_IDENTIFIER in request.cookies:
         if request.cookies[USER_IDENTIFIER] != "logged-out":
             return redirect(url_for('home_blueprint.home_window'), code=302)
