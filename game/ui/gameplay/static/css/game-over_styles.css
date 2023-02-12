@@ -1,0 +1,132 @@
+body { overflow-y: hidden; }
+
+
+.game-over-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.0);
+}
+
+.shown {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0s, opacity 0.2s 0s, transform 0.2s;
+}
+
+
+#game-over-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--div-color);
+    border-color: var(--theme-color);
+    border-radius: 10px;
+    border-width: 3px;
+    border-style: solid;
+    margin-top: 15px;
+    height: 520px;
+    width: 325px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(6, max-content);
+    padding: 20px;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    row-gap: 35px;
+    align-content: center;
+    letter-spacing: 0.3px;
+}
+
+
+#g-o-display {
+    font-family: var(--font);
+    font-size: 40px;
+    color: white;
+    font-weight: 700;
+    height: max-content;
+}
+
+
+.g-o-separator {
+    border: 0;
+    border-top: 2px solid #777777;
+    width: 290px;
+    margin-top: -2px;
+}
+
+
+#new-game {
+    font-family: var(--font);
+    font-size: 26px;
+    color: var(--theme-color);
+    font-weight: 600;
+    margin-top: -15px;
+}
+
+
+#diff-grid {
+    display: grid;
+    grid-template-columns: auto;
+    width: 88%;
+    height: max-content;
+    row-gap: 15px;
+    align-items: center;
+    justify-items: center;
+    margin-top: -5px;
+}
+
+.diff-btns {
+    background-color: var(--bg-color);
+    height: 45px;
+    width: inherit;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 0px 1px rgba(43, 43, 43, 0.4);
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    user-select: none;
+}
+
+.diff-btns:hover { filter: brightness(120%) saturate(120%); }
+
+
+#return-btn {
+    width: 190px;
+    height: 55px;
+    background-color: var(--theme-color);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4px 0px 1px rgba(227, 105, 80, 0.6);
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 24px;
+    color: white;
+    font-weight: 700;
+    position: relative;
+    user-select: none;
+    margin-top: -6px;
+    letter-spacing: 0.2px;
+}
+
+#return-btn:hover { filter: brightness(110%) saturate(110%); }
+
+
+#new-game-form { display: none; }
+
+
+@media only screen and (max-height: 700px) {
+    body { overflow-y: visible; }
+}

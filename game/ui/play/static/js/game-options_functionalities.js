@@ -41,7 +41,7 @@ function startGame() {
     if (playNowButton.disabled == false) {
         for (let button of dLButtons) {
             if (button.className == "active-button") {
-                diffInfo.value = button.innerHTML;
+                diffInfo.value = button.innerText;
                 break;
             };
         };
@@ -50,21 +50,23 @@ function startGame() {
         const formData = new FormData(playNowForm);
         const data = new URLSearchParams(formData);
 
-        fetch(window.location.href, {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
+        async function start() {
+            await fetch(
+                window.location.href,
+                {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+        
+                    body: data
+                }
+            );
+            window.location.href = "/gameplay";
+        };
 
-            body: data
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data["redirect"]) {
-                    window.location.href = "/gameplay";
-                };
-            })
+        start();
     };
 
 };

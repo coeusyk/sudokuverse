@@ -29,11 +29,11 @@ def create_app():
 
 
     # Registering all blueprints:
-    from game.ui.play import play
-    app.register_blueprint(play.play_blueprint)
-
     from game.ui.gameplay import gameplay
     app.register_blueprint(gameplay.gameplay_blueprint)
+
+    from game.ui.play import play
+    app.register_blueprint(play.play_blueprint)
 
     from game.ui.signup import signup
     app.register_blueprint(signup.signup_blueprint)

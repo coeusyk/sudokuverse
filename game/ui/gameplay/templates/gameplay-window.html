@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('gameplay_blueprint.static', filename='css/grid_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('gameplay_blueprint.static', filename='css/gameplay-options_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('gameplay_blueprint.static', filename='css/game-over_styles.css') }}">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,32 @@
     <div id="title-bar">
         <h1 id="game-name">SudokuVerse</h1>
         <img id="game-icon" src="{{ url_for('play_blueprint.static', filename='images/app_icon.png') }}" alt="Game Icon" width="35" height="35">
+
+    </div>
+
+    <!-- Game over modal -->
+    <div class="game-over-bg">
+        <div id="game-over-modal">
+            <span id="g-o-display">Game Over</span>
+            <hr id="top-sep" class="g-o-separator">
+            <span id="new-game">New Game?</span>
+
+            <div id="diff-grid">
+                <button class="diff-btns">Simple</button>
+                <button class="diff-btns">Medium</button>
+                <button class="diff-btns">Complex</button>
+
+            </div>
+
+            <form method="POST" id="new-game-form">
+                <input id="diff-info" name="difficulty" type="text">  <!-- Just for knowing the difficulty -->
+            </form>
+
+            <hr class="g-o-separator">
+            
+            <button id="return-btn">Return</button>
+
+        </div>
 
     </div>
 
@@ -125,6 +152,7 @@
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/grid_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/gameplay-options_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/numbers_functionalities.js') }}"></script>
+<script src="{{ url_for('gameplay_blueprint.static', filename='js/game-over_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/timer_functionalities.js') }}"></script>
 
 </html>

@@ -55,7 +55,6 @@ function checkNumCompletion(num) {
 
 function addNumber(button) {
     var selectedCellAttr_ = getCurCell();
-    let mistake = false;
 
     if (selectedCellAttr_ != null) {
         addWork(selectedCellAttr_, "+");
@@ -75,8 +74,6 @@ function addNumber(button) {
         }
 
         else {
-            mistake = true;
-
             selectedCell.innerText = button.innerText;
             selectedCell.style.color = "rgb(255, 0, 0)";
 
@@ -84,8 +81,10 @@ function addNumber(button) {
             mistakes.innerText = `${parseInt(mistakes.innerText) + 1}`;
 
             if (mistakes.innerText == '3') {
-                alert("Game over");
-                stopTimer();  // From timer_functionalities.js
+                let gameOverBG = document.getElementsByClassName("game-over-bg")[0];
+                gameOverBG.classList.add("shown");
+
+                clearInterval(time);
             };
         };
 

@@ -6,6 +6,8 @@ var gridPausedContainer = document.getElementById("grid-container-2");
 
 var quitGameBtn = document.getElementById("quit-game");
 
+var difficultyChosen = document.getElementById("difficulty-chosen");
+
 
 function updateTime(time_) {
     time_ += 1;
@@ -24,51 +26,39 @@ function updateTime(time_) {
 };
 
 
-function stopTimer(time_=null) {
+function stopTimer(time_) {
     var enabledButtons = document.getElementsByClassName("enabled");
-    const data = {}
 
-    if (enabledButtons.length == 0) {
-        clearInterval(time);
+    if (time_ == null) {
+        var operation = nextOperation(success=false);  // From game-over_functionalities.js
+    }
 
-        if (document.cookie.includes("__uuid")) {
-            data["hints-used"] = usedHints,  
-            data["time-taken"] = time_,
-            data["game-result"] = 1
+    else if (enabledButtons.length == 0) {
+        // Checking if all entered values are valid:
+        let gameCompleted = true;
+        for (let div of GridElements) {
+            if (div.style.color == "rgb(255, 0, 0)") {
+                gameCompleted = false;
+                break;
+            };
+        };
+
+        if (gameCompleted) {
+            var operation = nextOperation(success=true, time_=time_);
         } else {
-            window.location.href = "/play"
+            return;
         };
     }
 
-    else if (time_ == null) {
-        clearInterval(time);
-
-        if (document.cookie.includes("__uuid")) {
-            data["hints-used"] = null,  
-            data["time-taken"] = null,
-            data["game-result"] = 0
-        } else {
-            window.location.href = "/play";
-        };
+    else {
+        return;
     };
 
-    // Sending the game details to python:
-    if ("game-result" in data) {
-        fetch("/gameplay", {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-
-            body: JSON.stringify(data)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data["info-added"] == true) {
-                    window.location.href = "/home";
-                };
-            });
+    // Checking the operation to perform:
+    if (typeof operation === "string") {
+        window.location.href = "/play";
+    } else {
+        sendData(operation, redirect=true);  // From game-over_functionalities.js
     };
 
 };
@@ -99,7 +89,7 @@ function pausePlay() {
 
 
 pausePlayButton.addEventListener('click', pausePlay);
-quitGameBtn.addEventListener('click', function() { stopTimer() });
+quitGameBtn.addEventListener('click', function() { stopTimer(null) });
 
 // Timer Functionality:
 var current_time = 0;

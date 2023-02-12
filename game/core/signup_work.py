@@ -81,8 +81,8 @@ def check_phash_validity(phash: str):
     invalid_char, invalid_char_count = None, 0
 
     for i in phash:
-        if not (
-            (64 < ord(i) < 91) and not (96 < ord(i) < 123) and 
+        if (
+            not (64 < ord(i) < 91) and not (96 < ord(i) < 123) and 
             (i not in special_chars) and not (47 < ord(i) < 58)
         ):
             invalid_char_count += 1

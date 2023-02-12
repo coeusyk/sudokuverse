@@ -173,7 +173,7 @@ function signUpFunctionality() {
                 
                 if ("phash" in data) {
                     phashErrorPrev = true;
-                    if ("invalid-format-1" in data["phash"]) {
+                    if (Array.isArray(data["phash"])) {
                         invalidChar = data["phash"][1];
                         phashError.innerText = phashErrorMap[data["phash"][0]];
                     } else {

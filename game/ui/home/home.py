@@ -50,7 +50,7 @@ def home_window():
             DIFF_RESP.set_cookie(DIFF_CHOSEN, str(diff_id))
 
             return DIFF_RESP
-        
+
         elif request.headers["Content-Type"] == "application/json":
             content = request.get_json()
 
