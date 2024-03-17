@@ -2,12 +2,12 @@
     display: grid;
     grid-template-columns: auto;
     row-gap: 10px;
-    width: 850px;
+    width: 900px;
     height: min-content;
     position: relative;
     top: 11%;
     left: 50%;
-    margin-left: -450px;
+    margin-left: -470px;
     background-color: var(--div-color);
     border: none;
     border-radius: 5px;

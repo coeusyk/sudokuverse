@@ -11,7 +11,7 @@ body { overflow-y: hidden; }
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     visibility: hidden;
-    transform: scale(1.0);
+    transform: scale(1);
 }
 
 .shown {
@@ -33,8 +33,8 @@ body { overflow-y: hidden; }
     border-width: 3px;
     border-style: solid;
     margin-top: 15px;
-    height: 520px;
-    width: 325px;
+    height: 550px;
+    width: 320px;
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: repeat(6, max-content);
@@ -57,12 +57,25 @@ body { overflow-y: hidden; }
 }
 
 
+#g-o-desc {
+    font-family: var(--font);
+    font-size: 18px;
+    color: #c7c7c7;
+    font-weight: 500;
+    height: max-content;
+    margin-top: -15px;
+    text-align: center;
+}
+
+
 .g-o-separator {
     border: 0;
     border-top: 2px solid #777777;
     width: 290px;
     margin-top: -2px;
 }
+
+#top-sep { margin-top: -10px; }
 
 
 #new-game {
@@ -101,6 +114,7 @@ body { overflow-y: hidden; }
 }
 
 .diff-btns:hover { filter: brightness(120%) saturate(120%); }
+.diff-btns:active { filter: brightness(115%) saturate(115%); }
 
 
 #return-btn {
@@ -109,7 +123,7 @@ body { overflow-y: hidden; }
     background-color: var(--theme-color);
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 4px 0px 1px rgba(227, 105, 80, 0.6);
+    box-shadow: 0 4px 0 1px rgba(227, 105, 80, 0.6);
     cursor: pointer;
     font-family: var(--font);
     font-size: 24px;
@@ -122,6 +136,7 @@ body { overflow-y: hidden; }
 }
 
 #return-btn:hover { filter: brightness(110%) saturate(110%); }
+#return-btn:active { filter: brightness(107%) saturate(107%); }
 
 
 #new-game-form { display: none; }

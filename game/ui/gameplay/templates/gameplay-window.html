@@ -26,6 +26,8 @@
     <div class="game-over-bg">
         <div id="game-over-modal">
             <span id="g-o-display">Game Over</span>
+            <span id="g-o-desc">You made 3 mistakes and<br>lost the game</span>
+
             <hr id="top-sep" class="g-o-separator">
             <span id="new-game">New Game?</span>
 
@@ -149,10 +151,10 @@
 
 </script>
 
+<script src="{{ url_for('gameplay_blueprint.static', filename='js/game-over_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/grid_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/gameplay-options_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/numbers_functionalities.js') }}"></script>
-<script src="{{ url_for('gameplay_blueprint.static', filename='js/game-over_functionalities.js') }}"></script>
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/timer_functionalities.js') }}"></script>
 
 </html>

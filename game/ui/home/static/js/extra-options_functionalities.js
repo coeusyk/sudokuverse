@@ -99,7 +99,7 @@ function addEntry(entry_id, diff, hints, time, dateTime) {
             lastEntry.classList.remove("entry_type-1");
             lastEntry.classList.add("entry_type-2");
         } else {
-            const lastEntry = entries[-1];
+            const lastEntry = entries[entries.length - 1];
             lastEntry.append(entrySeparator);
 
             lastEntry.classList.remove("entry_type-1");

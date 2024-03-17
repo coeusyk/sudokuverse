@@ -27,7 +27,6 @@ def create_app():
     db.init_app(app)
     db.create_all()
 
-
     # Registering all blueprints:
     from game.ui.gameplay import gameplay
     app.register_blueprint(gameplay.gameplay_blueprint)
@@ -50,13 +49,12 @@ def create_app():
     from game.ui.learn import learn
     app.register_blueprint(learn.learn_blueprint)
 
-
     @app.route("/")
     def main_window():
         if USER_IDENTIFIER in request.cookies:
             if request.cookies[USER_IDENTIFIER] != "logged-out":
                 return redirect(url_for("home_blueprint.home_window"), code=302)
-        
+
         return render_template("main-window.html")
 
     return app

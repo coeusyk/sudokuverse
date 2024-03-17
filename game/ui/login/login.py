@@ -1,12 +1,13 @@
 import json
 
-from flask import Blueprint, render_template, request, redirect, url_for, Response
+from flask import Blueprint, render_template, request, redirect, url_for, make_response
 
 from game.core.login_work import validate_login_credentials
-from game.core.constants import USER_IDENTIFIER, COOKIE_EXPIRATION_TIME, SUCCESS_RESP
+from game.core.constants import USER_IDENTIFIER, COOKIE_EXPIRATION_TIME
 
 
-login_blueprint = Blueprint("login_blueprint", __name__, template_folder="templates", static_folder="static", static_url_path="/ui/login")
+login_blueprint = Blueprint("login_blueprint", __name__, template_folder="templates", static_folder="static",
+                            static_url_path="/ui/login")
 
 
 @login_blueprint.route("/login", methods=["GET", "POST"])
@@ -21,16 +22,19 @@ def login_window():
 
         login_validation = validate_login_credentials(email, phash)
         
-        if type(login_validation) == tuple:
+        if login_validation is not False:
             user_record = login_validation[1]
 
-            user_cookie_expiration = user_record.date_joined + COOKIE_EXPIRATION_TIME
-            SUCCESS_RESP.set_cookie(USER_IDENTIFIER, user_record.uid, expires=user_cookie_expiration)
+            response = make_response(json.dumps({"success": True}), 302)
+            response.headers['Content-Type'] = 'application/json'
 
-            return SUCCESS_RESP
+            user_cookie_expiration = user_record.date_joined + COOKIE_EXPIRATION_TIME
+            response.set_cookie(USER_IDENTIFIER, user_record.uid, expires=user_cookie_expiration)
+
+            return response
         
         else:
-            response = Response(response=json.dumps({"success": False}), status=200)
+            response = make_response(json.dumps({"success": False}), 200)
 
             return response
 

@@ -115,7 +115,6 @@ create_cell_attributes()
 
 
 # Responses:
-SUCCESS_RESP = Response(json.dumps({"success": True}), status=302)  # Signup/Login/Logout successful response
 DIFF_RESP = Response(json.dumps({"redirect": True}), status=302)  # Start game
 
 

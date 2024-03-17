@@ -1,19 +1,19 @@
 const numButtons = document.getElementsByClassName("numbers");
-var cellWorkOrder = Array();
+let cellWorkOrder = Array();
 
 
 function addWork(cellAttr, action) {
     if (cellWorkOrder.length > 0) {
-        if (cellWorkOrder[-1] != [cellAttr, action]) {
+        if (cellWorkOrder[-1] !== [cellAttr, action]) {
             cellWorkOrder.push([cellAttr, action]);
-        };
+        }
     }
 
     else {
         cellWorkOrder.push([cellAttr, action]);
-    };
+    }
 
-};
+}
 
 
 function checkNumCompletion(num) {
@@ -21,22 +21,22 @@ function checkNumCompletion(num) {
     Checks if the entered number has been used in every grid or not, and changes the styles of the number button accordingly
     */
 
-    var count = 0;
+    let count = 0;
 
-    for (var grid of grids) {
-        for (var cell of grid) {
+    for (const grid of grids) {
+        for (const cell of grid) {
             if (!(cell.className.includes("unfilled"))) {
-                if (cell.innerHTML == num) {
+                if (cell.innerHTML === num) {
                     count += 1;
                     break;
-                };
-            };
-        };
-    };
+                }
+            }
+        }
+    }
 
-    selectedButton = numButtons[parseInt(num) - 1];
+    let selectedButton = numButtons[parseInt(num) - 1];
 
-    if (count == 9) {
+    if (count === 9) {
         selectedButton.classList.remove("enabled")
         selectedButton.classList.add("disabled");
 
@@ -48,20 +48,20 @@ function checkNumCompletion(num) {
         selectedButton.classList.add("enabled");
 
         selectedButton.disabled = false;
-    };
+    }
 
-};
+}
 
 
 function addNumber(button) {
-    var selectedCellAttr_ = getCurCell();
+    const selectedCellAttr_ = getCurCell();
 
     if (selectedCellAttr_ != null) {
         addWork(selectedCellAttr_, "+");
 
-        var selectedCell = selectedCellAttr_[0];
-        var rowIndex = selectedCellAttr_[1];
-        var colIndex = selectedCellAttr_[2];
+        const selectedCell = selectedCellAttr_[0];
+        const rowIndex = selectedCellAttr_[1];
+        const colIndex = selectedCellAttr_[2];
 
         selectedCell.classList.remove("unfilled");
         selectedCell.classList.add("filled");
@@ -80,27 +80,26 @@ function addNumber(button) {
             let mistakes = document.getElementById("mistakes").getElementsByClassName("coloured-text")[0];
             mistakes.innerText = `${parseInt(mistakes.innerText) + 1}`;
 
-            if (mistakes.innerText == '3') {
+            if (mistakes.innerText === '3') {
                 let gameOverBG = document.getElementsByClassName("game-over-bg")[0];
                 gameOverBG.classList.add("shown");
 
                 clearInterval(time);
-            };
-        };
+            }
+        }
 
         activateRowColGrid(selectedCell);  // From grid_functionalities.js
         activateNumCells(selectedCell);  // From grid_functionalities.js
-    };
-
-};
+    }
+}
 
 
 for (let _num of numButtons) {
     _num.addEventListener('click', function() {checkNumCompletion(_num.innerHTML); addNumber(_num)})
-};
+}
 
 
 // Initial Check:
 for (let i = 1; i < 10; i++) {
     checkNumCompletion(i.toString());
-};
+}

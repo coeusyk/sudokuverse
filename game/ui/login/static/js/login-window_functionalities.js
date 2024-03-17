@@ -1,29 +1,28 @@
-var phashInput = document.getElementsByClassName("login-inputs")[1];
+const phashInput = document.getElementsByClassName("login-inputs")[1];
 
-var welcomeOrErrorBox = document.getElementsByClassName("welcome-or-error-box")[0];
+const welcomeOrErrorBox = document.getElementsByClassName("welcome-or-error-box")[0];
 
-var loginButton = document.getElementById("login-button");
+const loginButton = document.getElementById("login-button");
 
 
 function transitionErrorBox() {
     let executeTimes = 0;
-    var errorTransition = setInterval(function() { 
-        if (executeTimes % 2 != 0) {
+    const errorTransition = setInterval(function () {
+        if (executeTimes % 2 !== 0) {
             welcomeOrErrorBox.style.transform = "translateX(4px)";
         } else {
             welcomeOrErrorBox.style.transform = "translateX(-4px)";
-        };
+        }
 
         executeTimes++;
 
-        if (executeTimes == 5) {
+        if (executeTimes === 5) {
             welcomeOrErrorBox.style.transform = "translateX(0px)";
             clearInterval(errorTransition);
-        };
+        }
 
     }, 50);
-
-};
+}
 
 
 function loginFunctionality() {
@@ -43,13 +42,13 @@ function loginFunctionality() {
     })
         .then(request => request.json())
         .then(data => {
-            if (data['success'] == false) {
+            if (data['success'] === false) {
                 phashInput.value = "";
 
                 // Changing the welcome box to error box:
                 welcomeOrErrorBox.classList.add("error");
 
-                var msg = welcomeOrErrorBox.querySelector("span");
+                const msg = welcomeOrErrorBox.querySelector("span");
                 msg.innerText = "Invalid Email or Password";
 
                 transitionErrorBox();
@@ -57,10 +56,9 @@ function loginFunctionality() {
             
             else {
                 window.location.href = "/home";  // Redirecting to the home window
-            };
+            }
         })
-
-};
+}
 
 
 loginButton.addEventListener('click', loginFunctionality);

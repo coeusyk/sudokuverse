@@ -1,15 +1,15 @@
 const signUpButton = document.getElementsByClassName("signup-button")[0];
 
-var [unameError, dobError, emailError, phashError] = document.getElementsByClassName("input-errors");
-var [unameInput, dobInput, emailInput, phashInput] = document.getElementsByClassName("signup-inputs");
+const [unameError, dobError, emailError, phashError] = document.getElementsByClassName("input-errors");
+const [unameInput, dobInput, emailInput, phashInput] = document.getElementsByClassName("signup-inputs");
 
-var [dobSpace, emailSpace, phashSpace] = document.getElementsByClassName("input-space");
-var signUpBtnSpace = document.getElementById("button-space");
+const [dobSpace, emailSpace, phashSpace] = document.getElementsByClassName("input-space");
+const signUpBtnSpace = document.getElementById("button-space");
 
-var phashViewButton = document.getElementById("phash-view-toggle");
+const phashViewButton = document.getElementById("phash-view-toggle");
 
-var showPhashIcon = document.getElementById("show-phash-icon");
-var hidePhashIcon = document.getElementById("hide-phash-icon");
+const showPhashIcon = document.getElementById("show-phash-icon");
+const hidePhashIcon = document.getElementById("hide-phash-icon");
 
 const unameErrorMap = {
     "not-entered": "Enter a username",
@@ -32,7 +32,7 @@ const emailErrorMap = {
     "taken": "This email is in use"
 };
 
-var invalidChar = "";
+let invalidChar = "";
 const phashErrorMap = {
     "not-entered": "Enter a password",
     "invalid-length": "Your password must contain atleast 6 characters",
@@ -40,103 +40,99 @@ const phashErrorMap = {
     "invalid-format-2": "Your password contains disallowed special characters"
 };
 
-var phashErrorPrev = false;
+let phashErrorPrev = false;
 
 
 function changeMargin() {
     // For the space between dob and the uname error:
-    if (unameError.innerHTML == "") {
+    if (unameError.innerText === "") {
         dobSpace.style.height = "48px";
     } else if (!(unameError.innerHTML.includes("<br>"))) {
         dobSpace.style.height = "34px";
     } else {
         dobSpace.style.height = "20px";
-    };
+    }
 
     // For the space between email and dob error:
-    if (dobError.innerHTML == "") {
+    if (dobError.innerText === "") {
         emailSpace.style.height = "48px";
     } else if (!(dobError.innerHTML.includes("<br>"))) {
         emailSpace.style.height = "34px"
     } else {
         emailSpace.style.height = "20px";
-    };
+    }
 
     // For the space between phash and email error:
-    if (emailError.innerHTML == "") {
+    if (emailError.innerText === "") {
         phashSpace.style.height = "48px";
     } else {
         phashSpace.style.height = "34px";
-    };
+    }
 
     // For the space between signup button and phash error:
-    if (phashError.innerHTML == "") {
+    if (phashError.innerText === "") {
         signUpBtnSpace.style.height = "34px";
     } else {
         signUpBtnSpace.style.height = "20px";
-    };
-
-};
+    }
+}
 
 
 function changeInputBorder() {
     // For the username input:
-    if (unameError.innerHTML != "") {
+    if (unameError.innerText !== "") {
         unameInput.style.borderColor = "rgb(255, 0, 0)";  // Red in rgb format
     } else {
         unameInput.style.borderColor = "rgb(43, 43, 43)";  // #2B2B2B in rgb format
-    };
+    }
 
     // For the dob input:
-    if (dobError.innerHTML != "") {
+    if (dobError.innerText !== "") {
         dobInput.style.borderColor = "rgb(255, 0, 0)";
     } else {
         dobInput.style.borderColor = "rgb(43, 43, 43)";
-    };
+    }
 
     // For the email input:
-    if (emailError.innerHTML != "") {
+    if (emailError.innerText !== "") {
         emailInput.style.borderColor = "rgb(255, 0, 0)";
     } else {
         emailInput.style.borderColor = "rgb(43, 43, 43)";
-    };
+    }
 
     // For the phash input:
-    if (phashError.innerHTML != "") {
+    if (phashError.innerText !== "") {
         phashInput.style.borderColor = "rgb(255, 0, 0)";
     } else {
         phashInput.style.borderColor = "rgb(43, 43, 43)";
-    };
-
-};
+    }
+}
 
 
 function showBasicPhashReq() {
-    if (phashErrorPrev == false) {
+    if (phashErrorPrev === false) {
         if (phashInput.value.length < 6) {
             phashError.style.color = "#777777";
-            phashError.innerHTML = "Password must contain atleast 6 characters";
+            phashError.innerText = "Password must contain atleast 6 characters";
         } else {
-            phashError.innerHTML = "";
+            phashError.innerText = "";
             phashError.style.color = "rgb(255, 0, 0)";
-        };
-    };
+        }
+    }
 
     changeMargin();
-
-};
+}
 
 
 function enableSignUpBtn() {
-    if ((unameInput.value != "") && (emailInput.value != "") && (phashInput.value != "")) {
+    if ((unameInput.value !== "") && (emailInput.value !== "") && (phashInput.value !== "")) {
         signUpButton.disabled = false;
         signUpButton.classList.remove("disabled");
     } else {
         signUpButton.disabled = true;
         signUpButton.classList.add("disabled");
-    };
-
-};
+    }
+}
 
 
 function signUpFunctionality() {
@@ -157,19 +153,19 @@ function signUpFunctionality() {
     })
         .then(request => request.json())
         .then(data => {
-            if (data["success"] == false) {
+            if (data["success"] === false) {
                 // Accessing the data sent:
                 if ("username" in data) {
                     unameError.innerText = unameErrorMap[data["username"]];
-                };
+                }
                 
                 if ("dob" in data) {
                     dobError.innerText = dobErrorMap[data["dob"]];
-                };
+                }
                 
                 if ("email" in data) {
                     emailError.innerText = emailErrorMap[data["email"]];
-                };
+                }
                 
                 if ("phash" in data) {
                     phashErrorPrev = true;
@@ -178,30 +174,29 @@ function signUpFunctionality() {
                         phashError.innerText = phashErrorMap[data["phash"][0]];
                     } else {
                         phashError.innerText = phashErrorMap[data["phash"]];
-                    };
-                };
+                    }
+                }
 
                 changeMargin();
                 changeInputBorder();
-            } 
+            }
             
             else {
                 window.location.href = "/home";  // Redirecting the user to the home window
-            };
+            }
         });
-
-};
+}
 
 
 function togglePhashView() {
-    if (showPhashIcon.style.display != "none") {
+    if (showPhashIcon.style.display !== "none") {
         showPhashIcon.style.display = "none";
         hidePhashIcon.style.display = "block";
 
         phashInput.type = "text";
     }
     
-    else if (hidePhashIcon.style.display != "none") {
+    else if (hidePhashIcon.style.display !== "none") {
         hidePhashIcon.style.display = "none";
         showPhashIcon.style.display = "block";
 
@@ -213,9 +208,8 @@ function togglePhashView() {
         showPhashIcon.style.display = "block";
 
         phashInput.type = "password";
-    };
-
-};
+    }
+}
 
 
 // Event listeners:

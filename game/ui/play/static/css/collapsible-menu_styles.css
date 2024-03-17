@@ -78,7 +78,7 @@ html, body {
 
 #log-out-btn {
     position: relative;
-    margin-top: 50px;
+    top: 50%;
 }
 
 
