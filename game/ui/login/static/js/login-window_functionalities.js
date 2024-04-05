@@ -1,7 +1,5 @@
 const phashInput = document.getElementsByClassName("login-inputs")[1];
-
 const welcomeOrErrorBox = document.getElementsByClassName("welcome-or-error-box")[0];
-
 const loginButton = document.getElementById("login-button");
 
 
@@ -25,39 +23,40 @@ function transitionErrorBox() {
 }
 
 
-function loginFunctionality() {
+async function loginFunctionality() {
     const formLogin = document.getElementById("login-form");
 
     const formData = new FormData(formLogin);
     const data = new URLSearchParams(formData);
 
-    fetch("/login", {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
+    try {
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
 
-        body: data
-    })
-        .then(request => request.json())
-        .then(data => {
-            if (data['success'] === false) {
-                phashInput.value = "";
+        const result = await response.json();
 
-                // Changing the welcome box to error box:
-                welcomeOrErrorBox.classList.add("error");
+        if (result['success'] === false) {
+            phashInput.value = "";
 
-                const msg = welcomeOrErrorBox.querySelector("span");
-                msg.innerText = "Invalid Email or Password";
+            // Changing the welcome box to error box:
+            welcomeOrErrorBox.classList.add("error");
 
-                transitionErrorBox();
-            }
-            
-            else {
-                window.location.href = "/home";  // Redirecting to the home window
-            }
-        })
+            const msg = welcomeOrErrorBox.querySelector("span");
+            msg.innerText = "Invalid Email or Password";
+
+            transitionErrorBox();
+        } else {
+            window.location.href = "/home";  // Redirecting to the home window
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 

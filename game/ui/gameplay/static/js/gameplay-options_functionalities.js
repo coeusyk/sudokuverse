@@ -11,6 +11,7 @@ const hintsUsedIdentifier = document.getElementById("h-u-span");
 
 function eraseFunctionality(cellAttr=null, undo=false) {
     let currentCellAttr;
+
     if (cellAttr == null) {
         currentCellAttr = getCurCell();
     } else {
@@ -30,14 +31,14 @@ function eraseFunctionality(cellAttr=null, undo=false) {
         activateRowColGrid(selectedCell);  // From grid_functionalities.js
         activateNumCells(selectedCell);  // From grid_functionalities.js
 
-        checkNumCompletion(selectedCell.innerHTML);
+        checkNumCompletion(selectedCell.innerText);
     }
-
 }
 
 
 function hintFunctionality(cellAttr=null, undo=false) {
     let selectedCellAttr;
+
     if (usedHints < maxHints) {
         if (cellAttr == null) {
             selectedCellAttr = getCurCell();
@@ -52,7 +53,6 @@ function hintFunctionality(cellAttr=null, undo=false) {
 
             const [selectedCell, rowIndex, colIndex] = selectedCellAttr;
 
-
             if (selectedCell.className.includes("unfilled")) {
                 selectedCell.classList.remove("unfilled");
                 selectedCell.classList.add("filled");
@@ -61,7 +61,7 @@ function hintFunctionality(cellAttr=null, undo=false) {
                     selectedCell.innerText = solution_[rowIndex][colIndex]  
                 }
 
-                if (selectedCell.innerText === solution_[rowIndex][colIndex]) {
+                if (selectedCell.innerText === `${solution_[rowIndex][colIndex]}`) {
                     selectedCell.style.color = "rgb(233, 130, 39)";
                 } else {
                     selectedCell.style.color = "rgb(255, 0, 0)";
@@ -71,13 +71,11 @@ function hintFunctionality(cellAttr=null, undo=false) {
                 activateNumCells(selectedCell);  // From grid_functionalities.js
 
                 if (!(undo)) {
-                    usedHints += 1;
-                    hintsUsedIdentifier.innerText = usedHints;
+                    hintsUsedIdentifier.innerText = `${++usedHints}`;
                 }
             }
         }
     }
-
 }
 
 

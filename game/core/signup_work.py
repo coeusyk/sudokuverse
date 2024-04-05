@@ -26,7 +26,7 @@ def check_username_validity(username: str):
     else:
         username_check = User.query.filter(User.username.ilike(username)).one_or_none()
 
-        if username_check != None:
+        if username_check is not None:
             return "taken"
     
     return True
@@ -56,7 +56,7 @@ def check_email_validity(email: str):
         # Checking if a record having the entered email exists:
         email_check = User.query.filter(User.email.ilike(email)).one_or_none()
 
-        if email_check != None:
+        if email_check is not None:
             return "taken"
 
     return True
@@ -125,7 +125,7 @@ def validate_N_format_date(date: str):
             time_difference = present_time - entered_date
             approx_years = time_difference.days / 365
 
-            if (5 <= approx_years <= 130):
+            if 5 <= approx_years <= 130:
                 return entered_date
             elif approx_years < 5:
                 return "underage"

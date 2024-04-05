@@ -111,7 +111,7 @@ class Sudoku:
 
 
 def get_solution():
-    file_path = gen_for_solve(max_filled = random.randint(0, 9))
+    file_path = gen_for_solve(max_filled=random.randint(0, 9))
 
     with open(file_path, "r") as f:
         lines = f.readlines()

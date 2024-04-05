@@ -1,16 +1,16 @@
 const difficultyLevelCategory = document.getElementById("button-category");
 const dLButtons = difficultyLevelCategory.getElementsByTagName("button");
-var clickTimes = [0, 0, 0];
+const clickTimes = [0, 0, 0];
 
-var diffInfo = document.getElementById("diff-info");
-var playNowButton = document.getElementById("play-now-button");
+const diffInfo = document.getElementById("diff-info");
+const playNowButton = document.getElementById("play-now-button");
 
 
 function diffButtonClick(button_) {
     let index = Array.from(dLButtons).indexOf(button_);
 
     for (let i = 0; i < dLButtons.length; i++) {
-        if (i != index) {
+        if (i !== index) {
             dLButtons[i].className = "inactive-button";
             clickTimes[i] = 0;
         }
@@ -30,21 +30,20 @@ function diffButtonClick(button_) {
 
                 playNowButton.disabled = false;
                 playNowButton.style.backgroundColor = "#E36950";
-            };
-        };
-    };
-
-};
+            }
+        }
+    }
+}
 
 
 function startGame() {
-    if (playNowButton.disabled == false) {
+    if (playNowButton.disabled === false) {
         for (let button of dLButtons) {
-            if (button.className == "active-button") {
+            if (button.classList.contains("active-button")) {
                 diffInfo.value = button.innerText;
                 break;
-            };
-        };
+            }
+        }
 
         const playNowForm = document.getElementById("play-now-form");
         const formData = new FormData(playNowForm);
@@ -63,14 +62,17 @@ function startGame() {
                     body: data
                 }
             );
-            window.location.href = "/gameplay";
-        };
+        }
 
-        start();
-    };
+        start().then(r => window.location.href = "/gameplay");
+    }
+}
 
-};
 
+// Deleting the diff cookie if it exists in the document cookies:
+if (document.cookie.split(';').some((item) => item.trim().startsWith('__diff='))) {
+    document.cookie = "__diff=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+}
 
 // Defaulting the difficulty level to Simple:
 dLButtons[0].className = "active-button";
@@ -79,15 +81,11 @@ clickTimes[0]++;
 playNowButton.disabled = false;
 playNowButton.style.backgroundColor = "#E36950";
 
-
 // Assigning event listeners to the dLButtons ('event delegation'):
 difficultyLevelCategory.addEventListener('click', clickEvent => {
-    if ((clickEvent.target.className == "inactive-button") | (clickEvent.target.className == "active-button")) {
+    if ((clickEvent.target.className === "inactive-button") || (clickEvent.target.className === "active-button")) {
         diffButtonClick(clickEvent.target);
-    };
-});
+    }
+})
 
 playNowButton.addEventListener('click', startGame);
-
-// Deleting the diff cookie:
-document.cookie = "__diff=; expires=Sat, 01 Jan 0001 00:00:00 UTC; path=/"

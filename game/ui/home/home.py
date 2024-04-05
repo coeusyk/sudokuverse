@@ -8,6 +8,7 @@ from game.core.constants import USER_IDENTIFIER, NUM_OF_DIFFICULTIES, DIFFICULTY
     DIFF_RESP, SIMPLE, MEDIUM, COMPLEX
 from game.core.stats_functionalities import format_datetime, get_fastest_time, get_games_per_diff, get_timer_value
 
+
 home_blueprint = Blueprint("home_blueprint", __name__, template_folder="templates", static_folder="static",
                            static_url_path="/ui/home")
 
@@ -64,7 +65,7 @@ def home_window():
 
     if request.method == "GET":
         # Checking if the GET request is from the client, and not a redirect:
-        if request.headers["Accept"] == "application/json":
+        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             completed_games_info = {"entry-id": [], "difficulty": [], "hints-used": [], "time-taken": [],
                                     "date-time": []}
 

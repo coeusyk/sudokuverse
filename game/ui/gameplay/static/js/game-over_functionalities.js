@@ -1,6 +1,6 @@
 const difficultyLevels = document.getElementById("diff-grid");
 
-var returnBtn = document.getElementById("return-btn");
+const returnBtn = document.getElementById("return-btn");
 
 
 // Getting the next operation or data:
@@ -32,6 +32,11 @@ function nextOperation(success=false, time_=null) {
         }
     }
 
+    // Deleting the diff cookie if it exists in the document cookies:
+    if (document.cookie.split(';').some((item) => item.trim().startsWith('__diff='))) {
+        document.cookie = "__diff=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    }
+
     return data;
 }
 
@@ -53,7 +58,11 @@ async function sendData(gameData, redirect=false) {
     if (redirect) {
         const sdResponse = await sdRequest.json();
         if (sdResponse["info-added"] === true) {
-            window.location.href = "/home";
+            const redirectRequest = await fetch("/home", {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
         }
     }
 }
@@ -91,7 +100,6 @@ function newGame(diffBtn) {
     }
 
     reloadGame();
-
 }
 
 

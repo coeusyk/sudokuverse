@@ -1,4 +1,5 @@
 import json
+import datetime
 
 from flask import Blueprint, render_template, request, redirect, url_for, make_response
 
@@ -26,10 +27,9 @@ def login_window():
             user_record = login_validation[1]
 
             response = make_response(json.dumps({"success": True}), 302)
-            response.headers['Content-Type'] = 'application/json'
 
-            user_cookie_expiration = user_record.date_joined + COOKIE_EXPIRATION_TIME
-            response.set_cookie(USER_IDENTIFIER, user_record.uid, expires=user_cookie_expiration)
+            user_cookie_expiration = datetime.datetime.now() + COOKIE_EXPIRATION_TIME
+            response.set_cookie(key=USER_IDENTIFIER, value=user_record.uid, expires=user_cookie_expiration)
 
             return response
         

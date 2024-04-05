@@ -12,7 +12,6 @@ function addWork(cellAttr, action) {
     else {
         cellWorkOrder.push([cellAttr, action]);
     }
-
 }
 
 
@@ -49,7 +48,6 @@ function checkNumCompletion(num) {
 
         selectedButton.disabled = false;
     }
-
 }
 
 
@@ -66,7 +64,7 @@ function addNumber(button) {
         selectedCell.classList.remove("unfilled");
         selectedCell.classList.add("filled");
 
-        if (solution_[rowIndex][colIndex] == button.innerText) {
+        if (`${solution_[rowIndex][colIndex]}` === button.innerText) {
             selectedCell.innerHTML = solution_[rowIndex][colIndex]
             selectedCell.style.color = "rgb(233, 130, 39)";
 

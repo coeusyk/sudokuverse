@@ -28,8 +28,7 @@ const grid7 = document.getElementsByClassName("grid-7")
 const grid8 = document.getElementsByClassName("grid-8")
 const grid9 = document.getElementsByClassName("grid-9");
 
-const rows = [row1, row2, row3, row4, row5, row6, row7, row8, row9]
-const cols = [col1, col2, col3, col4, col5, col6, col7, col8, col9]
+const rows = [row1, row2, row3, row4, row5, row6, row7, row8, row9];
 const grids = [grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9];
 
 const rowMap = new Map([
@@ -103,6 +102,7 @@ function activateRowColGrid(div) {
     Array.from(GridElements).forEach(_div => {
         _div.style.backgroundColor = "white";
         _div.classList.remove("active");
+
         if (_div.className.includes("unfilled")) {
             _div.style.color = "white";
         }
@@ -111,6 +111,7 @@ function activateRowColGrid(div) {
     for (let elem of curRowColGrid) {
         Array.from(elem).forEach(_div => {
             _div.style.backgroundColor = "rgb(255, 236, 185)";
+
             if (_div.className.includes("unfilled")) {
                 _div.style.color = "rgb(255, 236, 185)";
             }
@@ -138,6 +139,7 @@ function activateNumCells(div) {
     // Updating all the other cells (having the same number) row-wise:
     if (!(div.className.includes("unfilled")) || (div.style.color === "rgb(255, 0, 0)")) {
         let num = div.innerHTML;
+
         for (let i = 0; i < rows.length; i++) {
             Array.from(rows[i]).forEach(_div => {
                 if ((_div.innerHTML === num) && (!(_div.className.includes("unfilled")))) {
@@ -146,7 +148,6 @@ function activateNumCells(div) {
             });
         }
     }
-
 }
 
 

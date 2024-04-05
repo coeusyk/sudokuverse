@@ -1,0 +1,18 @@
+[ErrorMessages]
+    [ErrorMessages.context]
+        INVALID_TYPE = "invalid type for context"
+        INVALID_VALUE = "invalid value for context"
+
+    [ErrorMessages.msg_choice]
+        INVALID_TYPE = "invalid type for msg_choice"
+        INVALID_VALUE = "invalid value for msg_choice"
+
+
+[Config]
+    [Config.flask_env]
+        INVALID_VALUE = "invalid value for flask_env"
+
+
+[Constants]
+    [Constants.num_of_difficulties]
+        INVALID_VALUE = "invalid value for num_of_difficulties"
