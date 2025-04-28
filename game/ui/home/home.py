@@ -69,7 +69,7 @@ def home_window():
             completed_games_info = {"entry-id": [], "difficulty": [], "hints-used": [], "time-taken": [],
                                     "date-time": []}
 
-            # Sending the latest (upto) five games to the client (JS):
+            # Sending the latest (up to) five games to the client (JS):
             for cg in games_finished[:5]:
                 cg: GameStats
 

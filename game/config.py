@@ -50,7 +50,7 @@ class Config:
         if num_of_difficulties != NUM_OF_DIFFICULTIES:
             raise ValueError(num_of_diff_error)
 
-        self.config_file: dict[str, dict] = toml.load("instance/config.toml")
+        self.config_file: dict[str, dict] = toml.load("instance/__config__.toml")
 
     def get_database_uri(self):
         db_info: dict[str, str] = self.config_file["flask_env"][self.flask_env]

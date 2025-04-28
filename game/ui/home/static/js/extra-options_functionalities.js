@@ -1,10 +1,10 @@
-var allColouredStats = Array.from(document.getElementsByClassName("stats-variable"));
-var totalGames = allColouredStats[0];
+const allColouredStats = Array.from(document.getElementsByClassName("stats-variable"));
+const totalGames = allColouredStats[0];
 
-var entriesDiv = document.getElementById("entries");
-var entries = entriesDiv.getElementsByTagName("div");
+const entriesDiv = document.getElementById("entries");
+const entries = entriesDiv.getElementsByTagName("div");
 
-var logOutBtn = document.getElementById("log-out-btn");
+const logOutBtn = document.getElementById("log-out-btn");
 
 
 function logOut() {
@@ -19,27 +19,29 @@ function logOut() {
     })
         .then(response => response.json())
         .then(data => {
-            if (data["success"] == true) {
-                window.location.href = "/";  // Redirecting to main window
-            };
+            if (data["success"] === true) {
+                window.location.href = "/";  // Redirecting to the main window
+            }
         });
-
-};
+}
 
 
 /**
- * Sends a GET request to the server (Python-Flask) for obtaining atmost 5 latest completed games
+ * Sends a GET request to the server (Python-Flask) for getting atmost 5 latest completed games
  * and adds those entries to HTML which are unregistered (not added yet)
  */
 function getGameInfo() {
     if (parseInt(totalGames.innerText) > entries.length) {
         fetch("/home", {
             method: "GET",
-            headers: {'Accept': 'application/json'}
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
         })
             .then(response => response.json())
             .then(data => {
-                var entry_ids = Array.from(data["entry-id"]);
+                const entry_ids = Array.from(data["entry-id"]);
 
                 for (let i = 0; i < entry_ids.length; i++) {
                     let entry_validation = validateEntry(entry_ids[i]);
@@ -49,11 +51,11 @@ function getGameInfo() {
                         let timeTaken = data["time-taken"][i]; let dateTime = data["date-time"][i];
 
                         addEntry(entry_ids[i], diff, hintsUsed, timeTaken, dateTime);
-                    };
-                };
+                    }
+                }
             });
-    };
-};
+    }
+}
 
 
 function changeStatColour() {
@@ -66,22 +68,20 @@ function changeStatColour() {
         else {
             stat.classList.add("stats-variable");
             stat.classList.remove("stats-const");
-        };
+        }
     });
-
-};
+}
 
 
 function validateEntry(entry_id) {
     for (let entry of entries) {
-        if (entry.id == entry_id) {
+        if (entry.id === entry_id) {
             return false;
-        };
-    };
+        }
+    }
 
     return true;
-
-};
+}
 
 
 function addEntry(entry_id, diff, hints, time, dateTime) {
@@ -92,7 +92,7 @@ function addEntry(entry_id, diff, hints, time, dateTime) {
         const entrySeparator = document.createElement("hr");
         entrySeparator.classList.add("entry-separator");
 
-        if (entries.length == 1) {
+        if (entries.length === 1) {
             const lastEntry = entries[0];
             lastEntry.append(entrySeparator);
 
@@ -104,8 +104,8 @@ function addEntry(entry_id, diff, hints, time, dateTime) {
 
             lastEntry.classList.remove("entry_type-1");
             lastEntry.classList.add("entry_type-2");
-        };
-    };
+        }
+    }
 
     entry.classList.add("entry", "entry_type-1");
 
@@ -118,7 +118,7 @@ function addEntry(entry_id, diff, hints, time, dateTime) {
         cgInfo.innerText = firstThreeInfo[i];
 
         entry.append(cgInfo);
-    };
+    }
 
     // For date-time:
     const cgDateTimeInfo = document.createElement("span");
@@ -128,7 +128,7 @@ function addEntry(entry_id, diff, hints, time, dateTime) {
     entry.append(cgDateTimeInfo);
 
     entriesDiv.appendChild(entry);
-};
+}
 
 
 changeStatColour();  // Initial check

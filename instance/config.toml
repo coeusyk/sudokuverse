@@ -1,7 +1,0 @@
-[flask_env]
-    [flask_env.dev]
-        user = "root"
-        password = "example"
-        host = "127.0.0.1"
-        port = "3306"
-        db = "sudokuverse_dev"

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <link rel="stylesheet" href="{{ url_for('play_blueprint.static', filename='css/title-bar_styles.css') }}">
@@ -57,17 +56,17 @@
 
             <!-- The sudoku board -->
             <svg id="board-container">
-                <rect id="board" width="450" height="450" x="10" y="10"/>
+                <rect id="board" width="450" height="450" x="10" y="10"></rect>
 
                 {% set variable_value, const_start, const_end = 50, 10, 460 %}
                 {% for i in range(1, 9) %}
                     {% if i % 3 != 0 %}
-                        <line class="line" x1="{{ 10 + variable_value * i }}" x2="{{ 10 + variable_value * i }}" y1="{{ const_start }}" y2="{{ const_end }}"/>
-                        <line class="line" x1="{{ const_start }}" x2="{{ const_end }}" y1="{{ 10 + variable_value * i }}" y2="{{ 10 + variable_value * i }}"/>
+                        <line class="line" x1="{{ 10 + variable_value * i }}" x2="{{ 10 + variable_value * i }}" y1="{{ const_start }}" y2="{{ const_end }}"></line>
+                        <line class="line" x1="{{ const_start }}" x2="{{ const_end }}" y1="{{ 10 + variable_value * i }}" y2="{{ 10 + variable_value * i }}"></line>
                     
                     {% else %}
-                        <line class="line sep" x1="{{ 10 + variable_value * i }}" x2="{{ 10 + variable_value * i }}" y1="{{ const_start }}" y2="{{ const_end }}"/>
-                        <line class="line sep" x1="{{ const_start }}" x2="{{ const_end }}" y1="{{ 10 + variable_value * i }}" y2="{{ 10 + variable_value * i }}"/>
+                        <line class="line sep" x1="{{ 10 + variable_value * i }}" x2="{{ 10 + variable_value * i }}" y1="{{ const_start }}" y2="{{ const_end }}"></line>
+                        <line class="line sep" x1="{{ const_start }}" x2="{{ const_end }}" y1="{{ 10 + variable_value * i }}" y2="{{ 10 + variable_value * i }}"></line>
                     
                     {% endif %}
                 
