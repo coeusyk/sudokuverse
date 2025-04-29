@@ -1,15 +1,24 @@
 import re
-import datetime
 
 from game.models import *
 
 
 def check_username_validity(username: str):
     """
-    Checks if the username has already been used or not and if the username is greater than 4 letters
-    - Returns:- True if valid, else the error key
+    Checks the validity of a username.
 
-    `username`: The username chosen by the user
+    Validates if the username:
+    - Is not empty.
+    - Has a length between 5 and 25 characters.
+    - Matches the required format (alphanumeric characters only).
+    - Is not already taken.
+
+    Returns:
+        - `True` if the username is valid.
+        - An error key (`str`) indicating the issue otherwise.
+
+    Args:
+        username (str): The username chosen by the user.
     """
 
     regular_expression = "[a-zA-Z0-9]{5,25}"
@@ -34,10 +43,14 @@ def check_username_validity(username: str):
 
 def check_email_validity(email: str):
     """
-    Checks if the email given has already been used or not and if it follows the syntax
-    - Returns:- True if valid, else the error key
+    Validates the provided email for uniqueness and proper syntax.
 
-    `email`: The email given by the user
+    Returns:
+        - `True` if the email is valid.
+        - An error key (`str`) indicating the issue otherwise.
+
+    Args:
+        email (str): The email entered by the user.
     """
 
     regular_expression = r"[a-zA-Z0-9!#$%&*+./=?^-_`{|}~]+@[a-zA-Z0-9.-]+\." \
@@ -64,10 +77,14 @@ def check_email_validity(email: str):
 
 def check_phash_validity(phash: str):
     """
-    Checks if the phash entered is valid
-    - Returns:- True if valid, else the error key
+    Validates the provided password hash (phash).
 
-    `phash`: The phash entered by the user
+    Returns:
+        - `True` if the phash is valid.
+        - An error key (`str`) or list indicating the issue otherwise.
+
+    Args:
+        phash (str): The password hash entered by the user.
     """
 
     if len(phash) == 0:
@@ -99,10 +116,14 @@ def check_phash_validity(phash: str):
 
 def validate_N_format_date(date: str):
     """
-    Checks if the entered date is valid
-    - Returns:- The formatted datetime value if valid, else the error key
+    Validates the entered date.
 
-    `date`: The date entered by the user
+    Returns:
+        - The formatted `datetime.date` value if valid.
+        - An error key (`str`) indicating the issue otherwise.
+
+    Args:
+        date (str): The date entered by the user in 'YYYY-MM-DD' format.
     """
 
     if date == "":

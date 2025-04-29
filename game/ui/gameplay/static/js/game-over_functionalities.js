@@ -14,8 +14,6 @@ function nextOperation(success=false, time_=null) {
             data["time-taken"] = null;
             data["game-result"] = 0;
             data["difficulty"] = difficulty;
-
-            console.log(data);
         } else {
             return "redirect";
         }
@@ -30,11 +28,6 @@ function nextOperation(success=false, time_=null) {
         } else {
             return "redirect";
         }
-    }
-
-    // Deleting the diff cookie if it exists in the document cookies:
-    if (document.cookie.split(';').some((item) => item.trim().startsWith('__diff='))) {
-        document.cookie = "__diff=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
     }
 
     return data;
@@ -56,13 +49,15 @@ async function sendData(gameData, redirect=false) {
     );
 
     if (redirect) {
+        // Deleting the diff cookie if it exists in the document cookies:
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('__diff='))) {
+            document.cookie = "__diff=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        }
+
         const sdResponse = await sdRequest.json();
+
         if (sdResponse["info-added"] === true) {
-            const redirectRequest = await fetch("/home", {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            });
+            window.location.href = "/home";
         }
     }
 }
@@ -95,7 +90,7 @@ function newGame(diffBtn) {
     }
 
     if ((document.cookie.includes("__uuid")) && (!document.cookie.includes("logged-out"))) {
-        let gameStats = nextOperation(success=false, time_=null);
+        let gameStats = nextOperation(false, null);
         sendData(gameStats);
     }
 

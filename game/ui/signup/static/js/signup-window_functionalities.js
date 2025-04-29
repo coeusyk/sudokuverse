@@ -27,7 +27,7 @@ const dobErrorMap = {
 
 const emailErrorMap = {
     "not-entered": "Enter an email",
-    "invalid-length": "Your email must contain atmost 256 characters",
+    "invalid-length": "Your email must contain at most 256 characters",
     "invalid-format": "Your email is invalid",
     "taken": "This email is in use"
 };
@@ -35,7 +35,7 @@ const emailErrorMap = {
 let invalidChar = "";
 const phashErrorMap = {
     "not-entered": "Enter a password",
-    "invalid-length": "Your password must contain atleast 6 characters",
+    "invalid-length": "Your password must contain at least 6 characters",
     "invalid-format-1": `Your password cannot contain \'${invalidChar}\'`,
     "invalid-format-2": "Your password contains disallowed special characters"
 };
@@ -113,7 +113,7 @@ function showBasicPhashReq() {
     if (phashErrorPrev === false) {
         if (phashInput.value.length < 6) {
             phashError.style.color = "#777777";
-            phashError.innerText = "Password must contain atleast 6 characters";
+            phashError.innerText = "Password must contain at least 6 characters";
         } else {
             phashError.innerText = "";
             phashError.style.color = "rgb(255, 0, 0)";

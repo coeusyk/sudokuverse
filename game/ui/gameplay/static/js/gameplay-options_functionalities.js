@@ -92,20 +92,17 @@ function undoFunctionality() {
             cellAttr = cellWorkOrder[cellWorkOrder.length - 1][0];
         }
 
-        let undo;
-
         if (action === "+") {
-            eraseFunctionality(cellAttr, undo = true);
+            eraseFunctionality(cellAttr, true);
         } else {
-            hintFunctionality(cellAttr, undo = true);
+            hintFunctionality(cellAttr, true);
         }
 
         cellWorkOrder = cellWorkOrder.slice(0, (cellWorkOrder.length - 1));
     }
-
 }
 
 
-eraseButton.addEventListener('click', function() { eraseFunctionality(cellAttr=null, undo=false); });
-hintButton.addEventListener('click', function() { hintFunctionality(cellAttr=null, undo=false); });
+eraseButton.addEventListener('click', function() { eraseFunctionality(null, false); });
+hintButton.addEventListener('click', function() { hintFunctionality(null, false); });
 undoButton.addEventListener('click', undoFunctionality);

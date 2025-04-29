@@ -4,6 +4,20 @@ from game.core.constants import MAX_NUMBER, PATH
 
 
 def gen_for_solve(max_filled: int = 9):
+    """
+    Generates a partial Sudoku puzzle and writes it to a file.
+
+    Args:
+        max_filled (int): The maximum number of filled cells in each row.
+                          Must be between 0 and 9 (inclusive).
+
+    Returns:
+        str: The path to the generated file containing the partial Sudoku puzzle.
+
+    Raises:
+        ValueError: If `max_filled` is not between 0 and 9.
+    """
+
     if not (-1 < max_filled < 10):
         msg = "invalid max_filled: expected number in 0 to 9"
         raise ValueError(msg)

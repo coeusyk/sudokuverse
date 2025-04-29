@@ -64,7 +64,7 @@ function startGame() {
             );
         }
 
-        start().then(r => window.location.href = "/gameplay");
+        start().then(_ => window.location.href = "/gameplay");
     }
 }
 

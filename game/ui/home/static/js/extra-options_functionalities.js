@@ -1,5 +1,5 @@
 const allColouredStats = Array.from(document.getElementsByClassName("stats-variable"));
-const totalGames = allColouredStats[0];
+const gamesFinished = allColouredStats[1];
 
 const entriesDiv = document.getElementById("entries");
 const entries = entriesDiv.getElementsByTagName("div");
@@ -31,7 +31,7 @@ function logOut() {
  * and adds those entries to HTML which are unregistered (not added yet)
  */
 function getGameInfo() {
-    if (parseInt(totalGames.innerText) > entries.length) {
+    if (parseInt(gamesFinished.innerText) > entries.length) {
         fetch("/home", {
             method: "GET",
             headers: {
@@ -133,6 +133,5 @@ function addEntry(entry_id, diff, hints, time, dateTime) {
 
 changeStatColour();  // Initial check
 getGameInfo();  // Initial check
-
 
 logOutBtn.addEventListener("click", logOut);

@@ -7,10 +7,21 @@ my_dict = {"Simple": 1, "Medium": 2, "Complex": 3}
 
 def create_puzzle(input_sudoku: list[list[int]], difficulty: int):
     """
-    This function creates a puzzle out of the generated solved sudoku 
-    based on the difficulty chosen
+    Generates a Sudoku puzzle by removing numbers from a solved Sudoku grid
+    based on the specified difficulty level.
+
+    Args:
+        input_sudoku (list[list[int]]): A 9x9 solved Sudoku grid.
+        difficulty (int): Difficulty level (1 for Simple, 2 for Medium, 3 for Complex).
+
+    Returns:
+        list[list[int]]: A 9x9 partially filled Sudoku grid representing the puzzle.
+
+    Raises:
+        ValueError: If the difficulty parameter is not between 1 and 3.
     """
 
+    # Difficulty validation:
     if difficulty == 1:
         num_of_clues = random.choice(SIMPLE)
         clues_per_grid = 3
@@ -26,9 +37,10 @@ def create_puzzle(input_sudoku: list[list[int]], difficulty: int):
     else:
         param_error = "invalid parameter difficulty: expected number from 1 to 3"
         raise ValueError(param_error)
-    
 
+    # Puzzle creation:
     pos_for_partial = []
+
     for i in range(9):
         for _ in range(clues_per_grid):
             index = random.choice([j for j in POS_GRIDS[i] if j not in pos_for_partial])

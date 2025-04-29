@@ -61,11 +61,11 @@ def gameplay_window():
             db.session.add(stats_record)
             db.session.commit()
 
-            info_added_resp = Response(json.dumps({"info-added": True}), status=302)
+            info_added_resp = Response(json.dumps({"info-added": True}), status=200)
 
             return info_added_resp
 
-        else:
+        elif request.headers['Content-Type'] == "application/x-www-form-urlencoded":
             global difficulty, diff_id, solution, partial_board, new_game_resp
 
             difficulty = request.form.get("difficulty")
@@ -82,8 +82,7 @@ def gameplay_window():
     if request.method == "GET":
         # Checking if a new game from existing game response was made and deleting to avoid keeping track of it:
         try:
-            if new_game_resp:
-                del new_game_resp
+            del new_game_resp
 
         except NameError:
             diff_id = int(request.cookies[DIFF_CHOSEN])

@@ -85,7 +85,7 @@ def home_window():
                 completed_games_info["time-taken"] += [time_taken]
 
                 completed_games_info["date-time"] += [
-                    [format_datetime(cg.end_time, type="date"), format_datetime(cg.end_time, type="time")]]
+                    [format_datetime(cg.end_time, type_="date"), format_datetime(cg.end_time, type_="time")]]
 
             cg_info_response = make_response(json.dumps(completed_games_info), 200)
 

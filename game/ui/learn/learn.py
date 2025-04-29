@@ -16,6 +16,5 @@ def how_to_play_window():
     
     else:
         user_identified = False
-            
 
     return render_template("learn-window.html", user_identified=user_identified)

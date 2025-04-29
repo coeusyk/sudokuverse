@@ -90,11 +90,11 @@ class Sudoku:
 
     # Attempting to solve with supplied inputs, and return solution; None otherwise
     def solve_puzzle(self):
-        self.problem.solve(lp.apis.PULP_CBC_CMD(msg=0))
+        self.problem.solve(lp.apis.PULP_CBC_CMD(msg=False))
         solution_status = lp.LpStatus[self.problem.status]
 
         if solution_status == 'Optimal':
-            result = [[0 for col in COLS] for row in ROWS]
+            result = [[0 for _ in COLS] for _ in ROWS]
             for row in ROWS:
                 for col in COLS:
                     for value in self.values:

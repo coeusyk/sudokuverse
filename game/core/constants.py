@@ -3,12 +3,10 @@ All project constants are defined here to make any changes done here
 to be reflected everywhere
 """
 
-
 import datetime
 import json
 
 from flask import Response
-
 
 MAX_NUMBER = 9
 
@@ -21,7 +19,6 @@ GRIDS = range(MAX_NUMBER)
 NUMBERS = range(1, MAX_NUMBER + 1)
 
 POSITIONS = [(j // 10, j % 10) for j in range(90) if (j % 10 != 9)]
-
 
 PATH = "game/core/"
 
@@ -40,7 +37,7 @@ def create_cell_attributes():
     temp = 1
     for i in range(1, 82):
         CELL_ATTRIBUTES[i - 1] += [temp]
-        
+
         if i % 9 == 0:
             temp += 1
 
@@ -56,15 +53,19 @@ def create_cell_attributes():
     temp, g_num, row_grid_times = 0, 1, 0
     for i in range(1, 10):
         for j in range(3):
-            CELL_ATTRIBUTES[temp] += [g_num]; CELL_ATTRIBUTES[temp + 1] += [g_num]; CELL_ATTRIBUTES[temp + 2] += [g_num]
+            CELL_ATTRIBUTES[temp] += [g_num]
+            CELL_ATTRIBUTES[temp + 1] += [g_num]
+            CELL_ATTRIBUTES[temp + 2] += [g_num]
 
-            temp += 3; g_num += 1
+            temp += 3
+            g_num += 1
+
         else:
             if i % 3 == 0:
                 row_grid_times += 1
-            
+
             g_num = (3 * row_grid_times) + 1
-    
+
     # Adding div type number for all cells:
     temp = 0
     for i in range(1, 10):
@@ -113,14 +114,11 @@ POS_GRIDS = get_grids()
 
 create_cell_attributes()
 
-
 # Responses:
 DIFF_RESP = Response(json.dumps({"redirect": True}), status=302)  # Start game
-
 
 # Cookie names:
 USER_IDENTIFIER = "__uuid"
 DIFF_CHOSEN = "__diff"
-
 
 COOKIE_EXPIRATION_TIME = datetime.timedelta(days=30)
