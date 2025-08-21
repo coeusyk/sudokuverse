@@ -5,6 +5,14 @@
     --font: 'Metropolis';
 }
 
+@font-face {
+  font-family: 'Metropolis';
+  src: url('../fonts/Metropolis-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {overflow-x: hidden;}
 
 #page-content {
@@ -37,7 +45,7 @@ body {overflow-x: hidden;}
 .div-container {
     width: 1000px;
     height: 500px;
-    column-gap: 0px;
+    column-gap: 0;
     background-color: var(--div-color);
     justify-content: center;
     align-content: center;

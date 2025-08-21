@@ -1,0 +1,25 @@
+[project]
+name = "sudokuverse"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "blinker",
+    "cffi",
+    "click",
+    "colorama",
+    "cryptography",
+    "flask",
+    "Flask-SQLAlchemy",
+    "greenlet",
+    "itsdangerous",
+    "Jinja2",
+    "MarkupSafe",
+    "PuLP",
+    "pycparser",
+    "PyMySQL",
+    "SQLAlchemy",
+    "toml",
+    "typing_extensions",
+    "Werkzeug",
+]

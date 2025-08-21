@@ -160,4 +160,4 @@ cython_debug/
 .idea/
 .VSCodeCounter
 
-instance/__config__.toml
+config.toml

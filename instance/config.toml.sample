@@ -1,0 +1,14 @@
+[flask_env]
+    [flask_env.dev]
+        user = "<username>"
+        password = "<pwd>"
+        host = "db"
+        port = "3306"
+        db = "<database_name>"
+
+    [flask_env.prod]
+        user = "<username>"
+        password = "<pwd>"
+        host = "db"
+        port = "3306"
+        db = "<database_name>"

@@ -1,0 +1,43 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${MYSQL_USR}
+      MYSQL_PASSWORD: ${MYSQL_PWD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PWD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - appnet
+  
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USR}", "-p${MYSQL_PWD}"]
+      timeout: 20s
+      retries: 5
+      interval: 5s
+      start_period: 30s
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      FLASK_APP: "game:create_app()"
+      APP_PROFILE: dev
+    ports:
+      - "5000:5000"
+    networks:
+      - appnet
+    command: >
+      sh -c "flask run --host=0.0.0.0"
+
+volumes:
+  db_data:
+
+networks:
+  appnet:

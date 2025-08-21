@@ -1,13 +1,14 @@
 import toml
+import os
 
-from game.core.constants import NUM_OF_DIFFICULTIES
+from game.core.constants import NUM_OF_DIFFICULTIES, BASE_DIR
 
 
 # Messages for exceptions that will be raised manually:
 class ErrorMessages:
     def __init__(self, context: str):
         self.context = context
-        self.error_msgs: dict[str, dict] = toml.load("instance/error_messages.toml")
+        self.error_msgs: dict[str, dict] = toml.load(os.path.join(BASE_DIR, "instance", "error_messages.toml"))
 
         self.param_validation(self.context, self.error_msgs, "context")  # Validating the entered context
 
@@ -43,14 +44,14 @@ class Config:
         const_errors_handle = ErrorMessages("Constants")  # Error message handler for constants
 
         env_error = config_errors_handle.get_error_message("flask_env", "INVALID_VALUE")
-        if self.flask_env not in ["dev", "prod", "docker"]:
+        if self.flask_env not in ["dev", "prod"]:
             raise ValueError(env_error)
 
         num_of_diff_error = const_errors_handle.get_error_message("num_of_difficulties", "INVALID_VALUE")
         if num_of_difficulties != NUM_OF_DIFFICULTIES:
             raise ValueError(num_of_diff_error)
 
-        self.config_file: dict[str, dict] = toml.load("instance/__config__.toml")
+        self.config_file: dict[str, dict] = toml.load(os.path.join(BASE_DIR, "instance", "config.toml"))
 
     def get_database_uri(self):
         db_info: dict[str, str] = self.config_file["flask_env"][self.flask_env]

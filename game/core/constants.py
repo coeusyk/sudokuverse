@@ -5,8 +5,10 @@ to be reflected everywhere
 
 import datetime
 import json
+import pathlib
 
 from flask import Response
+
 
 MAX_NUMBER = 9
 
@@ -20,6 +22,7 @@ NUMBERS = range(1, MAX_NUMBER + 1)
 
 POSITIONS = [(j // 10, j % 10) for j in range(90) if (j % 10 != 9)]
 
+BASE_DIR = pathlib.Path(__file__).parent.parent.parent
 PATH = "game/core/"
 
 NUM_OF_DIFFICULTIES = 3

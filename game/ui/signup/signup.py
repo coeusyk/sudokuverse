@@ -5,7 +5,7 @@ import uuid
 from flask import Blueprint, render_template, request, make_response, redirect, url_for
 
 from game.core.signup_work import check_username_validity, check_email_validity, check_phash_validity, \
-    validate_N_format_date
+    validate_and_format_date
 from game.models import db, User
 from game.core.constants import USER_IDENTIFIER, COOKIE_EXPIRATION_TIME
 
@@ -19,8 +19,6 @@ def signup_window():
         if request.cookies[USER_IDENTIFIER] != "logged-out":
             return redirect(url_for('home_blueprint.home_window'), code=302)
 
-    uname_validity, email_validity, phash_validity = None, None, None
-
     if request.method == "POST":
         username = request.form.get("username")
         dob = request.form.get("dob")
@@ -28,7 +26,7 @@ def signup_window():
         phash = request.form.get("phash")
 
         uname_validity = check_username_validity(username)
-        dob_validity = validate_N_format_date(dob)
+        dob_validity = validate_and_format_date(dob)
         email_validity = check_email_validity(email)
         phash_validity = check_phash_validity(phash)
 

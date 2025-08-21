@@ -114,7 +114,7 @@ def check_phash_validity(phash: str):
     return True
 
 
-def validate_N_format_date(date: str):
+def validate_and_format_date(date: str):
     """
     Validates the entered date.
 

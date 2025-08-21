@@ -19,7 +19,7 @@ def create_app():
     config = Config(flask_env=profile)
 
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_file("__config__.toml", load=toml.load)
+    app.config.from_file("config.toml", load=toml.load)
     app.config['SQLALCHEMY_DATABASE_URI'] = config.get_database_uri()
     app.app_context().push()
 

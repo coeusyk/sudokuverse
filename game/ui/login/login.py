@@ -23,7 +23,7 @@ def login_window():
 
         login_validation = validate_login_credentials(email, phash)
         
-        if login_validation is not False:
+        if not login_validation:
             user_record = login_validation[1]
 
             response = make_response(json.dumps({"success": True}), 302)

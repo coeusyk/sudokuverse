@@ -1,100 +1,103 @@
-# Sudoku Game Project
+# SudokuVerse
 
-Creating a game of Sudoku using Python, having basic features:-
-* Graphical UI
-* Multi-complexity
-* Time keeper
-* Hints
+A modern web-based Sudoku game built with Flask and Docker, featuring user authentication, statistics tracking, and 
+an interactive gameplay experience.
 
+***Developed as a 12th grade computer science project.***
 
-## Project Structure
+## Table of Contents
 
-```
-/sudoku-verse
-    |__ /game
-        |__ /core
-            |-- *.py
-            |-- *.txt
-        |__ /templates
-            |-- main-window.html
-        |__ /static
-            |__ /css
-                |-- *.css
-            |__ /images
-                |-- *.svg
-            |__ /js
-                |-- *.js
-        |__ /ui
-            |__ /<module>
-                |__ /static
-                |__ /templates
-                |-- <module>.py
+* [Features](#features)
+* [Game Features](#game-features)
+  * [Sudoku Solver](#sudoku-solver)
+  * [User Interface](#user-interface)
+  * [Statistics](#statistics)
+* [Tech Stack](#tech-stack)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Configuration](#configuration)
 
-        |-- __init__.py
-        |-- config.py
-        |-- models.py
+## Features
 
-    |__ /tests
-        |__ /code-tests
-            |__ /gui
-                |-- *.html
-                |-- *.css
-        |__ /unit-tests
-            |-- *.py
-```
+- **Interactive Sudoku Gameplay**: Clean, responsive grid interface with intuitive controls
+- **User Authentication**: Secure login and signup system
+- **Statistics Tracking**: Monitor your progress and performance over time
+- **Multiple Game Modes**: Various difficulty levels and gameplay options
 
-Given above is the **project structure** of our project. Files have to be added as required (shown above).
+## Game Features
 
+### Sudoku Solver
 
-## Module Info
+- Advanced algorithm for puzzle generation and solving
+- Configurable difficulty levels
+- Automatic puzzle validation
 
-### 1. [/src](https://github.com/alp-comp-project/game-sudoku/tree/develop/src)
+### User Interface
 
-Contains the source code of the project.
+* Clean, modern design with custom styling
+* Interactive grid with hover effects and visual feedback
+* Timer functionality for tracking solve times
+* Hint system and error checking
 
-Only [`app.py`](https://github.com/alp-comp-project/game-sudoku/blob/develop/src/app.py), [`__init__.py`](https://github.com/alp-comp-project/game-sudoku/blob/develop/src/__init__.py), and [`game-sudoku_database.sql`](https://github.com/alp-comp-project/game-sudoku/blob/develop/src/game-sudoku_database.sql) files go into this (other files go under the sub-folders).
+### Statistics
 
-### 2. [/tests](https://github.com/alp-comp-project/game-sudoku/tree/develop/tests)
+* Track completion times
+* Monitor accuracy and progress
+* Historical performance data
 
-Contains the files that are currently in progress or need review.
+## Tech Stack
 
-Any type of file will go in to the respective folders in this.
+- **Backend**: Python with Flask framework
+- **Frontend**: HTML, CSS, JavaScript
+- **Database**: Configured for production use
+- **Containerization**: Docker and Docker Compose
+- **Font**: Metropolis (self-hosted)
 
-### 3. /module
+## Getting Started
 
-Contains the backend part of different parts of the project, having certain functionalities.
+### Prerequisites
 
-All python files will go in to these folders.
+- Docker Desktop: 4.43
+- MySQL: 8.0
+- Docker: 28.3
 
-### 4. [/templates](https://github.com/alp-comp-project/game-sudoku/tree/develop/src/templates)
+### Installation
 
-Contains the files for the backbone of the frontend part, divided into separate modules.
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd sudokuverse
+   ```
 
-All HTML files will go in to the subfolders of this folder.
+2. **Configure the application**
 
-### 5. [/static](https://github.com/alp-comp-project/game-sudoku/tree/develop/src/static)
+   - Windows:
+     ```commandline
+     copy instance/config.toml.sample instance/config.toml
+     copy .env.sample .env
+     ```
 
-Contains the files for the styling and functionality of the HTML files.
+   - Linux:
+     ```bash
+     cp instance/config.toml.sample instance/config.toml
+     cp .env.sample .env
+     ```
+  
+   - Open these files and update them according to your settings.
 
-All CSS and JavaScript files will go in to their respective subfolders of this folder.
+3. **Run with Docker**
+   ```
+   docker compose up -d
+   ```
+   
+4. **Access the application**
 
+   Open your browser and navigate to http://localhost:5000
 
-## Themes
+## Configuration
 
-### Colors of Dark Theme
+The application uses configuration files located in the instance/ directory:
 
-- #E36950 -> For color of buttons
-- #2B2B2B -> Background color of main part of the window
-- #E34D1F -> On hover of #E36950 colored button
-- #212121 -> Background color of menu and some other divisions
-- #2A2A2A -> On hover of close button (x)
-
-
-## Guidelines
-
-Use `develop` branch for active development.
-
-Mention "Closes #(the number given to the issue)" at the end of the description of the commit you do if the issue
-is solved.
-
-After you have solved an issue, create a **pull request** to make changes to the `main` branch.
+- `config.toml`: Main application configuration
+- `error_messages.toml`: Custom error messages
