@@ -5,6 +5,7 @@
         host = "db"
         port = "3306"
         db = "<database_name>"
+        secret_key = "<generate-random-secret-key-for-dev>"
 
     [flask_env.prod]
         user = "<username>"
@@ -12,3 +13,4 @@
         host = "db"
         port = "3306"
         db = "<database_name>"
+        secret_key = "<generate-random-secret-key-for-prod>"

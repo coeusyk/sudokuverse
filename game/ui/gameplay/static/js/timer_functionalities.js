@@ -25,7 +25,7 @@ function updateTime(time_) {
 }
 
 
-function stopTimer(time_) {
+async function stopTimer(time_) {
     let operation;
     let isCompletion = false;
     const enabledButtons = document.getElementsByClassName("enabled");
@@ -63,6 +63,16 @@ function stopTimer(time_) {
             clearInterval(time);
             showCompletionModal(difficultyChosen.innerText, time_, null); // From game-over_functionalities.js
         } else {
+            // Guest user quit - clear game state and session before redirecting
+            if (typeof clearGameState !== 'undefined') {
+                clearGameState();
+            }
+            // Clear server-side session puzzle (await to ensure it completes)
+            try {
+                await fetch('/gameplay/clear-session', {method: 'POST'});
+            } catch (error) {
+                console.error('Failed to clear session:', error);
+            }
             window.location.href = "/play";
         }
     } else {
@@ -71,6 +81,10 @@ function stopTimer(time_) {
             clearInterval(time);
             sendData(operation, true, time_);  // From game-over_functionalities.js
         } else {
+            // Logged-in user quit - clear state before posting
+            if (typeof clearGameState !== 'undefined') {
+                clearGameState();
+            }
             sendData(operation, false, null);  // From game-over_functionalities.js
         }
     }

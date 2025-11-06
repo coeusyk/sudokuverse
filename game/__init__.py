@@ -21,6 +21,7 @@ def create_app():
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_file("config.toml", load=toml.load)
     app.config['SQLALCHEMY_DATABASE_URI'] = config.get_database_uri()
+    app.config['SECRET_KEY'] = config.get_secret_key()
     app.app_context().push()
 
     from game.models import db

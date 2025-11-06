@@ -4,7 +4,30 @@ let cellWorkOrder = Array();
 
 function addWork(cellAttr, action) {
     if (cellWorkOrder.length > 0) {
-        if (cellWorkOrder[-1] !== [cellAttr, action]) {
+        const last = cellWorkOrder[cellWorkOrder.length - 1];
+
+        const isSameEntry = (entryA, entryB) => {
+            if (!Array.isArray(entryA) || !Array.isArray(entryB)) return entryA === entryB;
+
+            const [cellA, actA] = entryA;
+            const [cellB, actB] = entryB;
+
+            if (actA !== actB) return false;
+
+            // If the cell attributes are arrays (e.g. [cell, row, col]), compare elements
+            if (Array.isArray(cellA) && Array.isArray(cellB)) {
+                if (cellA.length !== cellB.length) return false;
+                for (let i = 0; i < cellA.length; i++) {
+                    if (cellA[i] !== cellB[i]) return false;
+                }
+                return true;
+            }
+
+            // Fallback to reference equality for non-array cell attributes (e.g. DOM element)
+            return cellA === cellB;
+        };
+
+        if (!isSameEntry(last, [cellAttr, action])) {
             cellWorkOrder.push([cellAttr, action]);
         }
     }
@@ -88,6 +111,11 @@ function addNumber(button) {
 
         activateRowColGrid(selectedCell);  // From grid_functionalities.js
         activateNumCells(selectedCell);  // From grid_functionalities.js
+        
+        // Save game state after action
+        if (typeof saveOnAction !== 'undefined') {
+            saveOnAction();
+        }
     }
 }
 

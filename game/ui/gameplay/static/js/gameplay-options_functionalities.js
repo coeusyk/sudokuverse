@@ -32,6 +32,11 @@ function eraseFunctionality(cellAttr=null, undo=false) {
         activateNumCells(selectedCell);  // From grid_functionalities.js
 
         checkNumCompletion(selectedCell.innerText);
+        
+        // Save game state after action
+        if (typeof saveOnAction !== 'undefined') {
+            saveOnAction();
+        }
     }
 }
 
@@ -73,6 +78,11 @@ function hintFunctionality(cellAttr=null, undo=false) {
                 if (!(undo)) {
                     hintsUsedIdentifier.innerText = `${++usedHints}`;
                 }
+                
+                // Save game state after action
+                if (typeof saveOnAction !== 'undefined') {
+                    saveOnAction();
+                }
             }
         }
     }
@@ -99,6 +109,11 @@ function undoFunctionality() {
         }
 
         cellWorkOrder = cellWorkOrder.slice(0, (cellWorkOrder.length - 1));
+        
+        // Save game state after action
+        if (typeof saveOnAction !== 'undefined') {
+            saveOnAction();
+        }
     }
 }
 

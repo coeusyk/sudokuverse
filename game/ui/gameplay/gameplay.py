@@ -2,7 +2,7 @@ import json
 import datetime
 import uuid
 
-from flask import Blueprint, render_template, request, Response, redirect, url_for
+from flask import Blueprint, render_template, request, Response, redirect, url_for, session
 
 from game.models import db, User, GameStats
 from game.core.constants import CELL_ATTRIBUTES
@@ -14,6 +14,13 @@ from game.core.stats_functionalities import convert_timer_value, get_timer_value
 
 gameplay_blueprint = Blueprint("gameplay_blueprint", __name__, template_folder="templates", static_folder="static",
                                static_url_path="/ui/gameplay")
+
+
+@gameplay_blueprint.route("/gameplay/clear-session", methods=["POST"])
+def clear_gameplay_session():
+    """Clear the current puzzle from session"""
+    session.pop('current_puzzle', None)
+    return Response(json.dumps({"cleared": True}), status=200)
 
 
 @gameplay_blueprint.route("/gameplay", methods=["GET", "POST"])
@@ -35,6 +42,10 @@ def gameplay_window():
     if request.method == "POST":
         if request.headers['Content-Type'] == "application/json":
             game_stats: dict = request.get_json()
+            
+            # If user quit (game_result == 0), clear the session puzzle
+            if game_stats["game-result"] == 0:
+                session.pop('current_puzzle', None)
 
             user_record = User.query.filter_by(uid=request.cookies[USER_IDENTIFIER]).first()
 
@@ -90,13 +101,20 @@ def gameplay_window():
             return info_added_resp
 
         elif request.headers['Content-Type'] == "application/x-www-form-urlencoded":
-            global difficulty, diff_id, solution, partial_board, new_game_resp
-
             difficulty = request.form.get("difficulty")
             diff_id = DIFFICULTY_DICT[difficulty]
 
+            # Generate new puzzle and store in session
             solution = get_solution()
             partial_board = create_puzzle(solution, difficulty=diff_id)
+            
+            # Store puzzle in session so refresh doesn't regenerate
+            session['current_puzzle'] = {
+                'solution': solution,
+                'partial': partial_board,
+                'difficulty': difficulty,
+                'diff_id': diff_id
+            }
 
             # Returning a response:
             new_game_resp = Response(status=205)
@@ -104,17 +122,25 @@ def gameplay_window():
             return new_game_resp
 
     if request.method == "GET":
-        # Checking if a new game from existing game response was made and deleting to avoid keeping track of it:
-        try:
-            del new_game_resp
-
-        except NameError:
-            diff_id = int(request.cookies[DIFF_CHOSEN])
-
-            difficulty = list(filter(lambda key: DIFFICULTY_DICT[key] == diff_id, DIFFICULTY_DICT))[0]
-
+        diff_id = int(request.cookies[DIFF_CHOSEN])
+        difficulty = list(filter(lambda key: DIFFICULTY_DICT[key] == diff_id, DIFFICULTY_DICT))[0]
+        
+        # Check if we have a puzzle in session for this difficulty
+        if 'current_puzzle' in session and session['current_puzzle']['diff_id'] == diff_id:
+            # Use existing puzzle from session
+            solution = session['current_puzzle']['solution']
+            partial_board = session['current_puzzle']['partial']
+        else:
+            # Generate new puzzle and store in session
             solution = get_solution()
             partial_board = create_puzzle(solution, difficulty=diff_id)
+            
+            session['current_puzzle'] = {
+                'solution': solution,
+                'partial': partial_board,
+                'difficulty': difficulty,
+                'diff_id': diff_id
+            }
 
     return render_template(
         "gameplay-window.html",
