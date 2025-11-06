@@ -98,9 +98,24 @@ function showCompletionModal(difficulty, timeTaken, bestTime) {
 }
 
 
+function setDiffCookie(difficulty) {
+    const difficultyMap = {'SIMPLE': 1, 'MEDIUM': 2, 'COMPLEX': 3};
+    const diffId = difficultyMap[difficulty.toUpperCase()];
+    document.cookie = `__diff=${diffId}; path=/; max-age=3600`;
+}
+
 function newGame(diffBtn) {
     const diffInfo = document.getElementById("diff-info");
     diffInfo.value = diffBtn.innerText.toUpperCase();
+    
+    // Update the difficulty cookie
+    setDiffCookie(diffBtn.innerText);
+    
+    // Clear game state from storage and set intentional exit flag
+    if (typeof isIntentionalExit !== 'undefined') {
+        isIntentionalExit = true;
+    }
+    sessionStorage.removeItem('sudokuGameState');
 
     const newGameForm = document.getElementById("new-game-form");
     const formData = new FormData(newGameForm);
@@ -151,6 +166,15 @@ const completionReturnBtn = document.getElementById('completion-return-btn');
 function completionNewGame(diffBtn) {
     const diffInfo = document.getElementById('diff-info');
     diffInfo.value = diffBtn.innerText.toUpperCase();
+    
+    // Update the difficulty cookie
+    setDiffCookie(diffBtn.innerText);
+    
+    // Clear game state from storage and set intentional exit flag
+    if (typeof isIntentionalExit !== 'undefined') {
+        isIntentionalExit = true;
+    }
+    sessionStorage.removeItem('sudokuGameState');
 
     const newGameForm = document.getElementById('new-game-form');
     const formData = new FormData(newGameForm);
@@ -177,8 +201,20 @@ function completionNewGame(diffBtn) {
     reloadGame();
 }
 
-function completionReturn() {
+async function completionReturn() {
     deleteDiffCookie();
+    
+    // Clear game state when returning
+    if (typeof clearGameState !== 'undefined') {
+        clearGameState();
+    }
+    
+    // Clear server-side session puzzle (await to ensure it completes)
+    try {
+        await fetch('/gameplay/clear-session', {method: 'POST'});
+    } catch (error) {
+        console.error('Failed to clear session:', error);
+    }
     
     if ((document.cookie.includes("__uuid")) && (!document.cookie.includes("logged-out"))) {
         window.location.href = "/home";

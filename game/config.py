@@ -65,3 +65,20 @@ class Config:
         SQL_DATABASE_URI = f"mysql+pymysql://{user}:{password}@{host}:{port}/{db}"
 
         return SQL_DATABASE_URI
+
+    def get_secret_key(self):
+        """Get the secret key for Flask sessions"""
+        db_info: dict[str, str] = self.config_file["flask_env"][self.flask_env]
+        
+        secret_key = db_info.get("secret_key")
+        
+        if not secret_key:
+            # Fallback to a default key for development (should be set in config.toml)
+            import warnings
+            warnings.warn(
+                "SECRET_KEY not found in config.toml. Using default key. "
+                "Please set a proper secret_key in your config.toml file."
+            )
+            return "dev-secret-key-please-change-in-production"
+        
+        return secret_key
