@@ -29,12 +29,16 @@ services:
     environment:
       FLASK_APP: "game:create_app()"
       APP_PROFILE: dev
+      FLASK_DEBUG: 1
+      FLASK_RUN_EXTRA_FILES: "game/templates/**/*:game/static/**/*:game/ui/**/*"
     ports:
       - "5000:5000"
+    volumes:
+      - .:/app
     networks:
       - appnet
     command: >
-      sh -c "flask run --host=0.0.0.0"
+      sh -c "flask run --host=0.0.0.0 --reload --extra-files game/templates:game/static:game/ui"
 
 volumes:
   db_data:

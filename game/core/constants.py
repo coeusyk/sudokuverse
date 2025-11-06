@@ -26,9 +26,9 @@ BASE_DIR = pathlib.Path(__file__).parent.parent.parent
 PATH = "game/core/"
 
 NUM_OF_DIFFICULTIES = 3
-SIMPLE = range(35, 39)
-MEDIUM = range(29, 33)
-COMPLEX = range(23, 27)
+SIMPLE = range(36, 41)
+MEDIUM = range(32, 36)
+COMPLEX = range(26, 32)
 
 DIFFICULTY_DICT = {"SIMPLE": 1, "MEDIUM": 2, "COMPLEX": 3}
 

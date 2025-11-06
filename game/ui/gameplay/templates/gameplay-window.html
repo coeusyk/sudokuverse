@@ -50,6 +50,44 @@
 
     </div>
 
+    <!-- Completion modal -->
+    <div class="completion-bg">
+        <div id="completion-modal">
+            <span id="completion-title">Puzzle Completed!</span>
+            <span id="completion-desc">Congratulations! You solved the puzzle</span>
+
+            <hr class="completion-separator">
+            
+            <div id="completion-stats">
+                <div class="stat-row">
+                    <span class="stat-label">Difficulty:</span>
+                    <span class="stat-value" id="completion-difficulty">Simple</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Time Taken:</span>
+                    <span class="stat-value" id="completion-time">0:00</span>
+                </div>
+                <div class="stat-row" id="best-time-row" style="display: none;">
+                    <span class="stat-label">Your Best Time:</span>
+                    <span class="stat-value" id="completion-best-time">0:00</span>
+                </div>
+            </div>
+
+            <hr class="completion-separator">
+            <span id="completion-new-game-label">New Game?</span>
+
+            <div id="completion-diff-grid">
+                <button class="completion-diff-btns">Simple</button>
+                <button class="completion-diff-btns">Medium</button>
+                <button class="completion-diff-btns">Complex</button>
+            </div>
+
+            <hr class="completion-separator">
+            
+            <button id="completion-return-btn">Return</button>
+        </div>
+    </div>
+
     <div id="page-container">
         <div id="board-container">
             <!-- The bar on top of the board -->
@@ -146,9 +184,12 @@
 
 </body>
 
-<script>
-    const solution_ = {{ solution | tojson }};
+<script id="solution-data" type="application/json">
+{{ solution | tojson }}
+</script>
 
+<script>
+    const solution_ = JSON.parse(document.getElementById('solution-data').textContent);
 </script>
 
 <script src="{{ url_for('gameplay_blueprint.static', filename='js/game-over_functionalities.js') }}"></script>

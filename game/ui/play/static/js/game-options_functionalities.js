@@ -46,25 +46,7 @@ function startGame() {
         }
 
         const playNowForm = document.getElementById("play-now-form");
-        const formData = new FormData(playNowForm);
-        const data = new URLSearchParams(formData);
-
-        async function start() {
-            await fetch(
-                window.location.href,
-                {
-                    method: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-        
-                    body: data
-                }
-            );
-        }
-
-        start().then(_ => window.location.href = "/gameplay");
+        playNowForm.submit();
     }
 }
 

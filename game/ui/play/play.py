@@ -17,7 +17,7 @@ def play_window():
         difficulty = request.form.get("difficulty")
         diff_id = DIFFICULTY_DICT[difficulty]
 
-        difficulty_response = Response(json.dumps({"redirect": True}), status=302)
+        difficulty_response = redirect(url_for('gameplay_blueprint.gameplay_window'), code=302)
         difficulty_response.set_cookie(DIFF_CHOSEN, str(diff_id))
 
         return difficulty_response

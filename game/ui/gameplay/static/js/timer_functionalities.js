@@ -27,6 +27,7 @@ function updateTime(time_) {
 
 function stopTimer(time_) {
     let operation;
+    let isCompletion = false;
     const enabledButtons = document.getElementsByClassName("enabled");
 
     if (time_ == null) {
@@ -45,6 +46,7 @@ function stopTimer(time_) {
 
         if (gameCompleted) {
             operation = nextOperation(true, time_);
+            isCompletion = true;
         } else {
             return;
         }
@@ -56,9 +58,21 @@ function stopTimer(time_) {
 
     // Checking the operation to perform:
     if (typeof operation === "string") {
-        window.location.href = "/play";
+        if (isCompletion) {
+            // Guest user completed the game: show completion modal (no stats post)
+            clearInterval(time);
+            showCompletionModal(difficultyChosen.innerText, time_, null); // From game-over_functionalities.js
+        } else {
+            window.location.href = "/play";
+        }
     } else {
-        sendData(operation, true);  // From game-over_functionalities.js
+        if (isCompletion) {
+            // Logged-in user: post stats and show completion modal with best time
+            clearInterval(time);
+            sendData(operation, true, time_);  // From game-over_functionalities.js
+        } else {
+            sendData(operation, false, null);  // From game-over_functionalities.js
+        }
     }
 }
 

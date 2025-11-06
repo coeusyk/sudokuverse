@@ -9,7 +9,7 @@ from game.core.constants import CELL_ATTRIBUTES
 from game.core.partial_creator import create_puzzle
 from game.core.solver import get_solution
 from game.core.constants import USER_IDENTIFIER, DIFFICULTY_DICT, DIFF_CHOSEN, NUMBERS
-from game.core.stats_functionalities import convert_timer_value
+from game.core.stats_functionalities import convert_timer_value, get_timer_value
 
 
 gameplay_blueprint = Blueprint("gameplay_blueprint", __name__, template_folder="templates", static_folder="static",
@@ -61,7 +61,31 @@ def gameplay_window():
             db.session.add(stats_record)
             db.session.commit()
 
-            info_added_resp = Response(json.dumps({"info-added": True}), status=200)
+            response_data = {"info-added": True}
+            
+            # If game was completed, get best time for this difficulty
+            if game_stats["game-result"] == 1 and game_stats["time-taken"] is not None:
+                # Get all completed games for this difficulty
+                completed_games = GameStats.query.filter_by(
+                    uid=user_record.uid,
+                    game_type=DIFFICULTY_DICT[game_stats["difficulty"]],
+                    game_result=1
+                ).all()
+                
+                if len(completed_games) > 0:
+                    # Find the fastest time
+                    fastest_timedelta = None
+                    for record in completed_games:
+                        if record.start_time and record.end_time:
+                            time_delta = record.end_time - record.start_time
+                            if fastest_timedelta is None or time_delta < fastest_timedelta:
+                                fastest_timedelta = time_delta
+                    
+                    if fastest_timedelta:
+                        best_time_str = get_timer_value(fastest_timedelta)
+                        response_data["best-time"] = best_time_str
+
+            info_added_resp = Response(json.dumps(response_data), status=200)
 
             return info_added_resp
 
