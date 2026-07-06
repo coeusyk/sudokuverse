@@ -10,8 +10,18 @@
 
 html, body {
     margin: 0;
-    height: 100%;
     overflow-x: hidden;
+}
+
+/*
+ * Sidebar + content are laid out as a flex row so #menu-content's background
+ * always stretches to match #page-content's real (possibly taller-than-viewport)
+ * height, instead of being capped at one viewport's height (see: sidebar not
+ * extending the full page on tall/scrollable pages).
+ */
+body {
+    display: flex;
+    min-height: 100vh;
 }
 
 
@@ -19,13 +29,28 @@ html, body {
     background-color: var(--div-color);
     border: none;
     width: var(--collapsible-div-width);
-    height: calc(100% - 40px);
+    flex: 0 0 var(--collapsible-div-width);
     transition: width 0.3s;
-    overflow: hidden;
-    position: fixed;
-    top: 45px;
-    left: 0%;
+    position: relative;
     z-index: 80;
+}
+
+/* Keeps the nav pinned near the top of the viewport while scrolling, without
+   forcing #menu-content's own (now page-height) box to that fixed height. */
+#menu-sticky-content {
+    position: sticky;
+    top: 45px;
+    height: calc(100vh - 40px);
+    overflow: hidden;
+}
+
+#page-content {
+    position: relative;
+    flex: 1 1 auto;
+    height: auto;
+    width: auto;
+    margin: 0;
+    padding-top: 45px;
 }
 
 

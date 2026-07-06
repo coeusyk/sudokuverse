@@ -121,7 +121,6 @@ create_cell_attributes()
 DIFF_RESP = Response(json.dumps({"redirect": True}), status=302)  # Start game
 
 # Cookie names:
-USER_IDENTIFIER = "__uuid"
 DIFF_CHOSEN = "__diff"
 
 COOKIE_EXPIRATION_TIME = datetime.timedelta(days=30)

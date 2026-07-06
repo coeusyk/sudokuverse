@@ -12,7 +12,7 @@ class User(db.Model):
     uid = db.Column(db.String(36), primary_key=True)
     username = db.Column(db.String(25), nullable=False, unique=True)
     email = db.Column(db.String(256), nullable=False, unique=True)
-    phash = db.Column(db.String(32), nullable=False)
+    phash = db.Column(db.String(255), nullable=False)
     dob = db.Column(db.DateTime, nullable=True)
     date_joined = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now().date())
 

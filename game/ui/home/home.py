@@ -4,7 +4,8 @@ import json
 from flask import Blueprint, render_template, request, redirect, url_for, make_response
 
 from game.models import User, GameStats
-from game.core.constants import USER_IDENTIFIER, NUM_OF_DIFFICULTIES, DIFFICULTY_DICT, DIFF_CHOSEN, \
+from game.core.auth import is_logged_in, current_uid, logout_user
+from game.core.constants import NUM_OF_DIFFICULTIES, DIFFICULTY_DICT, DIFF_CHOSEN, \
     DIFF_RESP, SIMPLE, MEDIUM, COMPLEX
 from game.core.stats_functionalities import format_datetime, get_fastest_time, get_games_per_diff, get_timer_value
 
@@ -15,30 +16,29 @@ home_blueprint = Blueprint("home_blueprint", __name__, template_folder="template
 
 @home_blueprint.route("/home", methods=["GET", "POST"])
 def home_window():
-    if USER_IDENTIFIER in request.cookies:
-        if request.cookies[USER_IDENTIFIER] != "logged-out":
-            uid: str = request.cookies.get(USER_IDENTIFIER)
-            user_record = User.query.filter_by(uid=uid).first()
+    if is_logged_in():
+        uid: str = current_uid()
+        user_record = User.query.filter_by(uid=uid).first()
 
-            # Getting the stats:
-            total_games = GameStats.query.filter_by(uid=uid).count()
-            games_finished = GameStats.query.filter_by(uid=uid, game_result=1).order_by(
-                GameStats.start_time.desc()).all()
+        # Getting the stats:
+        total_games = GameStats.query.filter_by(uid=uid).count()
+        games_finished = GameStats.query.filter_by(uid=uid, game_result=1).order_by(
+            GameStats.start_time.desc()).all()
 
-            # Getting the fastest times of completion:
-            diff_ft_info = []
+        # Getting the fastest times of completion:
+        diff_ft_info = []
 
-            for i in range(NUM_OF_DIFFICULTIES):
-                ft_info = get_fastest_time(uid, i + 1)
-                if ft_info is not None:
-                    diff_ft, diff_ft_date = ft_info[0], ft_info[1]
-                else:
-                    diff_ft, diff_ft_date = None, ""
+        for i in range(NUM_OF_DIFFICULTIES):
+            ft_info = get_fastest_time(uid, i + 1)
+            if ft_info is not None:
+                diff_ft, diff_ft_date = ft_info[0], ft_info[1]
+            else:
+                diff_ft, diff_ft_date = None, ""
 
-                diff_ft_info += [(diff_ft, diff_ft_date)]
+            diff_ft_info += [(diff_ft, diff_ft_date)]
 
-            # Getting the count of games of each difficulty:
-            diff_count_info = get_games_per_diff(uid)
+        # Getting the count of games of each difficulty:
+        diff_count_info = get_games_per_diff(uid)
 
     else:
         return redirect(url_for('login_blueprint.login_window'))
@@ -57,9 +57,10 @@ def home_window():
             content = request.get_json()
 
             if "log-out" in content:
+                logout_user()
+
                 response = make_response(json.dumps({"success": True}), 302)
                 response.headers['Content-Type'] = 'application/json'
-                response.set_cookie(USER_IDENTIFIER, "logged-out")  # Updating the user cookie to "logged-out"
 
                 return response
 

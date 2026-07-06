@@ -24,6 +24,7 @@
 
     <!-- The content of the menu button -->
     <div id="menu-content">
+      <div id="menu-sticky-content">
         <div id="title-space"></div>
 
         <div id="main-content" role="group">
@@ -36,15 +37,15 @@
                     <button type="button" class="menu-options">PLAY</button>
                 </a>
             {% endif %}
-            
+
             <a href="/how-to-play">
                 <button type="button" class="menu-options active_m-o">HOW TO PLAY</button>
             </a>
-            
+
             <a href="/about">
                 <button type="button" class="menu-options">ABOUT</button>
             </a>
-        
+
         </div>
 
         {% if user_identified %}
@@ -53,23 +54,24 @@
             </a> -->
 
             <button id="log-out-btn" class="menu-options">LOG OUT</button>
-        
+
         {% else %}
             <div id="new-user-content" role="group">
                 <div id="options-space"></div>
-                
+
                 <a href="{{ url_for('signup_blueprint.signup_window') }}">
                     <button type="button" class="menu-options">SIGN UP</button>
                 </a>
 
                 <a href="{{ url_for('login_blueprint.login_window') }}">
-                    <button type="button" class="menu-options">LOG IN</button> 
+                    <button type="button" class="menu-options">LOG IN</button>
                 </a>
 
             </div>
 
         {% endif %}
 
+      </div>
     </div>
 
     <div id="page-content">

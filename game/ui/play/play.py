@@ -1,7 +1,8 @@
 import json
 
 from flask import Blueprint, render_template, request, redirect, url_for, Response
-from game.core.constants import USER_IDENTIFIER, DIFFICULTY_DICT, DIFF_CHOSEN, SIMPLE, MEDIUM, COMPLEX
+from game.core.auth import is_logged_in
+from game.core.constants import DIFFICULTY_DICT, DIFF_CHOSEN, SIMPLE, MEDIUM, COMPLEX
 
 play_blueprint = Blueprint("play_blueprint", __name__, template_folder="templates", static_folder="static",
                            static_url_path="/ui/play")
@@ -9,9 +10,8 @@ play_blueprint = Blueprint("play_blueprint", __name__, template_folder="template
 
 @play_blueprint.route("/play", methods=['GET', 'POST'])
 def play_window():
-    if USER_IDENTIFIER in request.cookies:
-        if request.cookies[USER_IDENTIFIER] != "logged-out":
-            return redirect(url_for('home_blueprint.home_window'), code=302)
+    if is_logged_in():
+        return redirect(url_for('home_blueprint.home_window'), code=302)
 
     if request.method == "POST":
         difficulty = request.form.get("difficulty")

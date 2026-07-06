@@ -5,10 +5,11 @@ import uuid
 from flask import Blueprint, render_template, request, Response, redirect, url_for, session
 
 from game.models import db, User, GameStats
+from game.core.auth import is_logged_in, current_uid
 from game.core.constants import CELL_ATTRIBUTES
 from game.core.partial_creator import create_puzzle
 from game.core.solver import get_solution
-from game.core.constants import USER_IDENTIFIER, DIFFICULTY_DICT, DIFF_CHOSEN, NUMBERS
+from game.core.constants import DIFFICULTY_DICT, DIFF_CHOSEN, NUMBERS
 from game.core.stats_functionalities import convert_timer_value, get_timer_value
 
 
@@ -28,13 +29,13 @@ def gameplay_window():
     # Checking if the request sent was valid or not:
     if DIFF_CHOSEN in request.cookies:
         # Giving an advantage for signed in users (increased number of hints):
-        if (USER_IDENTIFIER in request.cookies) and (request.cookies[USER_IDENTIFIER] != "logged-out"):
+        if is_logged_in():
             max_hints = 5
         else:
             max_hints = 3
 
     else:
-        if USER_IDENTIFIER in request.cookies:
+        if is_logged_in():
             return redirect(url_for('home_blueprint.home_window'))
         else:
             return redirect(url_for('play_blueprint.play_window'))
@@ -47,7 +48,7 @@ def gameplay_window():
             if game_stats["game-result"] == 0:
                 session.pop('current_puzzle', None)
 
-            user_record = User.query.filter_by(uid=request.cookies[USER_IDENTIFIER]).first()
+            user_record = User.query.filter_by(uid=current_uid()).first()
 
             end_time = datetime.datetime.now()
 

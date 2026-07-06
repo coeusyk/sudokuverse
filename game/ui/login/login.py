@@ -1,10 +1,9 @@
 import json
-import datetime
 
 from flask import Blueprint, render_template, request, redirect, url_for, make_response
 
+from game.core.auth import is_logged_in, login_user
 from game.core.login_work import validate_login_credentials
-from game.core.constants import USER_IDENTIFIER, COOKIE_EXPIRATION_TIME
 
 
 login_blueprint = Blueprint("login_blueprint", __name__, template_folder="templates", static_folder="static",
@@ -13,26 +12,23 @@ login_blueprint = Blueprint("login_blueprint", __name__, template_folder="templa
 
 @login_blueprint.route("/login", methods=["GET", "POST"])
 def login_window():
-    if USER_IDENTIFIER in request.cookies:
-        if request.cookies[USER_IDENTIFIER] != "logged-out":
-            return redirect(url_for('home_blueprint.home_window'), code=302)
-    
+    if is_logged_in():
+        return redirect(url_for('home_blueprint.home_window'), code=302)
+
     if request.method == "POST":
         email = request.form.get("email")
         phash = request.form.get("phash")
 
         login_validation = validate_login_credentials(email, phash)
-        
-        if not login_validation:
-            user_record = login_validation[1]
+
+        if login_validation:
+            _, user_record = login_validation
+            login_user(user_record.uid)
 
             response = make_response(json.dumps({"success": True}), 302)
 
-            user_cookie_expiration = datetime.datetime.now() + COOKIE_EXPIRATION_TIME
-            response.set_cookie(key=USER_IDENTIFIER, value=user_record.uid, expires=user_cookie_expiration)
-
             return response
-        
+
         else:
             response = make_response(json.dumps({"success": False}), 200)
 

@@ -71,14 +71,16 @@ class Config:
         db_info: dict[str, str] = self.config_file["flask_env"][self.flask_env]
         
         secret_key = db_info.get("secret_key")
-        
+
         if not secret_key:
-            # Fallback to a default key for development (should be set in config.toml)
+            if self.flask_env == "prod":
+                raise ValueError("SECRET_KEY must be set in instance/config.toml for the prod environment.")
+
             import warnings
             warnings.warn(
                 "SECRET_KEY not found in config.toml. Using default key. "
                 "Please set a proper secret_key in your config.toml file."
             )
             return "dev-secret-key-please-change-in-production"
-        
+
         return secret_key

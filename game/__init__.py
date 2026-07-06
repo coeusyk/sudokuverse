@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, redirect, url_for
 
 import os
 import toml
 
-from game.core.constants import USER_IDENTIFIER
+from game.core.auth import is_logged_in
+from game.core.constants import COOKIE_EXPIRATION_TIME
 
 
 def create_app():
@@ -22,6 +23,10 @@ def create_app():
     app.config.from_file("config.toml", load=toml.load)
     app.config['SQLALCHEMY_DATABASE_URI'] = config.get_database_uri()
     app.config['SECRET_KEY'] = config.get_secret_key()
+    app.config['PERMANENT_SESSION_LIFETIME'] = COOKIE_EXPIRATION_TIME
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+    app.config['SESSION_COOKIE_SECURE'] = profile == "prod"
     app.app_context().push()
 
     from game.models import db
@@ -52,9 +57,8 @@ def create_app():
 
     @app.route("/")
     def main_window():
-        if USER_IDENTIFIER in request.cookies:
-            if request.cookies[USER_IDENTIFIER] != "logged-out":
-                return redirect(url_for("home_blueprint.home_window"), code=302)
+        if is_logged_in():
+            return redirect(url_for("home_blueprint.home_window"), code=302)
 
         return render_template("main-window.html")
 

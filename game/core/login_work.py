@@ -1,4 +1,4 @@
-import hashlib
+from werkzeug.security import check_password_hash
 
 from game.models import *
 
@@ -29,9 +29,7 @@ def validate_login_credentials(email: str, phash: str):
             if len(phash) < 6:
                 return False
 
-            phash = hashlib.md5(phash.encode('utf-8')).hexdigest()
-
-            if user_record.phash == phash:
+            if check_password_hash(user_record.phash, phash):
                 return True, user_record
 
     return False
